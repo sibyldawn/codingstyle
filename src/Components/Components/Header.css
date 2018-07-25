@@ -1,5 +1,5 @@
 .menu{
-    background: pink;
+    background: purple;
     height: 100px;
     width: 100vw;
     padding-top: 10px;
@@ -10,7 +10,34 @@
     
   }
 
-  img{
-    height: 100px;
-    width: 100px;
+ .logo{
+    height: 50px;
+    width: 50px;
+  }
+
+  .drawer{
+    position: fixed;
+    top: 110px;
+    left: 0;
+    width: 0px;
+    background: palegoldenrod;
+    display:none;
+    color: white;
+    height: calc(100vh - 50px);
+    transition: 1s;
+  }
+
+  .open{
+    width: 150px;
+    display: initial;
+    
+  }
+  
+  .icons>img{
+    height: 50px;
+    width: 50px;
+  }
+  .bag>img{
+    height: 50px;
+    width: 50px;
   }

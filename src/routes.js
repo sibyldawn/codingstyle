@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Home from './Components/Pages/Home';
 import Men from './Components/Pages/Men';
@@ -8,14 +8,16 @@ import ShoppingBag from './Components/Pages/ShoppingBag';
 import CheckoutForm from './Components/Pages/CheckoutForm';
 import OrderConfirm from './Components/Pages/OrderConfirm';
 
-export default function routes(){
+export default class routes extends Component{
+    render(){
     return <Switch>
-             <Route exact path ="/" Component = {Home}/>
-             <Route path="/Men" Component={Men}/>
-             <Route path="/Women" Component={Women}/>
-             <Route path="/ProductView" Component={ProductView}/>
-             <Route path="/ShoppingBag" Component={ShoppingBag}/>
-             <Route path="/CheckoutForm" Component={CheckoutForm}/>
-             <Route path="/OrderConfirm" Component={OrderConfirm}/>
+             <Route exact path ="/" component={Home}/>
+             <Route path="/Men" component={Men}/>
+             <Route path="/Women" component={Women}/>
+             <Route path="/ProductView" component={ProductView}/>
+             <Route path="/ShoppingBag" component={ShoppingBag}/>
+             <Route path="/CheckoutForm" component={CheckoutForm}/>
+             <Route path="/OrderConfirm" component={OrderConfirm}/>
           </Switch>
+    }
 }
