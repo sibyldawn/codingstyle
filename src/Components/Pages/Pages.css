@@ -2,3 +2,26 @@
     height: 50vh;
     width: 100%;
 }
+
+.grid-container {
+    background: blue;
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-areas: ". . ." ". . ." ". . ." ". . .";
+  }
+  
+  .gallery{
+      height: 100px;
+      width: 200%;
+      display: flex;
+      justify-content: space-evenly;
+  }
+
+  h3{
+      color: rgb(45, 5, 62);
+      font-family: 'Arvo', serif;
+      font-size: 40px;
+
+  }

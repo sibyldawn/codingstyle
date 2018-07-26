@@ -6,18 +6,20 @@ const massive = require('massive');
 const uC = require('./user_controller');
 const aC = require('./admin_controller');
 const pC = require('./product_controller');
-const cC = require('./cart_controller');
-const oC = require('./orders_controller');
+const bC = require('./bag_controller');
 const stripe_ctrl = require('./stripe_controller');
+const sessionVerify = require('./sessionVerify');
 require('dotenv').config();
 
 //CONNECT TO DATABASE
 massive(process.env.CONNECTION_STRING).then(db => {
+    // console.log('Connected to Database');
     app.set('db',db)
 }).catch(error => console.log('massive error',error));
 
 const app = express();
 app.use(bodyParser.json());
+// app.use(sessionVerify);
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -27,7 +29,7 @@ app.use(session({
 app.get('/auth/callback', (req,res) => {
     exchangeCodeForAccessToken()
     .then(exchangeAccessTokenForUserInfo)
-    .then(fetchAuth0AccessToken)
+    .then(storeUserInfoInDatabase)
     .catch( error => {
         console.log('Auth Error', error);
         res.status(500).send('An error occurred on the server.');
@@ -45,35 +47,61 @@ app.get('/auth/callback', (req,res) => {
     }
 
     function exchangeAccessTokenForUserInfo(accessTokenResponse){
-        console.log('accessTokenResponse', accessTokenResponse);
+        // console.log('accessTokenResponse', accessTokenResponse);
         const accessToken = accessTokenResponse.data.access_token;
         return axios.get(`https://${process.env.REACT_APP_AUTH0_DOMAIN}/userinfo?access_token=${accessToken}`);
     }
 
-    function fetchAuth0AccessToken(userInfoResponse){
-        console.log('userInfoResponse',userInfoResponse);
-        req.session.user = userInfoResponse.data;
-        res.redirect('/');
-        
-    }
-    })
- //FULL CRUD USER
- app.get('/api/products/Men',uC.getmen);
- app.get('/api/products/Women',uC.getwomen);
- app.post('/api/shop',cC.shop);
- app.post('/api/sendTo/:userId',uC.sendTo);
- app.put('/api/shop/:product',cC.update)
+    function storeUserInfoInDatabase(userInfoResponse){
+        // console.log('userInfoResponse',userInfoResponse.data);
+        const auth0id = userInfoResponse.data.sub;
+        const db = req.app.get('db');
+        return db.find_user(auth0id).then( users => {
+            console.log('-----users',users);
+            if(users.length){
+                const user = users[0];
+                req.session.user = user;
+                res.json(req.session.user);
+                res.redirect(req.headers.host);
+            }else{
+                const createUserData = [
+                    auth0id,
+                    userInfoResponse.data.given_name,
+                    userInfoResponse.data.family_name,
+                    userInfoResponse.data.picture,
+                    userInfoResponse.data.email
+                 ];
+                //  console.log('----createUserData',createUserData);
+                 return db.add_user(createUserData).then( newUsers => {
+                     const user = newUsers[0];
+                     req.session.user = user;
+                    //  res.send(alert(`Welcome ${createUserData[1]}!`));
+                     res.redirect('/');
+                 })
+                }
+            })
+        }   
+})
+
+ //Session Controller
+app.get('/api/user/session', uC.getSession)
+app.post('/api/logout', (req,res)=>{
+    req.session.destroy();
+    res.send('Logged Out!')
+})
+
+ //Products Controller
+ app.get('/api/products/Men',pC.getmen);
+ app.get('/api/products/Women',pC.getwomen);
+ app.get('/api/products',pC.getAll);
+
+//Bag_Controller
+// app.get('/api/bag/',bC.read);
+// app.post('/api/bag/', bC.add);
+// app.put('/api/bag/:productId',bC.edit);
+// app.delete('/api/bag/:productId',bC.deleteItem);
 
 
-
- //FULL CRUD ADMIN
- app.get('/api/admin/products',aC.read);
-
- //SESSIONS
- app.post('/api/logout', (req,res)=>{
-     req.session.destroy();
-     res.send('Logged Out!')
- })
 
 
 const PORT = 4000;

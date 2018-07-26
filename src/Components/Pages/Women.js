@@ -30,7 +30,7 @@ export default class Men extends Component {
             </div>
         })
         return (
-            <div className="wrap">
+            <div className="gallery">
              {women}
             </div>
         )

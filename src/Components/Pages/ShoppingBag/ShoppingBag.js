@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CheckoutForm from './CheckoutForm';
+import CheckoutForm from '../CheckoutForm';
 
 export default class ShoppingBag extends Component {
     constructor(){
@@ -18,8 +18,8 @@ export default class ShoppingBag extends Component {
  
     render() {
         return (
-            <div className="wrap">
-             <h1>THIS IS THE SHOPPING BAG PAGE!</h1>
+            <div className="shopping-window">
+             <h1>THIS IS THE SHOPPING BAG WINDOW!</h1>
              <div>
                  {this.state.user
                     ? <CheckoutForm/>

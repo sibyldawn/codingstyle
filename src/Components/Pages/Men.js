@@ -3,11 +3,11 @@ import './Pages.css';
 import axios from 'axios';
 
 export default class Men extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state={
-            men:[]
+            men:[],
         }
     }
 
@@ -20,7 +20,10 @@ export default class Men extends Component {
         })
     }
 
+    
+
     render() {
+        
         const men = this.state.men.map( r => {
             return <div className="product-box" key={r.id}>
                 <div className="image"><img src={r.picture}/></div>
@@ -30,7 +33,7 @@ export default class Men extends Component {
             </div>
         })
         return (
-            <div className="wrap">
+            <div className={ this.props.path === '/' ? "gallery" : "grid-container"}>
              {men}
             </div>
         )

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './Components/Components/Header';
 import Routes from './routes';
+import ShoppingBag from './Components/Pages/ShoppingBag/ShoppingBag';
 
 class App extends Component {
   render() {
@@ -9,6 +10,7 @@ class App extends Component {
       <div>
         <Header/>
         <Routes/>
+        <ShoppingBag/>
       </div>   
      );
   }

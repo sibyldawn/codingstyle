@@ -16,19 +16,20 @@ export default class Home extends Component {
 
 
     render() {
-       
+        
         return (
             <div className="wrap"> 
              <h1>THIS IS HOME!</h1>
             <div className="top">
-                <img classname="large" src={ main }/>
+                <img className="large" src={ main }/>
             </div>
             <div className="body">
-             <div className="men">MEN'S COLLECTION
-             <Men/>
+             <div className="home">
+             <h3>MEN'S COLLECTION</h3>
+             <Men path={window.location.pathname}/>
              </div>
-             <div className="women">
-             WOMEN'S COLLECTION
+             <div className="home">
+             <h3>WOMEN'S COLLECTION</h3>
              <Women/>
              </div>
             </div>

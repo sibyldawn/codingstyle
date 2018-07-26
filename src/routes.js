@@ -4,7 +4,6 @@ import Home from './Components/Pages/Home';
 import Men from './Components/Pages/Men';
 import Women from './Components/Pages/Women';
 import ProductView from './Components/Pages/ProductView';
-import ShoppingBag from './Components/Pages/ShoppingBag';
 import CheckoutForm from './Components/Pages/CheckoutForm';
 import OrderConfirm from './Components/Pages/OrderConfirm';
 
@@ -15,7 +14,6 @@ export default class routes extends Component{
              <Route path="/Men" component={Men}/>
              <Route path="/Women" component={Women}/>
              <Route path="/ProductView" component={ProductView}/>
-             <Route path="/ShoppingBag" component={ShoppingBag}/>
              <Route path="/CheckoutForm" component={CheckoutForm}/>
              <Route path="/OrderConfirm" component={OrderConfirm}/>
           </Switch>
