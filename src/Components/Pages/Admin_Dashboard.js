@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import main from '../../Assets/Main.png';
 import './Pages.css';
 import axios from 'axios';
-import Men from './Men';
-import Women from './Women';
+
 
 
 export default class Home extends Component {
@@ -19,17 +18,17 @@ export default class Home extends Component {
        
         return (
             <div className="wrap"> 
-             <h1>THIS IS HOME!</h1>
+             <h1>ADMIN PAGE!</h1>
             <div className="top">
                 <img classname="large" src={ main }/>
             </div>
             <div className="body">
-             <div className="men">MEN'S COLLECTION
-             <Men/>
+             <div className="products-board">PRODUCTS
+          
              </div>
-             <div className="women">
-             WOMEN'S COLLECTION
-             <Women/>
+             <div className="orders-board">
+             ORDERS
+             
              </div>
             </div>
             </div>

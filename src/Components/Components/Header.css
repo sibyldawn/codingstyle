@@ -1,18 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Arvo|Monoton');
+
+.header-wrap{
+  background: purple;
+  height: 100px;
+  width: 100vw;
+  display: fixed;
+}
+
 .menu{
-    background: purple;
     height: 100px;
-    width: 100vw;
-    padding-top: 10px;
+    width: 80vw;
     padding-left: 10px;
     padding-right: 10px;
+    margin: 0 auto;
     display: flex;
-    justify-content: space-between
     
   }
-
- .logo{
-    height: 50px;
-    width: 50px;
+  .menu-nav{
+    flex: 1;
+  }
+  .icon-wrap{
+    flex: 1;
+    display: inline-block;
+  }
+  
+  .logo{
+   flex: 3;
+   position: fixed;
+   top: 0px;
+   left: 250px;
+  }
+  .logo>img{
+    height: 100px;
+    width: 100px;
   }
 
   .drawer{
@@ -33,11 +53,29 @@
     
   }
   
-  .icons>img{
-    height: 50px;
-    width: 50px;
+  img{
+    height: 70px;
+    width: 70px;
   }
-  .bag>img{
-    height: 50px;
-    width: 50px;
+
+  .bag{
+    position: fixed;
+    right: 150px;
+    top: 10px;
+  }
+
+  .login{
+    position: fixed;
+    right: 250px;
+    top: 10px;
+  }
+
+  h2{
+    font-family: 'Monoton', cursive;
+    color: gold;
+    font-weight: heavy;
+    font-size: 3em;
+    position: fixed;
+    top: 30px;
+    left: 350px;
   }

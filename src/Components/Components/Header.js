@@ -31,10 +31,10 @@ export default class Header extends Component {
         const { showMenu } = this.state;
 
         return (
-           
+           <div className="header-wrap">
             <div className="menu">
             <nav>
-            <div className="icons" onClick={()=> this.setState({showMenu : !showMenu, menuIsStopped: false})}>
+            <div className="menu-nav" onClick={()=> this.setState({showMenu : !showMenu, menuIsStopped: false})}>
              <Lottie options={menuNav}
                      height = {100}
                      width  = {100}
@@ -48,20 +48,21 @@ export default class Header extends Component {
                 <Link to="/Women">Women's Collection</Link>
             </div>
 
-
-             <img className="logo" src={ logo }/>
+            <div className="logo">
+            <img src={ logo }/>
+            <h2>coding style shop</h2>
+            </div>
+             
            <div className="icon-wrap">
-             <div className="icons">
+             <div className="login">
              <img src={login}/>
              </div>
              <div className="bag" onClick={console.log('go to cart')}>
              <Link to="/ShoppingBag"><img src={bag}/></Link>
              </div>
             </div>
-            
-
-
-            </div>
+          </div>
+        </div>
         );
     }
 }
