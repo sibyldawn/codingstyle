@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import CheckoutForm from '../CheckoutForm';
+import './ShoppingBag.css';
 
 export default class ShoppingBag extends Component {
     constructor(){
         super();
         this.state = {
             user: '',
+            showBag: false
         };
       this.login = this.login.bind(this);
     } 
@@ -17,9 +19,13 @@ export default class ShoppingBag extends Component {
     }
  
     render() {
+        const {showBag} = this.state;
+        
         return (
-            <div className="shopping-window">
-             <h1>THIS IS THE SHOPPING BAG WINDOW!</h1>
+            <div className={"shopping-window"}>
+             <div>
+                 <h1>THIS IS THE SHOPPING BAG</h1>
+                 </div>
              <div>
                  {this.state.user
                     ? <CheckoutForm/>
@@ -35,3 +41,4 @@ export default class ShoppingBag extends Component {
         )
     }
 }
+

@@ -6,6 +6,7 @@ import style from './Header.css';
 import bag from '../../Assets/bag.png';
 import { Link } from 'react-router-dom';
 import login from '../../Assets/login.png'
+import ShoppingBag from '../Pages/ShoppingBag/ShoppingBag';
 
 
 export default class Header extends Component {
@@ -35,7 +36,9 @@ export default class Header extends Component {
             }
         }
 
+
         const { showMenu } = this.state;
+        const { showBag } = this.state;
 
         return (
            <div className="header-wrap">
@@ -64,8 +67,9 @@ export default class Header extends Component {
              <div className="login">
              <img src={login} onClick={this.login}/>
              </div>
-             <div className="bag" onClick={console.log('go to cart')}>
-             <Link to="/ShoppingBag"><img src={bag}/></Link>
+             <div className="bag">
+             <Link to="/ShoppingBag"> <img src={bag}/> </Link>}/>
+             
              </div>
             </div>
           </div>

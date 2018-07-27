@@ -13,6 +13,7 @@ const initialState = {
     submitted: false,
     userId: null,
 }
+
 const UPDATE_NAME = "UPDATE_NAME";
 const UPDATE_PRICE = "UPDATE_PRICE";
 const UPDATE_USER = 'UPDATE_USER';
@@ -25,14 +26,12 @@ const UPDATE_SIZE = 'UPDATE_SIZE';
 const UPDATE_ISADMIN = 'UPDATE_ISADMIN';
 const UPDATE_ISNOTADMIN = 'UPDATE_ISNOTADMIN';
 const UPDATE_TOTAL = 'UPDATE_TOTAL';
-const UPDATE_SUBMITTED = 'UPDATE_SUBMITTED';
 const UPDATE_USERID = 'UPDATE_USERID';
 // const UPDATE_CART = "UPDATE_CART";
 const DELETE_FROM_CART = "DELETE_FROM_CART";
 const UPDATE_SUBMITTED = "UPDATED_SUBMITTED";
 const UPDATE_CUSTOMERID = "UPDATE_CUSTOMERID";
 const UPDATE_QUANTITY = "UPDATE_QUANTITY";
-const UPDATE_USER = "UPDATE_USER";
 const SET_CART = "SET_CART";
 const SET_TOTAL = "SET_TOTAL";
 
@@ -44,12 +43,11 @@ export default function reducer(state = initialState,action){
         return {
             ...state,
             bag: [...state.bag,action.payload]
-        }
+        };
         case UPDATE_LOGIN:
-        return {...state, login: action.payload}
-
+        return {...state, login: action.payload};
         case UPDATE_USER:
-        return {...state,user: action.payload}
+        return {...state,user: action.payload};
 
         case UPDATE_NAME:
             return { ...state, name: action.payload };
@@ -61,14 +59,13 @@ export default function reducer(state = initialState,action){
             let index = state.cart.findIndex((e) => e.id === +action.payload.id);
             state.cart[index].quantity = action.payload.quantity
             return { ...state};
-
-        case UPDATE_IMAGE:
+        case UPDATE_PICTURE:
             return { ...state, image: action.payload };
 
         case UPDATE_ISADMIN:
             return { ...state, isAdmin: true };
 
-        case UPDATE_NOTADMIN:
+        case UPDATE_ISNOTADMIN:
             return { ...state, isAdmin: false };
 
         //  case UPDATE_CART:
@@ -89,6 +86,7 @@ export default function reducer(state = initialState,action){
             return { ...state, cart: action.payload };  
         case SET_TOTAL:
             return { ...state, total: action.payload };  
+        
       
 
         
@@ -148,7 +146,7 @@ export function updateQuantity(quantity) {
 }
 export function updateImage(image) {
     return {
-        type: UPDATE_IMAGE,
+        type: UPDATE_PICTURE,
         payload: image,
     };
 
@@ -160,7 +158,7 @@ export function updateAdmin() {
 };
 export function updateNotAdmin() {
     return {
-        type: UPDATE_NOTADMIN
+        type: UPDATE_ISNOTADMIN
     }
 };
 // export function updateCart(cart) {

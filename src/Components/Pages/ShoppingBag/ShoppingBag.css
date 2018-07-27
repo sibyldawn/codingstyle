@@ -4,8 +4,7 @@
     top: 110px;
     right: 0;
     width: 0px;
-    background: palegreen;
-    display:none;
+    /* display:none; */
     color: white;
     height: calc(100vh - 50px);
     transition: 1s;
