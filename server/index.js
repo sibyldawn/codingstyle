@@ -13,7 +13,7 @@ require('dotenv').config();
 
 //CONNECT TO DATABASE
 massive(process.env.CONNECTION_STRING).then(db => {
-    // console.log('Connected to Database');
+    console.log('Connected to Database');
     app.set('db',db)
 }).catch(error => console.log('massive error',error));
 
@@ -61,8 +61,7 @@ app.get('/auth/callback', (req,res) => {
             if(users.length){
                 const user = users[0];
                 req.session.user = user;
-                res.json(req.session.user);
-                res.redirect(req.headers.host);
+                res.redirect(window.location.pathname);
             }else{
                 const createUserData = [
                     auth0id,
@@ -75,8 +74,7 @@ app.get('/auth/callback', (req,res) => {
                  return db.add_user(createUserData).then( newUsers => {
                      const user = newUsers[0];
                      req.session.user = user;
-                    //  res.send(alert(`Welcome ${createUserData[1]}!`));
-                     res.redirect('/');
+                     res.redirect(window.location.pathname);
                  })
                 }
             })
@@ -90,16 +88,21 @@ app.post('/api/logout', (req,res)=>{
     res.send('Logged Out!')
 })
 
+
  //Products Controller
  app.get('/api/products/Men',pC.getmen);
  app.get('/api/products/Women',pC.getwomen);
  app.get('/api/products',pC.getAll);
+ app.post('/api/admin/products',pC.create);
+ app.put('/api/admin/products/:productid',pC.update);
+ app.delete('/api')
 
 //Bag_Controller
-// app.get('/api/bag/',bC.read);
-// app.post('/api/bag/', bC.add);
-// app.put('/api/bag/:productId',bC.edit);
-// app.delete('/api/bag/:productId',bC.deleteItem);
+app.get('/api/bag/:userid',bC.read);
+app.post('/api/bag/', bC.add);
+app.put('/api/bag/:userid',bC.edit); //still needs endpoint testing
+
+//
 
 
 

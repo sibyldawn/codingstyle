@@ -1,3 +1,5 @@
-select * from users u
-join shipTo s on u.id = s.user_id
-where u.id=$1;
+insert into shipTo
+(user_id,address,city,state,zipcode)
+values
+($1,$2,$3,$4,$5)
+returning *;
