@@ -15,7 +15,14 @@ export default class Header extends Component {
             menuIsStopped: true,
             showMenu: false,
         };
+        this.login = this.login.bind(this);
     }
+
+    login(){
+        const redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`);
+   
+        window.location = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/authorize?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${redirectUri}&response_type=code`
+       }
 
     render() {
 
@@ -55,7 +62,7 @@ export default class Header extends Component {
              
            <div className="icon-wrap">
              <div className="login">
-             <img src={login}/>
+             <img src={login} onClick={this.login}/>
              </div>
              <div className="bag" onClick={console.log('go to cart')}>
              <Link to="/ShoppingBag"><img src={bag}/></Link>

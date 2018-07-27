@@ -1,1 +1,18 @@
-.
+.shopping-window{
+    background: blue;
+    position: fixed;
+    top: 110px;
+    right: 0;
+    width: 0px;
+    background: palegreen;
+    display:none;
+    color: white;
+    height: calc(100vh - 50px);
+    transition: 1s;
+  }
+
+  .open{
+    width: 150px;
+    display: initial;
+    
+  }

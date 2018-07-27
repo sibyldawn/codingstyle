@@ -89,20 +89,20 @@ app.post('/api/logout', (req,res)=>{
 })
 
 
+
  //Products Controller
  app.get('/api/products/Men',pC.getmen);
  app.get('/api/products/Women',pC.getwomen);
  app.get('/api/products',pC.getAll);
  app.post('/api/admin/products',pC.create);
  app.put('/api/admin/products/:productid',pC.update);
- app.delete('/api')
+ app.delete('/api/products/:productid',pC.deleteItem);
 
 //Bag_Controller
 app.get('/api/bag/:userid',bC.read);
 app.post('/api/bag/', bC.add);
-app.put('/api/bag/:userid',bC.edit); //still needs endpoint testing
 
-//
+//Stripe Controller
 
 
 

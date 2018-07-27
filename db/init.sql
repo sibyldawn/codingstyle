@@ -92,7 +92,4 @@ values
 ('2018-07-25','11','10','3'),
 ('2018-07-20','4','10','3');
 
-insert into isAdmin
-(username, password)
-values
-('sibyl','sibelbel');
+
