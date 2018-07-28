@@ -13,7 +13,7 @@
   }
   
   .gallery{
-      height: 100px;
+      height: 200px;
       width: 200%;
       display: flex;
       justify-content: space-evenly;

@@ -1,6 +1,6 @@
 const initialState = {
     user: {},
-    bag: JSON.parse(localStorage.getItem('bag')) || [],
+    cart: JSON.parse(localStorage.getItem('cart')) || [],
     login: false,
     name: '',
     price: 0,
@@ -17,7 +17,6 @@ const initialState = {
 const UPDATE_NAME = "UPDATE_NAME";
 const UPDATE_PRICE = "UPDATE_PRICE";
 const UPDATE_USER = 'UPDATE_USER';
-const UPDATE_BAG = 'UPDATE_BAG';
 const UPDATE_LOGIN = 'UPDATE_LOGIN';
 const UPDATE_PICTURE = 'UPDATE_PICTURE';
 const UPDATE_QTY = 'UPDATE_QTY';
@@ -27,7 +26,6 @@ const UPDATE_ISADMIN = 'UPDATE_ISADMIN';
 const UPDATE_ISNOTADMIN = 'UPDATE_ISNOTADMIN';
 const UPDATE_TOTAL = 'UPDATE_TOTAL';
 const UPDATE_USERID = 'UPDATE_USERID';
-// const UPDATE_CART = "UPDATE_CART";
 const DELETE_FROM_CART = "DELETE_FROM_CART";
 const UPDATE_SUBMITTED = "UPDATED_SUBMITTED";
 const UPDATE_CUSTOMERID = "UPDATE_CUSTOMERID";
@@ -38,12 +36,7 @@ const SET_TOTAL = "SET_TOTAL";
 export default function reducer(state = initialState,action){
     let newState = { ...state }
     switch(action.type){
-        case UPDATE_BAG:
-        localStorage.setItem('bag', JSON.stringify([...state.bag,action.payload]))
-        return {
-            ...state,
-            bag: [...state.bag,action.payload]
-        };
+
         case UPDATE_LOGIN:
         return {...state, login: action.payload};
         case UPDATE_USER:
@@ -67,11 +60,6 @@ export default function reducer(state = initialState,action){
 
         case UPDATE_ISNOTADMIN:
             return { ...state, isAdmin: false };
-
-        //  case UPDATE_CART:
-        //     newState.cart.push(action.payload);
-        //     newState.total += (+action.payload.price * +action.payload.quantity);
-        //     return {...newState};
         case DELETE_FROM_CART:
             newState.cart = action.payload.cart;
             newState.total = action.payload.total;
@@ -95,20 +83,7 @@ export default function reducer(state = initialState,action){
     }
 }
 
-export function updateBag(id,name,price,size,category,picture) {
-    console.log('------------ state', initialState)
-    return {
-        type: UPDATE_BAG,
-        payload: {
-            id,
-            name,
-            price,
-            size,
-            category,
-            picture
-        }
-    }
-}
+
 
 export function updateUser(user) {
     return {
@@ -138,19 +113,42 @@ export function updatePrice(price) {
     };
 }
 
-export function updateQuantity(quantity) { 
+export function updateQuantity(qty) { 
     return {
         type: UPDATE_QUANTITY,
-        payload: quantity
+        payload: qty
     }
 }
-export function updateImage(image) {
+export function updateSize(size) {
+    return {
+        type: UPDATE_SIZE,
+        payload: size,
+    };
+}
+export function updatePicture(picture) {
     return {
         type: UPDATE_PICTURE,
-        payload: image,
+        payload: picture,
     };
 
 }
+export function updateCategory(category) {
+    return {
+        type: UPDATE_PICTURE,
+        payload: category,
+    };
+
+}
+
+export function updateItemTotal(itemTotal) {
+    return {
+        type: UPDATE_PICTURE,
+        payload: itemTotal,
+    };
+
+}
+
+
 export function updateAdmin() {
     return {
         type: UPDATE_ISADMIN
@@ -161,12 +159,7 @@ export function updateNotAdmin() {
         type: UPDATE_ISNOTADMIN
     }
 };
-// export function updateCart(cart) {
-//     return {
-//         type: UPDATE_CART,
-//         payload: cart,
-//     }
-// }
+
 export function deleteFromCart(cart) {
     return {
         type: DELETE_FROM_CART,

@@ -3,9 +3,11 @@ module.exports = function(req,res,next){
 
     if(!session.user){
         session.user = {
+            id: '',
+            name: '',
             bag: {},
             total: 0,
-            admin: false
+            isAdmin: false
         };
     }
     next();

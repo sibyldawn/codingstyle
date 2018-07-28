@@ -59,8 +59,8 @@ export default class Header extends Component {
             </div>
 
             <div className="logo">
-            <img src={ logo }/>
-            <h2>coding style shop</h2>
+            <Link to='/'><img src={ logo }/></Link>
+            <Link to='/'><h2>coding style shop</h2></Link>
             </div>
              
            <div className="icon-wrap">
