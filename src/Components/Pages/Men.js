@@ -72,12 +72,10 @@ export default class Men extends Component {
                 <div className="image"><img src={r.picture}/></div>
                 <p>Name: {r.name}</p>
                 <p>Price: ${r.price}</p>
-                <p>Qty:{r.item}</p>
-
-             </div>
+                </div>
         })
         return (
-            <div className={ this.props.path === '/' ? "gallery" : "grid-container"}>
+            <div className="grid-container">
              {men}
             </div>
         )

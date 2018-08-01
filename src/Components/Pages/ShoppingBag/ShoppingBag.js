@@ -31,41 +31,43 @@ export default class ShoppingBag extends Component {
  
     render() {
         const {showCart} = this.state;
-        const cartDisplay = this.state.cart ? this.state.cart.map(item => {
-            return( <div key={item.id}>
-                <Well>
-                   <Media>
-                    <Media.Left>
-                        <img width={100}
-                             height={100}
-                             src={item.picture} alt="shirt"/>
-                   </Media.Left>
-                   <Media.Body>
-                       <p>{item.name}</p>
-                       <Row className="show-grid">
-                         <Col md={6}>{item.size}</Col>
-                         <br/>
-                         <Col md={6}>{item.category}</Col>
-                       </Row>
-                       <Row className="show-grid">
-                         <Col md={6}>Price:{item.price}</Col>
-                         <br/>
-                         <Col md={6}>Qty: {item.qty}</Col>
-                       </Row>
-                       <Row>
-                         <Col md={6}>Item Total:{item.itemTotal}</Col>
-                       </Row>
-                   </Media.Body>
-                   </Media>
-                </Well>
-            </div>
-            )}): 'Your Cart is Empty';
+        // const cartDisplay = this.state.cart ? this.state.cart.map(item => {
+        //     return( <div key={item.id}>
+        //         <Well>
+        //            <Media>
+        //             <Media.Left>
+        //                 <img width={100}
+        //                      height={100}
+        //                      src={item.picture} alt="shirt"/>
+        //            </Media.Left>
+        //            <Media.Body>
+        //                <p>{item.name}</p>
+        //                <Row className="show-grid">
+        //                  <Col md={6}>{item.size}</Col>
+        //                  <br/>
+        //                  <Col md={6}>{item.category}</Col>
+        //                </Row>
+        //                <Row className="show-grid">
+        //                  <Col md={6}>Price:{item.price}</Col>
+        //                  <br/>
+        //                  <Col md={6}>Qty: {item.qty}</Col>
+        //                </Row>
+        //                <Row>
+        //                  <Col md={6}>Item Total:{item.itemTotal}</Col>
+        //                </Row>
+        //            </Media.Body>
+        //            </Media>
+        //         </Well>
+        //     </div>
+        //     )}): 'Your Cart is Empty';
 
         return (
-            <div className={"shopping-window"}>
-             <div className={"cart-gallery"}>
-                { cartDisplay}
+            <div className="shopping-window">
+             <div className="cart-gallery">
+                {/* { cartDisplay} */}
+                
              </div>
+             <div><h3>THIS IS THE SHOPPING BAG PAGE!</h3></div>
              <div>
                  {this.state.user
                     ? <CheckoutForm/>

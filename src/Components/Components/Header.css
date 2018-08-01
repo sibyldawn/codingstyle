@@ -30,7 +30,7 @@
   .logo{
    flex: 3;
    position: fixed;
-   top: 0px;
+   top: 10px;
    left: 250px;
   }
   .logo>img{

@@ -18,6 +18,7 @@ massive(process.env.CONNECTION_STRING).then(db => {
 }).catch(error => console.log('massive error',error));
 
 const app = express();
+app.use(express.static(`${__dirname}/../build`));
 app.use(bodyParser.json());
 // app.use(sessionVerify);
 app.use(session({
@@ -104,7 +105,10 @@ app.post('/api/bag/', bC.add);
 
 //Stripe Controller
 
-
+const path = require('path')
+app.get('*',(req,res)=> {
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+})
 
 
 const PORT = 4000;

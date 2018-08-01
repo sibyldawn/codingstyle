@@ -22,15 +22,8 @@ export default class Home extends Component {
                 <img className="large" src={ main }/>
             </div>
             <div className="body">
-             <div className="home">
-             <h3>MEN'S COLLECTION</h3>
-             <Men path={window.location.pathname}/>
+               
              </div>
-             <div className="home">
-             <h3>WOMEN'S COLLECTION</h3>
-             <Women/>
-             </div>
-            </div>
             </div>
         );
     }

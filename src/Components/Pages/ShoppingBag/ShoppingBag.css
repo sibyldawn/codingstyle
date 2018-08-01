@@ -1,12 +1,16 @@
 .shopping-window{
   height: 100vh;
-  width: 500px;
+  width: 100vw;
   background: papayawhip;
   position: fixed;
   top: 100px;
   right: 0;
   transition: 1s;
-
 }
 
 
+
+h3{
+  font-size: x-large;
+  color:red;
+}

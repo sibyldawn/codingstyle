@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Arvo|Monoton');
+
+
 .top>img{
     height: 50vh;
     width: 100%;
@@ -24,4 +27,26 @@
       font-family: 'Arvo', serif;
       font-size: 40px;
 
+  }
+
+ .modal{
+     font-family: serif;
+     font-size: 1em;
+     font-family: 'Arvo', serif;
+ }
+
+ .modal-header{
+     background:rgb(45, 5, 62);
+     font-family: 'Arvo', serif;
+     color: goldenrod;
+ }
+
+  #preview{
+    height: 250px;
+    width: 250px;
+    margin: 0 auto;
+  }
+
+  h4{
+      margin: 0 auto;
   }

@@ -25,6 +25,8 @@ export default class Header extends Component {
         window.location = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/authorize?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${redirectUri}&response_type=code`
        }
 
+   
+
     render() {
 
         const menuNav = {
@@ -35,6 +37,8 @@ export default class Header extends Component {
                 preserveAspectRatio: 'xMidYMid slice'
             }
         }
+        
+    
 
 
         const { showMenu } = this.state;
@@ -60,7 +64,7 @@ export default class Header extends Component {
 
             <div className="logo">
             <Link to='/'><img src={ logo }/></Link>
-            <Link to='/'><h2>coding style shop</h2></Link>
+            <Link to='/'><h2>coding style</h2></Link>
             </div>
              
            <div className="icon-wrap">
@@ -68,7 +72,7 @@ export default class Header extends Component {
              <img src={login} onClick={this.login}/>
              </div>
              <div className="bag">
-             <Link to="/ShoppingBag"> <img src={bag}/> </Link>}/>
+              <img src={bag}/>
              
              </div>
             </div>
