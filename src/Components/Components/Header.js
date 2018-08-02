@@ -58,7 +58,9 @@ export default class Header extends Component {
             </nav>
             
             <div className={ showMenu ? "drawer open": "drawer"}>
+                <br/>
                 <Link to="/Men"> Men's Collection </Link>
+                <br/>
                 <Link to="/Women">Women's Collection</Link>
             </div>
 

@@ -20,19 +20,18 @@
      position: absolute;
      top: 30%;
      left: 40%;
-     height: 1000px;
+     height:70%;
      width: 500px;
      font-family: serif;
      font-size: 1em;
      font-family: 'Arvo', serif;
  }
 
- .modal-footer{
-     background: green;
-    position: relative;
-    top: 60%;
-    left:10px;
- }
+ /* .add-cart{
+    background: green;
+    position: absolute;
+    bottom: 0;
+ }  */
 
  .modal-header{
      background:rgb(45, 5, 62);
@@ -57,3 +56,10 @@
     width: 100%;
 }
 
+.modal-lg {
+    height: 600px;
+    width: 300px;
+    display:block;
+    align-content: center;
+    justify-content: center;
+}

@@ -1,15 +1,14 @@
 .grid-body{
-    background: orange;
-    position:fixed;
-    top:600px;
+    position:relative;
+    top:100px;
     height: 100%;
     width: 100%;
 }
 
 .grid-container {
-    background: blue;
     display: grid;
     position: relative;
+    top:100px;
     margin: 0 auto;
     height: 100%;
     width: 1200px;
@@ -21,8 +20,8 @@
 
 .image>img{
     margin: 0 auto;
-    height: 250px;
-    width: 250px;
+    height: 200px;
+    width: 200px;
     position: relative;
     top: 10px;
     left: 20%;
@@ -33,19 +32,22 @@
     top: 100px;
     height: 50vh;
     width: 100%;
+    z-index: -1;
 }
 
 .product-box{
-    background: palevioletred;
-    border: 3px solid black;
+    border: 1px solid grey;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     display:block;
     justify-content: space-evenly;
+    align-items: center;
+    height: 400px;
+
 }
 
 p{
-    background: green;
+
     position: relative;
     top: 50px;
     width: 300px;
@@ -57,7 +59,7 @@ p{
 
 .add-button{
     position: relative;
-    top: 100px;
-    left: 35%;
+    top: 60px;
+    left: 30%;
 
 }
