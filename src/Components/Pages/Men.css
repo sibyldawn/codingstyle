@@ -1,0 +1,63 @@
+.grid-body{
+    background: orange;
+    position:fixed;
+    top:600px;
+    height: 100%;
+    width: 100%;
+}
+
+.grid-container {
+    background: blue;
+    display: grid;
+    position: relative;
+    margin: 0 auto;
+    height: 100%;
+    width: 1200px;
+    padding: 0 auto; 
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: ". . ." ". . ." ". . ." ". . .";
+  }
+
+.image>img{
+    margin: 0 auto;
+    height: 250px;
+    width: 250px;
+    position: relative;
+    top: 10px;
+    left: 20%;
+}
+
+.top>img{
+    position: relative;
+    top: 100px;
+    height: 50vh;
+    width: 100%;
+}
+
+.product-box{
+    background: palevioletred;
+    border: 3px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    display:block;
+    justify-content: space-evenly;
+}
+
+p{
+    background: green;
+    position: relative;
+    top: 50px;
+    width: 300px;
+    justify-content: space-around;
+    margin: 0 auto;
+    padding: 5px;
+    text-align: center;
+}
+
+.add-button{
+    position: relative;
+    top: 100px;
+    left: 35%;
+
+}

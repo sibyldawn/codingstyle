@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import './Pages.css';
+import './Men.css';
 import axios from 'axios';
+import menHeader from '../../Assets/Men.png';
+import ProductView from '../Pages/ProductView';
 
 
 export default class Men extends Component {
@@ -70,14 +72,25 @@ export default class Men extends Component {
         const men = this.state.men.map( r => {
             return <div className="product-box" key={r.id}>
                 <div className="image"><img src={r.picture}/></div>
-                <p>Name: {r.name}</p>
-                <p>Price: ${r.price}</p>
+                <div><p>{r.name}</p></div>
+                <div><p>Price: ${r.price}</p></div>
+                <div className="add-button"><ProductView/></div>
+
                 </div>
         })
         return (
-            <div className="grid-container">
-             {men}
+         <div>
+             <div className="top">
+                <img className="large" src={ menHeader }/>
             </div>
+           <div className="grid-body">
+            <div className="grid-container">
+            
+             {men}
+             
+            </div>
+          </div>
+        </div>
         )
     }
 }

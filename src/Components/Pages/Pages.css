@@ -1,20 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Arvo|Monoton');
 
 
-.top>img{
-    height: 50vh;
-    width: 100%;
-}
 
-.grid-container {
-    background: blue;
-    display: grid;
-    height: 100%;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-template-areas: ". . ." ". . ." ". . ." ". . .";
-  }
-  
   .gallery{
       height: 200px;
       width: 200%;
@@ -30,9 +17,21 @@
   }
 
  .modal{
+     position: absolute;
+     top: 30%;
+     left: 40%;
+     height: 1000px;
+     width: 500px;
      font-family: serif;
      font-size: 1em;
      font-family: 'Arvo', serif;
+ }
+
+ .modal-footer{
+     background: green;
+    position: relative;
+    top: 60%;
+    left:10px;
  }
 
  .modal-header{
@@ -50,3 +49,11 @@
   h4{
       margin: 0 auto;
   }
+
+  .top>img{
+    position: relative;
+    top: 100px;
+    height: 50vh;
+    width: 100%;
+}
+
