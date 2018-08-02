@@ -7,6 +7,7 @@ import ProductView from './Components/Pages/ProductView';
 import CheckoutForm from './Components/Pages/CheckoutForm';
 import OrderConfirm from './Components/Pages/OrderConfirm';
 import ShoppingBag from './Components/Pages/ShoppingBag/ShoppingBag';
+import AdminDashboard from './Components/Pages/Admin_Dashboard';
 
 export default class routes extends Component{
     render(){
@@ -17,7 +18,7 @@ export default class routes extends Component{
              <Route path="/CheckoutForm" component={CheckoutForm}/>
              <Route path="/OrderConfirm" component={OrderConfirm}/>
              <Route path="/ShoppingBag" component={ShoppingBag}/>
-             
+             <Route path="/Dashboard" component={AdminDashboard}/>
           </Switch>
     }
 }

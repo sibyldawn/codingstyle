@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Arvo|Monoton');
 
-.header-wrap>div{
+.header-wrap{
   background: rgb(33, 3, 33);
   height: 100px;
   width: 100vw;

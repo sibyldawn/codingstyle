@@ -17,7 +17,6 @@ export default class Home extends Component {
         
         return (
             <div className="wrap"> 
-             <h1>THIS IS HOME!</h1>
             <div className="top">
                 <img className="large" src={ main }/>
             </div>

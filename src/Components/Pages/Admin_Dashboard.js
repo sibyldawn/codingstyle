@@ -1,37 +1,20 @@
 import React, { Component } from 'react';
-import main from '../../Assets/Main.png';
-import './Pages.css';
-import axios from 'axios';
+import {Tabs,Tab} from 'react-bootstrap';
+import './Admin_Dashboard.css';
 
-
-
-export default class Home extends Component {
-    constructor(){
-        super();
-
-
-        }
-    
-
-
+export default class AdminDashboard extends Component {
     render() {
-       
-        return (
-            <div className="wrap"> 
-             <h1>ADMIN PAGE!</h1>
-            <div className="top">
-                <img classname="large" src={ main }/>
-            </div>
-            <div className="body">
-             <div className="products-board">PRODUCTS
-          
-             </div>
-             <div className="orders-board">
-             ORDERS
-             
-             </div>
-            </div>
-            </div>
-        );
+        return ( <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
+        <Tab eventKey={1} title="Tab 1">
+          Tab 1 content
+        </Tab>
+        <Tab eventKey={2} title="Tab 2">
+          Tab 2 content
+        </Tab>
+        <Tab eventKey={3} title="Tab 3" disabled>
+          Tab 3 content
+        </Tab>
+      </Tabs>
+        )
     }
 }
