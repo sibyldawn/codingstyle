@@ -14,7 +14,6 @@ export default class routes extends Component{
              <Route exact path ="/" component={Home}/>
              <Route path="/Men" component={Men}/>
              <Route path="/Women" component={Women}/>
-             <Route path="/ProductView" component={ProductView}/>
              <Route path="/CheckoutForm" component={CheckoutForm}/>
              <Route path="/OrderConfirm" component={OrderConfirm}/>
              <Route path="/ShoppingBag" component={ShoppingBag}/>

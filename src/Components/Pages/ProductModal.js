@@ -33,7 +33,6 @@ export default class ProductModal extends Component {
              <Modal show={this.props.show} onHide={this.props.handleClose}
                {...this.props}
                bsSize="large"
-               className="modal"
                >
                 <Modal.Header closeButton className="modal-header" >
                   <Modal.Title id="contained-modal-title-lg">Product Info</Modal.Title>
@@ -74,7 +73,7 @@ export default class ProductModal extends Component {
                     
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button className="add-cart" onClick={this.props.onHide}>ADD TO CART</Button>
+                    <Button  bsStyle="primary" className="add-cart" onClick={this.props.onHide}>ADD TO CART</Button>
                 </Modal.Footer>
             </Modal>
             </div>,
