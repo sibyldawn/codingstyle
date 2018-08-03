@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Tabs,Tab} from 'react-bootstrap';
+import {Tab,Tabs} from 'react-bootstrap';
 import './Admin_Dashboard.css';
 import Products from '../Components/Products';
 import Orders from '../Components/Orders';

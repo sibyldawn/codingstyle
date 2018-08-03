@@ -1,38 +1,45 @@
 import React, { Component } from 'react';
-import { Grid,Row,Col,Button,Media} from 'react-bootstrap'
+import { Grid,Row,Col,Button,Media} from 'react-bootstrap';
+import axios from 'axios';
  
 export default class Products extends Component {
+    constructor(props){
+        super(props);
+
+        this.state={
+            products: [],
+        };
+    }
+
+    componentDidMount(){
+        axios.get('/api/products').then(res => {
+            console.log("products", res.data);
+            this.setState({
+                products: res.data
+            })
+        })
+    }
+
+
     render() {
+        const products = this.state.products.map( r => {
+            return <div className="productwrap" key={r.id}>
+                    <Media>
+                        <Media.Left>
+                        <img width={100} height={100} src={r.picture}/> 
+                        </Media.Left>
+                        <Media.Body>
+                             <div>{r.name}</div>
+                             <div>Category:{r.category}</div>
+                             <div>Price:{r.price}</div>
+                        </Media.Body>
+                    </Media>
+                    <hr/>
+                 </div>
+        })
         return (
             <div>
-             <Media>
-                <Media.Left>
-                <img width={64} height={64} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhaM7wMcPIMCYEbmg2fZCcD5mKpTDYDu8Hj53pN0klqnUM0lZq"  alt="thumbnail" />
-                </Media.Left>
-                <Media.Body>
-                <Media.Heading>Media Heading</Media.Heading>
-                <p>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                    ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-                    tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
-                    fringilla. Donec lacinia congue felis in faucibus.
-                </p>
-                </Media.Body>
-            </Media>
-            <Media>
-                <Media.Left>
-                <img width={64} height={64} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhaM7wMcPIMCYEbmg2fZCcD5mKpTDYDu8Hj53pN0klqnUM0lZq"  alt="thumbnail" /> alt="thumbnail" />
-                </Media.Left>
-                <Media.Body>
-                <Media.Heading>Media Heading</Media.Heading>
-                <p>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                    ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-                    tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
-                    fringilla. Donec lacinia congue felis in faucibus.
-                </p>
-                </Media.Body>
-              </Media>
+             {products}         
             </div>
         );
     }
