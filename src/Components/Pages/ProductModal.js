@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Modal, Popovers, Row, Col, Grid, Button, DropdownButton, Image, MenuItem,ButtonGroup,ButtonToolbar } from 'react-bootstrap';
+import { Modal, Row, Col, Grid, Button, Image, MenuItem,ButtonGroup,ButtonToolbar } from 'react-bootstrap';
 
 const root = document.getElementById('root')
 const modalRoot = document.getElementById('modal-root')

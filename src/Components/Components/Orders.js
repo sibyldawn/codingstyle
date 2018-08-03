@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Table} from 'react-bootstrap';
 import axios from 'axios';
 
 export default class Orders extends Component {
@@ -22,7 +21,7 @@ export default class Orders extends Component {
 
     render() {
         const orders = this.state.orders.map( r => {
-            return   <tr>
+            return <tr>
                     <td>{r.id}</td>
                     <td>{r.date}</td>
                     <td>{r.status}</td>
@@ -37,12 +36,12 @@ export default class Orders extends Component {
                     <td>{r.category}</td>
                     <td>{r.size}</td>
                     </tr> 
+                  
                 
         })
         return (
             <div>
-                <Table striped bordered condensed hover>
-                <thead>
+                <table className="table">
                     <tr>
                     <th>Order ID</th>
                     <th>Date</th>
@@ -58,11 +57,10 @@ export default class Orders extends Component {
                     <th>Category</th>
                     <th>Size</th>
                     </tr>
-                </thead>
                 <tbody>
                     {orders}
                 </tbody>
-                </Table>
+                </table>
                
                 
             </div>

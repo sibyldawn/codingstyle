@@ -1,4 +1,4 @@
-.grid-body{
+/* .grid-body{
     position:relative;
     top:100px;
     height: 100%;
@@ -46,7 +46,7 @@
 
 }
 
-p{
+.product-box>p{
 
     position: relative;
     top: 50px;
@@ -62,4 +62,4 @@ p{
     top: 60px;
     left: 30%;
 
-}
+} */

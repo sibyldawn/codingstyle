@@ -1,0 +1,24 @@
+.dashboard{
+    background: peachpuff;
+}
+
+.nav-flex{
+    margin-top: 200px;
+    background: yellow;
+    display:flex;
+}
+
+.products-board{
+    background: blueviolet;
+    flex: 2;
+}
+
+.orders-board{
+    background: plum;
+    flex:4;
+}
+
+.add-form{
+    background: blue;
+    flex:2;
+}

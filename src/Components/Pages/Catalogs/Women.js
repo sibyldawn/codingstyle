@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './Men.css';
 import axios from 'axios';
-import WomenHeader from '../../Assets/Women.png';
-import ProductView from '../Pages/ProductView';
+import WomenHeader from '../../../Assets/Women.png';
+import ProductView from '../../Pages/ProductView';
 
 
 export default class Men extends Component {

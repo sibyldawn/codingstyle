@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Lottie from 'react-lottie';
-import * as menuIcon from '../../menu.json';
-import logo from '../../Assets/cslogo.png';
+import * as menuIcon from '../../../Assets/menu.json';
+import logo from '../../../Assets/cslogo.png';
 import style from './Header.css';
-import bag from '../../Assets/bag.png';
+import bag from '../../../Assets/bag.png';
 import { Link } from 'react-router-dom';
-import login from '../../Assets/login.png'
-import ShoppingBag from '../Pages/ShoppingBag/ShoppingBag';
+import login from '../../../Assets/login.png'
+import ShoppingBag from '../../Pages/ShoppingBag/ShoppingBag';
 
 
 export default class Header extends Component {
