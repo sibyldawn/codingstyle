@@ -89,7 +89,8 @@ app.post('/api/logout', (req,res)=>{
     res.send('Logged Out!')
 })
 
-//
+//Admin Controller
+app.get('/api/admin/orders', aC.readAllOrders)
 
  //Products Controller
  app.get('/api/products/Men',pC.getmen);
