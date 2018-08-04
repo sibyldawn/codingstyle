@@ -21,7 +21,7 @@ export default class Orders extends Component {
 
     render() {
         const orders = this.state.orders.map( r => {
-            return <tr>
+            return <tr key ={r.id}>
                     <td>{r.id}</td>
                     <td>{r.date}</td>
                     <td>{r.status}</td>

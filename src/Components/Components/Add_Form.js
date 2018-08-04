@@ -14,17 +14,17 @@ class Add_Form extends Component {
   }
 
   addProduct = () => {
-    let newProduct = [
-        this.props.name,
-       this.props.price,
-       this.props.size,
-        this.props.category,
-       this.props.picture,
-    ];
+    let newProduct = {
+        name: this.props.name,
+        price: this.props.price,
+        size: this.props.size,
+        category: this.props.category,
+        picture: this.props.picture,
+    };
     axios.post('/api/admin/products', newProduct).then( res => {
-      console.log('Add Product', res.data);
+      alert('Add Product', res.data);
     })
-    alert(`ADDED PRODUCT:${this.props.name}, ${this.props.price},${this.props.size},${this.props.category},${this.props.picture}`);
+    
   }
 
   render() {
@@ -36,13 +36,14 @@ class Add_Form extends Component {
           Product Name: <br/><br/>
           <input type="text" value={this.props.name} onChange={(e)=> updateName(e.target.value)}/>
           </label>
-          <label>
+          <label><br/><br/>
           Price: <br/><br/>
           <input type="number" value={this.props.price} onChange={(e)=> updatePrice(e.target.value)}/>
           </label>
           <label>
-          Size:<br/><br/>
+          <br/><br/>
           <select value={this.props.size} onChange={(e)=> updateSize(e.target.value)}>
+          <option value="null">SIZE</option>
             <option value="S">Small</option>
             <option value="M">Medium</option>
             <option value="L">Large</option>
@@ -50,8 +51,9 @@ class Add_Form extends Component {
           </select>
         </label>
         <label>
-          Category:<br/><br/>
-          <select value={this.props.category} onChange={(e)=> updateCategory(e.target.value)}>
+          <br/><br/>
+          <select value={this.props.category} onChange={(e)=> updateCategory(e.target.value)} > 
+            <option value="null">CATEGORY</option>
             <option value="Men">Men</option>
             <option value="Women">Women</option>
           </select>
