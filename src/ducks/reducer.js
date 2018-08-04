@@ -53,8 +53,11 @@ export default function reducer(state = initialState,action){
             state.cart[index].quantity = action.payload.quantity
             return { ...state};
         case UPDATE_PICTURE:
-            return { ...state, image: action.payload };
-
+            return { ...state, picture: action.payload };
+        case UPDATE_CATEGORY:
+            return { ...state, category: action.payload };
+        case UPDATE_SIZE:
+            return { ...state, size: action.payload };
         case UPDATE_ISADMIN:
             return { ...state, isAdmin: true };
 
@@ -134,7 +137,7 @@ export function updatePicture(picture) {
 }
 export function updateCategory(category) {
     return {
-        type: UPDATE_PICTURE,
+        type: UPDATE_CATEGORY,
         payload: category,
     };
 
@@ -142,7 +145,7 @@ export function updateCategory(category) {
 
 export function updateItemTotal(itemTotal) {
     return {
-        type: UPDATE_PICTURE,
+        type: UPDATE_TOTAL,
         payload: itemTotal,
     };
 
