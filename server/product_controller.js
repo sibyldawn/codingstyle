@@ -29,13 +29,13 @@ module.exports={
             res.status(200).send(products);
         }).catch( error => {
             res.status(500).send("Error on the server");
-            console.log('------get ALL Error', error);
+            console.log('------get ALL Error');
         })
     },
     create:(req,res) => {
         const { name,price,size,category,picture } = req.body;
         const db=req.app.get('db');
-        db.add_product([name,price,size,category,picture])
+        db.add_product({name,price,size,category,picture})
         .then(newItem => {
             console.log('------add item: ',newItem);
             res.status(200).send(newItem);
