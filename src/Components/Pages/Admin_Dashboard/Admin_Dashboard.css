@@ -1,5 +1,6 @@
 .dashboard{
     background: peachpuff;
+    padding-right: 10px;
 }
 
 .nav-flex{
@@ -11,7 +12,9 @@
 .products-board{
     background: blueviolet;
     flex: 2;
+    
 }
+
 
 .orders-board{
     background: plum;
@@ -22,3 +25,39 @@
     background: blue;
     flex:2;
 }
+
+.dashboard>nav{
+    background: yellow;
+    position: fixed;
+    top: 150px;
+    left: 160px;
+    padding-right: 30px;
+    
+}
+
+.tablink {
+    background-color: #555;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 25%;
+  }
+  
+  .tablink:hover {
+    background-color: #777;
+  }
+  
+  /* Style the tab content (and add height:100% for full page content) */
+  .tabcontent {
+    color: white;
+    display: none;
+    padding: 100px 20px;
+    height: 100%;
+  }
+  
+  #Inventory {background-color: red;}
+  #Orders {background-color: green;}

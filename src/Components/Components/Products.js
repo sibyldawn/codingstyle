@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Grid,Row,Col,Button,Media} from 'react-bootstrap';
 import axios from 'axios';
  
 export default class Products extends Component {
@@ -24,16 +23,16 @@ export default class Products extends Component {
     render() {
         const products = this.state.products.map( r => {
             return <div className="productwrap" key={r.id}>
-                    <Media>
-                        <Media.Left>
+                    <div>
+                        <div>
                         <img width={100} height={100} src={r.picture}/> 
-                        </Media.Left>
-                        <Media.Body>
+                        </div>
+                        <div>
                              <div>{r.name}</div>
                              <div>Category:{r.category}</div>
                              <div>Price:{r.price}</div>
-                        </Media.Body>
-                    </Media>
+                        </div>
+                    </div>
                     <hr/>
                  </div>
         })

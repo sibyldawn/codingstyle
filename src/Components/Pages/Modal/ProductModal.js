@@ -1,48 +1,42 @@
 import React, { Component } from 'react';
-import Popup from "reactjs-popup";
-import ProductModal from '../Pages/Modal/ProductModal';
+import ReactDOM from 'react-dom';
+import '../Modal/ProductModal.css';
+import Popup from 'reactjs-popup';
 
-const contentStyle = {
-  background: "rgba(255,255,255,0)",
-  width: "400px",
-  border: "none"
-};
-
-export default class ProductView extends Component {
  
-    constructor(props) {
-        super(props);
+const root = document.getElementById('root')
+const modalRoot = document.getElementById('modal-root')
 
-        this.state = {open: false};
-   };
-    
-   openModal = () => {
-     this.setState({
-       open: true
-     });
-   }
+export default class ProductModal extends Component {
 
-   closeModal = () => {
-     this.setState({
-       open: false
-     });
-   }
-    
  
+    constructor(props, context) {
+        super(props, context);
+        this.el = document.createElement('div');
+    
+        this.state = {
+          show: false,
+         
+        };
+      }
+     
+      componentDidMount(){
+          modalRoot.appendChild(this.el)
+      }
+
+      componentWillUnmount(){
+          modalRoot.removeChild(this.el) 
+      }
+    
+    
     render() {
 
-        return (
-            <div className="product">
-              <button className="product-button" onClick={this.openModal}>QUICK VIEW</button>
-              <Popup 
-                open = {this.state.open}
-                closeOnDocumentClick
-                onClose = {this.closeModal}
-                position="top center"
-                contentStyle={contentStyle}
-                >
-                <div className="modal">
-                    <div className ="header">
+        return ReactDOM.createPortal(
+            <div>
+       
+                  <div className ="modal">
+        
+                    <div className="header" >
                     Product Info
                     </div>
                     <div className="content">
@@ -74,9 +68,10 @@ export default class ProductView extends Component {
                 <div>
                     <button className="add-cart" >ADD TO CART</button>
                 </div>
-              </div>
-               </Popup> 
-            </div>
+                </div>
+    
+            </div>,
+            this.el
         )
     }
 }

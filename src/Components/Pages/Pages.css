@@ -7,6 +7,7 @@
       width: 200%;
       display: flex;
       justify-content: space-evenly;
+      z-index: 500;
   }
 
   h3{
@@ -16,20 +17,7 @@
 
   }
 
- .modal{
-     position: fixed;
-     top: 200px;
-     font-family: serif;
-     font-size: 1em;
-     font-family: 'Arvo', serif;
-     padding-top: 10px;
- }
 
- .modal-header{
-     background:rgb(45, 5, 62);
-     font-family: 'Arvo', serif;
-     color: goldenrod;
- }
 
   #preview{
     height: 350px;
@@ -49,3 +37,35 @@
     width: 100%;
 }
 
+.modal {
+    background: yellow;
+    font-size: 12px;
+    align-content: center;
+    height: 600px;
+
+
+  }
+  .modal > .header {
+    width: 100%;
+    border-bottom: 1px solid gray;
+    font-size: 18px;
+    text-align: center;
+    padding: 5px;
+  }
+  .modal > .content {
+    width: 100%;
+    padding: 10px 5px;
+    margin: 0 auto;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .modal > .add-cart{
+    position: fixed;
+    left: 250px;
+    width: 30%;
+    padding: 10px 5px;
+    margin: auto;
+    font-size: 20px;
+    text-align: center;
+  }

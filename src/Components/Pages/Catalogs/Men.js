@@ -3,6 +3,7 @@ import './Men.css';
 import axios from 'axios';
 import menHeader from '../../../Assets/Men.png';
 import ProductView from '../../Pages/ProductView';
+import ProductModal from '../Modal/ProductModal';
 
 
 export default class Men extends Component {

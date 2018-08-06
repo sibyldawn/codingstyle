@@ -11,7 +11,7 @@
     top:100px;
     margin: 0 auto;
     height: 100%;
-    width: 1200px;
+    width: 1800px;
     padding: 0 auto; 
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -20,11 +20,11 @@
 
 .image>img{
     margin: 0 auto;
-    height: 200px;
-    width: 200px;
+    height: 400px;
+    width: 400px;
     position: relative;
     top: 10px;
-    left: 20%;
+    left: 0px;
 }
 
 .top>img{
@@ -42,11 +42,11 @@
     display:block;
     justify-content: space-evenly;
     align-items: center;
-    height: 400px;
+    height: 600px;
 
 }
 
-.product-box>p{
+.product-box>div{
 
     position: relative;
     top: 50px;
