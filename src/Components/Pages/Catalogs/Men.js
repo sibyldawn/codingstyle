@@ -36,6 +36,9 @@ export default class Men extends Component {
                 <div><p>Price: ${r.price}</p></div>
                 <div className="addbutton"><ProductView
                             name={r.name}
+                            category={r.category}
+                            price={r.price}
+                            picture={r.picture}
                 /></div>
 
                 </div>

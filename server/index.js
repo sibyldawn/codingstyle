@@ -96,9 +96,9 @@ app.get('/api/admin/orders', aC.readAllOrders)
  app.get('/api/products/Men',pC.getmen);
  app.get('/api/products/Women',pC.getwomen);
  app.get('/api/products',pC.getAll);
- app.get('/api/products',pC.findProduct);
+ app.get('/api/findproduct',pC.findProduct);
  app.post('/api/admin/products',pC.create);
- app.get('/api/products/:productName',pC.getProduct);
+ app.get('/api/products',pC.getProduct);
  app.put('/api/admin/products/:productid',pC.update);
  app.delete('/api/products/:productid',pC.deleteItem);
 

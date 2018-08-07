@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CheckoutForm from '../CheckoutForm';
 import './ShoppingBag.css';
-import { Button,Well,Media,Row,Col } from 'react-bootstrap';
+
 
 export default class ShoppingBag extends Component {
     constructor(){

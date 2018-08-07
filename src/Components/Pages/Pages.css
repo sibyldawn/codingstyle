@@ -38,14 +38,16 @@
 }
 
 .modal {
-    background: yellow;
+    background: white;
     font-size: 12px;
     align-content: center;
-    height: 600px;
+    height: 700px;
 
 
   }
   .modal > .header {
+    background: purple;
+    color: yellow;
     width: 100%;
     border-bottom: 1px solid gray;
     font-size: 18px;

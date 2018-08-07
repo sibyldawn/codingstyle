@@ -33,8 +33,9 @@ module.exports={
         })
     },
     findProduct: (req,res) =>{
-        const db=req.app.get('db')
-        const { name, size, category} = req.body;
+        const db=req.app.get('db');
+        // const { name,size,category} = req.body;
+        const { name, size, category} = req.query
         db.find_product([name, size, category])
         .then(product => {
             console.log('product found', product);
@@ -46,9 +47,9 @@ module.exports={
     },
     getProduct: (req,res) =>{
         const db=req.app.get('db')
-        const { productName } = req.params;
-        console.log(productName)
-        db.get_product([productName])
+        const { name,category } = req.query;
+        console.log(name,category)
+        db.get_product([name,category])
         .then(product => {
             console.log('product found', product);
             res.status(200).send(product);

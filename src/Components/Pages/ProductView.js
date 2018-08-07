@@ -18,89 +18,88 @@ export default class ProductView extends Component {
 
           open: false,
           cart: JSON.parse(localStorage.getItem('cart')) || [],
-          products: [],
-          id: '',
-          name: '',
+          id: 0,
+          size: '',
           price: 0,
           category: '',
           picture: '',
+          qty: 0,
           itemTotal: 0,
      
         };
+        this.closeModal = this.closeModal.bind(this)
    };
 
-   componentDidMount(){
-       const { name } = this.props;
-       console.log('==============',name)
-        axios.get(`/api/products/${name}`).then( response => {
-            console.log('-----getProduct',response);
-            this.setState ({
-                products: response.data[0]
-            })
-        })
-   }
 
 
    openModal = () => {
      this.setState({
        open: true
      });
-   }
+   };
 
-   closeModal = () => {
+   closeModal(){
      this.setState({
        open: false
      });
+   };
+
+
+   findProduct =(name,size,category) => {
+    if( !this.state.size   ){
+        alert('Please choose a size.')
+        return 
+    }
+    let product = [
+        this.props.name,
+        this.state.size,
+        this.props.category
+    ];
+    axios.get(`/api/findproduct/?name=${this.props.name}&size=${this.state.size}&category=${this.props.category}`).then(response => {
+        console.log('------sentProduct',product);
+        console.log('----findproduct', response);
+        let item = response.data[0]
+        console.log(item)
+        let data;
+        this.setState ({
+            id: item.id,
+            name:item.name,
+            size:item.size,
+            price:item.price,
+            category:item.category,
+            picture:item.picture,
+        })
+        this.addToCart(name,size,category)
+    })
    }
-//    findProduct =(id, name,size,category) => {
-//     let product = [
-//         this.props.name,
-//         this.state.size,
-//         this.props.category
-//     ];
-
-//     this.addToCart(id, name, size, category)
-
-    //  axios.get('/api/products',product).then(response => {
-    //      console.log('----findproduct', response.data);
-    //      this.setState = {
-    //         id: response.data.id,
-    //         name: response.data.name,
-    //         size:response.data.size,
-    //         price: response.data.price,
-    //         category: response.data.category,
-    //         picture: response.data.picture,
-    //      }
-    //      this.addToCart(...{
-    //         id: response.data.id,
-    //         name: response.data.name,
-    //         size:response.data.size,
-    //      })
-    //  })
-//    }
 
    addToCart = (id, name,size,price,category,picture,qty,itemTotal) => {
-    let cart = {
-        id: this.state.products.id,
-        name: this.state.products.name,
-        price: this.state.products.price,
+    //    setTimeout(() => console.log('ADDDDDDD', this.state), 1000)
+    console.log('ADDDDDDD', this.state)
+    let cart = [
+        {
+        id: this.state.id,
+        name: this.props.name,
         size: this.state.size,
-        category: this.state.products.category,
-        picture: this.state.products.picture,
+        category: this.props.category,
+        picture: this.props.picture,
         qty: this.state.qty,
-        itemTotal: this.state.itemTotal
-    };
+        itemTotal: this.state.itemTotal}
+    ];
     console.log(JSON.parse(localStorage.getItem('cart')));
     if(JSON.parse(localStorage.getItem('cart')) == null){
 
         localStorage.setItem('cart', JSON.stringify(cart));
     }else {
     let currentCart = JSON.parse(localStorage.getItem('cart'));
+    currentCart.push(cart)
+    console.log(currentCart)
     let index =  currentCart.findIndex(e => e.id === id);
     if(index !== -1){
         currentCart[index].qty += 1
         currentCart[index].itemTotal = currentCart[index].qty * currentCart[index].price;
         }
+    localStorage.setItem('cart', JSON.stringify(currentCart))
     }
    }
    
@@ -133,15 +132,15 @@ export default class ProductView extends Component {
         }
 
         calculateSubtotal = (qty) => {
-            const {price} = this.state.products.price;
+            const {price} = this.props;
+
+            console.log('=======price qty',price, qty)
+            let subtotal = (+qty * +price).toFixed(2)
             this.setState({
-                itemTotal: qty *= price,
+                itemTotal: subtotal ,
             }) 
         }
     render() {
-
-        console.log(this.state)
-
         
         return (
             <div className="product">
@@ -149,28 +148,32 @@ export default class ProductView extends Component {
               <Popup 
                 open = {this.state.open}
                 closeOnDocumentClick
-                onClose = {this.closeModal}
+                // onClose = {this.closeModal}
                 position="top center"
                 contentStyle={contentStyle}
                 >
                 <div className="modal">
                    
                     <div className ="header">
-                      
+                      <h4>Product View</h4>
                     </div>
                     <div className="content">
                             <div>
                             <div className="show-grid">
-                                <img  id="preview" src={this.state.products ? this.state.products.picture : ''}/> 
+                                <img  id="preview" src={this.props ? this.props.picture : ' '}/> 
                             </div>
                             <div className="show-grid">
-                                <h4>{this.state.products ? this.state.products.name : ''}</h4>
+                                <h4>{this.props ? this.props.name : ''}</h4>
                             </div>
                             <div className="show-grid">
-                                <h4>${this.state.products ? this.state.products.price : ''}</h4>
+                                <h4>${this.props ? this.props.price : ''}</h4>
+                            </div>
+                            <div className="show-grid">
+                                <h4>{this.props ? this.props.category : ''}</h4>
                             </div>
                                 <div className="show-grid">
-                                   <select onChange={(e) => this.handleChangeSize(e.target.value)} value={this.state.size}>
+                                   <select onChange={(e) => this.handleChangeSize(e.target.value)} value={this.state.value}>
+                                        <option value='default'>Select Size</option>
                                         <option value='S'>S</option>
                                         <option value='M'>M</option>
                                         <option value='L'>L</option>
@@ -182,12 +185,12 @@ export default class ProductView extends Component {
                                     QTY:<input type="integer" width="10" onChange={(e) => this.handleChangeQty(e.target.value)} /></div>
                             </div>
                                 <div className="show-grid">
-                                  <h4>Subtotal: {this.state.itemTotal}</h4>
+                                  <h4>Subtotal:$ {this.state.itemTotal}</h4>
                                 </div>
 
                         </div>
                 <div>
-                    <button onClick={() =>this.addToCart()} className="add-cart" >ADD TO CART</button>
+                    <button onClick={() =>this.findProduct(this.props.name,this.state.size,this.props.category )} className="add-cart" >ADD TO CART</button>
                 </div>
               </div>
                </Popup> 
