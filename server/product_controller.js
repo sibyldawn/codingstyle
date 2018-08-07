@@ -32,6 +32,33 @@ module.exports={
             console.log('------get ALL Error');
         })
     },
+    findProduct: (req,res) =>{
+        const db=req.app.get('db')
+        const { name, size, category} = req.body;
+        db.find_product([name, size, category])
+        .then(product => {
+            console.log('product found', product);
+            res.status(200).send(product);
+        }).catch(error => {
+            console.log('----getProduct', error );
+            res.status(500).send('Product not found');
+        })
+    },
+    getProduct: (req,res) =>{
+        const db=req.app.get('db')
+        const { productName } = req.params;
+        console.log(productName)
+        db.get_product([productName])
+        .then(product => {
+            console.log('product found', product);
+            res.status(200).send(product);
+        }).catch(error => {
+            console.log('----getProduct', error );
+            res.status(500).send('Product not found');
+        })
+    },
+
+
     create:(req,res) => {
         const { name,price,size,category,picture } = req.body;
         const db=req.app.get('db');

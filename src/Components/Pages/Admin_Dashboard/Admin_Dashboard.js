@@ -10,7 +10,7 @@ export default class AdminDashboard extends Component {
     constructor(){
         super();
 
-        this.openPage=this.openPage.bind(this);
+  
     }
     
    

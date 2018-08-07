@@ -1,2 +1,1 @@
-select * from products
-where size = 'S';
+select * from products;

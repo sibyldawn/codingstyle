@@ -22,7 +22,7 @@ export default class routes extends Component{
              <Route path="/OrderConfirm" component={OrderConfirm}/>
              <Route path="/ShoppingBag" component={ShoppingBag}/>
              <Route path="/Dashboard" component={AdminDashboard}/>
-             
+   
           </Switch>
     }
 }

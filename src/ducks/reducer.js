@@ -1,19 +1,17 @@
 const initialState = {
     user: {},
-    cart: JSON.parse(localStorage.getItem('cart')) || [],
     login: false,
     name: '',
     price: 0,
     picture: '',
-    qty: null,
+    qty: 0,
     category: null,
     size: null,
     isAdmin: false,
-    total: 0.00,
+    total: 0,
     submitted: false,
     userId: null,
 }
-
 const UPDATE_NAME = "UPDATE_NAME";
 const UPDATE_PRICE = "UPDATE_PRICE";
 const UPDATE_USER = 'UPDATE_USER';
@@ -37,6 +35,7 @@ export default function reducer(state = initialState,action){
     let newState = { ...state }
     switch(action.type){
 
+        
         case UPDATE_LOGIN:
         return {...state, login: action.payload};
         case UPDATE_USER:
@@ -85,7 +84,6 @@ export default function reducer(state = initialState,action){
         
     }
 }
-
 
 
 export function updateUser(user) {

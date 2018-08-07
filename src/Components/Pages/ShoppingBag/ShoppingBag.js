@@ -33,31 +33,31 @@ export default class ShoppingBag extends Component {
         const {showCart} = this.state;
         // const cartDisplay = this.state.cart ? this.state.cart.map(item => {
         //     return( <div key={item.id}>
-        //         <Well>
-        //            <Media>
-        //             <Media.Left>
+        //         <div>
+        //            <div>
+        //             <div>
         //                 <img width={100}
         //                      height={100}
         //                      src={item.picture} alt="shirt"/>
-        //            </Media.Left>
-        //            <Media.Body>
+        //            </div>
+        //            <div>
         //                <p>{item.name}</p>
-        //                <Row className="show-grid">
-        //                  <Col md={6}>{item.size}</Col>
+        //                <div className="show-grid">
+        //                  <div md={6}>{item.size}</div>
         //                  <br/>
-        //                  <Col md={6}>{item.category}</Col>
-        //                </Row>
-        //                <Row className="show-grid">
-        //                  <Col md={6}>Price:{item.price}</Col>
+        //                  <div md={6}>{item.category}</div>
+        //                </div>
+        //                <div className="show-grid">
+        //                  <div md={6}>Price:{item.price}</div>
         //                  <br/>
-        //                  <Col md={6}>Qty: {item.qty}</Col>
-        //                </Row>
-        //                <Row>
-        //                  <Col md={6}>Item Total:{item.itemTotal}</Col>
-        //                </Row>
-        //            </Media.Body>
-        //            </Media>
-        //         </Well>
+        //                  <div md={6}>Qty: {item.qty}</div>
+        //                </div>
+        //                <div>
+        //                  <div md={6}>Item Total:{item.itemTotal}</div>
+        //                </div>
+        //            </div>
+        //            </div>
+        //         </div>
         //     </div>
         //     )}): 'Your Cart is Empty';
 

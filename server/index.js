@@ -18,7 +18,7 @@ massive(process.env.CONNECTION_STRING).then(db => {
 }).catch(error => console.log('massive error',error));
 
 const app = express();
-app.use(express.static(`${__dirname}/../build`));
+// app.use(express.static(`${__dirname}/../build`));
 app.use(bodyParser.json());
 // app.use(sessionVerify);
 app.use(session({
@@ -96,7 +96,9 @@ app.get('/api/admin/orders', aC.readAllOrders)
  app.get('/api/products/Men',pC.getmen);
  app.get('/api/products/Women',pC.getwomen);
  app.get('/api/products',pC.getAll);
+ app.get('/api/products',pC.findProduct);
  app.post('/api/admin/products',pC.create);
+ app.get('/api/products/:productName',pC.getProduct);
  app.put('/api/admin/products/:productid',pC.update);
  app.delete('/api/products/:productid',pC.deleteItem);
 
@@ -106,10 +108,10 @@ app.post('/api/bag/', bC.add);
 
 //Stripe Controller
 
-const path = require('path')
-app.get('*',(req,res)=> {
-    res.sendFile(path.join(__dirname, '../build/index.html'));
-})
+// const path = require('path')
+// app.get('*',(req,res)=> {
+//     res.sendFile(path.join(__dirname, '../build/index.html'));
+// })
 
 
 const PORT = 4000;
