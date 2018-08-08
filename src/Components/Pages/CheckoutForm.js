@@ -11,6 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import ShippingInfo from '../Pages/ShippingInfo';
+import Stripe from './Stripe';
+
 
 const styles = theme => ({
     root: {
@@ -49,12 +51,9 @@ const styles = theme => ({
                  </div>
             </div>);
       case 1:
-        return (<ShippingInfo/>);
+        return (<ShippingInfo  />);
     case 2:
-        return `Try out different ad text to see what brings in the most customers,
-                and learn how to enhance your ads using features like ad extensions.
-                If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.`;
+        return (<Stripe/>);
     case 3:
         return `Try out different ad text to see what brings in the most customers,
                 and learn how to enhance your ads using features like ad extensions.
@@ -74,7 +73,7 @@ class CheckoutForm extends Component {
             user: [],
             activeStep:0,
         }
-       
+
     }
 
     componentDidMount(){
@@ -86,7 +85,7 @@ class CheckoutForm extends Component {
         })
      })
     }
-  
+    
 
    
     
