@@ -20,8 +20,8 @@
 
 
   #preview{
-    height: 350px;
-    width: 350px;
+    height: 500px;
+    width: 500px;
     margin: 0 auto;
     
   }
@@ -71,3 +71,5 @@
     font-size: 20px;
     text-align: center;
   }
+
+  

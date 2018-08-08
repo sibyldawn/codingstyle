@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import Popup from "reactjs-popup";
 import ProductModal from '../Pages/Modal/ProductModal';
 import axios from 'axios';
+import { connect } from 'react-redux';
+
 
 const contentStyle = {
   background: "rgba(255,255,255,0)",
-  width: "400px",
-  border: "none"
+  width: "600px",
+  border: "none",
+  padding: "10px",
 };
 
 export default class ProductView extends Component {
@@ -18,7 +21,9 @@ export default class ProductView extends Component {
 
           open: false,
           cart: JSON.parse(localStorage.getItem('cart')) || [],
+          total: JSON.parse(localStorage.getItem('total')) || [],   
           id: 0,
+          name:'',
           size: '',
           price: 0,
           category: '',
@@ -58,65 +63,75 @@ export default class ProductView extends Component {
     axios.get(`/api/findproduct/?name=${this.props.name}&size=${this.state.size}&category=${this.props.category}`).then(response => {
         console.log('------sentProduct',product);
         console.log('----findproduct', response);
-        let item = response.data[0]
+        let item = response.data
         console.log(item)
         let data;
         this.setState ({
-            id: item.id,
+            id: item[0].id,
             name:item.name,
             size:item.size,
             price:item.price,
             category:item.category,
             picture:item.picture,
         })
-        this.addToCart(name,size,category)
+        this.addToCart(this.state.id,name,size,category)
     })
    }
 
-   addToCart = (id, name,size,price,category,picture,qty,itemTotal) => {
+   addToCart = (id,name,size,category) => {
     //    setTimeout(() => console.log('ADDDDDDD', this.state), 1000)
-    console.log('ADDDDDDD', this.state)
-    let cart = [
-        {
-        id: this.state.id,
-        name: this.props.name,
-        size: this.state.size,
-        category: this.props.category,
+    console.log('ADDDDDDD', id)
+    let item = {
+        id: id,
+        name: name,
+        size:size,
+        category: category,
         picture: this.props.picture,
         qty: this.state.qty,
-        itemTotal: this.state.itemTotal}
-    ];
+        price: this.props.price,
+        itemTotal: this.state.itemTotal,
+    }
+    let cart = []
+            
+    ;
+    console.log('item qty', item.qty)
     console.log(JSON.parse(localStorage.getItem('cart')));
     if(JSON.parse(localStorage.getItem('cart')) == null){
-
+        cart.push(item)
         localStorage.setItem('cart', JSON.stringify(cart));
+        
     }else {
     let currentCart = JSON.parse(localStorage.getItem('cart'));
-    currentCart.push(cart)
     console.log(currentCart)
-    let index =  currentCart.findIndex(e => e.id === id);
+    currentCart.push(item)
+    let index =  currentCart.findIndex(e => e.id === this.state.id);
     if(index !== -1){
-        currentCart[index].qty += 1
-        currentCart[index].itemTotal = currentCart[index].qty * currentCart[index].price;
+        
+        console.log('currentCart[index] item.qty',currentCart[index].qty,item.qty) ;
+        // currentCart[index].qty += +item.qty;
+        currentCart[index].itemTotal = (+currentCart[index].qty * +currentCart[index].price).toFixed(2);
         }
     localStorage.setItem('cart', JSON.stringify(currentCart))
     }
-   }
+   } 
    
+  
 
-        minusOneQty = () => {
-            let currentCart = JSON.parse(localStorage.getItem('cart'))
-            let index = currentCart.findIndex( e => e.id === currentCart.id)
-            currentCart.qty -= 1;
-            currentCart.itemTotal = currentCart.qty * currentCart.price
-        }
 
-        plusOneQty = () => {
-            let currentCart = JSON.parse(localStorage.getItem('cart'))
-            let index = currentCart.findIndex( e => e.id === currentCart.id)
-            currentCart.qty += 1;
-            currentCart.total = currentCart.qty * currentCart.price
-        }
+
+        // minusOneQty = () => {
+        //     let currentCart = JSON.parse(localStorage.getItem('cart'))
+        //     let index = currentCart.findIndex( e => e.id === currentCart.id)
+        //     currentCart.qty -= 1;
+        //     currentCart.itemTotal = currentCart.qty * currentCart.price
+        // }
+
+        // plusOneQty = () => {
+        //     let currentCart = JSON.parse(localStorage.getItem('cart'))
+        //     let index = currentCart.findIndex( e => e.id === currentCart.id)
+        //     currentCart.qty += 1;
+        //     currentCart.total = currentCart.qty * currentCart.price
+        // }
     
         handleChangeSize = (size) => {
             this.setState({
@@ -128,20 +143,25 @@ export default class ProductView extends Component {
             this.setState({
                 qty: qty
             })
+
             this.calculateSubtotal(qty);
         }
 
         calculateSubtotal = (qty) => {
             const {price} = this.props;
-
+            
             console.log('=======price qty',price, qty)
             let subtotal = (+qty * +price).toFixed(2)
+            console.log('ite subtotal ==============',subtotal)
             this.setState({
-                itemTotal: subtotal ,
-            }) 
+                itemTotal: subtotal
+            })
+            
+            return subtotal
+            
         }
     render() {
-        
+        console.log(this.state.itemTotal);
         return (
             <div className="product">
               <button className="product-button" onClick={this.openModal}>QUICK VIEW</button>
@@ -182,7 +202,7 @@ export default class ProductView extends Component {
                                     
                                 </div>
                                 <div className="show-grid">
-                                    QTY:<input type="integer" width="10" onChange={(e) => this.handleChangeQty(e.target.value)} /></div>
+                                    QTY:<input value={this.state.qty} type="number" width="10" onChange={(e) => this.handleChangeQty(e.target.value)} /></div>
                             </div>
                                 <div className="show-grid">
                                   <h4>Subtotal:$ {this.state.itemTotal}</h4>
@@ -198,3 +218,6 @@ export default class ProductView extends Component {
         )
     }
 }
+
+
+ 

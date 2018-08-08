@@ -60,7 +60,7 @@ export default class ProductModal extends Component {
                                     
                                 </div>
                                 <div className="show-grid">
-                                    QTY:<input type="integer" width="10"/></div>
+                                    QTY:<input type="number" width="10"/></div>
                             </div>
 
                             

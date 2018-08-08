@@ -75,7 +75,7 @@ app.get('/auth/callback', (req,res) => {
                  return db.add_user(createUserData).then( newUsers => {
                      const user = newUsers[0];
                      req.session.user = user;
-                     res.redirect('/');
+                     res.redirect('/ShoppingBag');
                  })
                 }
             })

@@ -4,10 +4,12 @@ module.exports = function(req,res,next){
     if(!session.user){
         session.user = {
             id: '',
-            name: '',
-            bag: {},
+            first_name: '',
+            last_name: '',
+            picture: '',
+            email: '',
+            admin: false,
             total: 0,
-            isAdmin: false
         };
     }
     next();

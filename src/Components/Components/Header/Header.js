@@ -5,25 +5,34 @@ import logo from '../../../Assets/cslogo.png';
 import style from './Header.css';
 import bag from '../../../Assets/bag.png';
 import { Link } from 'react-router-dom';
-import login from '../../../Assets/login.png'
+import login from '../../../Assets/login.png';
+import axios from 'axios';
 import ShoppingBag from '../../Pages/ShoppingBag/ShoppingBag';
+import {connect} from 'react-redux';
+import {updateNotAdmin, updateAdmin, setCart, updateUser, updateLogin, updateUserImage} from '../../../ducks/reducer';
 
 
-export default class Header extends Component {
+class Header extends Component {
     constructor(props){
         super(props);
         this.state = {
             menuIsStopped: true,
             showMenu: false,
+            user_img:'',
         };
         this.login = this.login.bind(this);
     }
+
+
+   
 
     login(){
         const redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`);
    
         window.location = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/authorize?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${redirectUri}&response_type=code`
-       }
+        
+    }
+
 
    
 
@@ -71,10 +80,11 @@ export default class Header extends Component {
              
            <div className="icon-wrap">
              <div className="login">
-             <img src={login} onClick={this.login}/>
+                <img src={login} onClick={this.login}/>
+               
              </div>
              <div className="bag">
-              <img src={bag}/>
+              <Link to='/ShoppingBag'><img src={bag}/></Link>
              
              </div>
             </div>
@@ -83,3 +93,10 @@ export default class Header extends Component {
         );
     }
 }
+
+function mapStateToProps(state){
+    return {
+        state,
+    }
+}
+export default connect(mapStateToProps,{updateNotAdmin, updateAdmin, setCart, updateUser, updateLogin, updateUserImage})(Header);

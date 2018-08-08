@@ -1,5 +1,6 @@
 const initialState = {
     user: {},
+    user_img: '',
     login: false,
     name: '',
     price: 0,
@@ -11,8 +12,10 @@ const initialState = {
     total: 0,
     submitted: false,
     userId: null,
+    cart:'',
 }
 const UPDATE_NAME = "UPDATE_NAME";
+const UPDATE_USER_IMAGE = "UPDATE_USER_IMAGE";
 const UPDATE_PRICE = "UPDATE_PRICE";
 const UPDATE_USER = 'UPDATE_USER';
 const UPDATE_LOGIN = 'UPDATE_LOGIN';
@@ -29,7 +32,7 @@ const UPDATE_SUBMITTED = "UPDATED_SUBMITTED";
 const UPDATE_CUSTOMERID = "UPDATE_CUSTOMERID";
 const UPDATE_QUANTITY = "UPDATE_QUANTITY";
 const SET_CART = "SET_CART";
-const SET_TOTAL = "SET_TOTAL";
+
 
 export default function reducer(state = initialState,action){
     let newState = { ...state }
@@ -40,6 +43,8 @@ export default function reducer(state = initialState,action){
         return {...state, login: action.payload};
         case UPDATE_USER:
         return {...state,user: action.payload};
+        case UPDATE_USER_IMAGE:
+        return {...state,user_imgs: action.payload};
 
         case UPDATE_NAME:
             return { ...state, name: action.payload };
@@ -74,9 +79,6 @@ export default function reducer(state = initialState,action){
             return { ...newState };
         case SET_CART:
             return { ...state, cart: action.payload };  
-        case SET_TOTAL:
-            return { ...state, total: action.payload };  
-        
       
 
         
@@ -90,6 +92,12 @@ export function updateUser(user) {
     return {
         type: UPDATE_USER,
         payload: user
+    }
+}
+export function updateUserImage(user_img) {
+    return {
+        type: UPDATE_USER,
+        payload: user_img
     }
 }
 
@@ -141,10 +149,10 @@ export function updateCategory(category) {
 
 }
 
-export function updateItemTotal(itemTotal) {
+export function updateTotal(total) {
     return {
         type: UPDATE_TOTAL,
-        payload: itemTotal,
+        payload: total,
     };
 
 }
@@ -184,11 +192,5 @@ export function setCart(cart) {
     return {
         type: SET_CART,
         payload: cart,
-    }
-}
-export function setTotal(total) {
-    return {
-        type: SET_TOTAL,
-        payload: total,
     }
 }
