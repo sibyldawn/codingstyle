@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CheckoutForm from '../CheckoutForm';
 import './ShoppingBag.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -42,6 +43,7 @@ class ShoppingBag extends Component {
             size: '',
             qty: 0,
         };
+        this.login = this.login.bind(this)
     } 
     componentDidMount(){
         this.setState({
@@ -50,7 +52,12 @@ class ShoppingBag extends Component {
     
     }
 
-   
+    login(){
+      const redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`);
+ 
+      window.location = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/authorize?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${redirectUri}&response_type=code`
+      
+   }
 
     getTotal = () => {
         console.log("this.state.cart",this.state.cart);
@@ -112,11 +119,13 @@ class ShoppingBag extends Component {
                 { cartDisplay}
                 
              </div>
+             <Paper style={{ width: '400px' }}>
              <div className="total-price">
                 <h3>Est. Total: $ {this.getTotal()}</h3>
              </div>
+             </Paper>
              <div>
-                    <CheckoutForm/>
+             <Link to='//CheckoutForm'> <button onClick={this.login}>CHECKOUT</button></Link>
                 
              </div>
             </div>

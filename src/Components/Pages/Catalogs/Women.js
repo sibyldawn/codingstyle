@@ -18,7 +18,7 @@ export default class Women extends Component {
             category: '',
             picture: '',
             itemTotal: 0,
-            qty: 1
+            qty: 0,
         }
     }
 

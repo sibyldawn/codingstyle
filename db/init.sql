@@ -46,6 +46,7 @@ select * from users;
 select * from products;
 select * from bag;
 select * from isAdmin;
+select * from shipTo;
 
 /*DUMMY DATA*/
 insert into users

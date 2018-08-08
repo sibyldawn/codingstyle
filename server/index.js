@@ -62,7 +62,7 @@ app.get('/auth/callback', (req,res) => {
             if(users.length){
                 const user = users[0];
                 req.session.user = user;
-                res.redirect('/');
+                res.redirect('/CheckoutForm');
             }else{
                 const createUserData = [
                     auth0id,
@@ -75,7 +75,7 @@ app.get('/auth/callback', (req,res) => {
                  return db.add_user(createUserData).then( newUsers => {
                      const user = newUsers[0];
                      req.session.user = user;
-                     res.redirect('/ShoppingBag');
+                     res.redirect('/CheckoutForm');
                  })
                 }
             })
