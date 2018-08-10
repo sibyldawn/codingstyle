@@ -39,7 +39,7 @@ let obj = {
   total: total
 }
  axios.post('/api/user/cartSession',obj).then( response => {
-  //  axios.post('/api/user/totalSession',total).then( response =>{
+  
      console.log(response)
   //   }
  }).catch(error => console.log(error));
