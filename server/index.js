@@ -21,7 +21,8 @@ massive(process.env.CONNECTION_STRING).then(db => {
 const app = express();
 // app.use(express.static(`${__dirname}/../build`));
 app.use(bodyParser.json());
-app.use(sessionVerify);
+const stripe = require("stripe")(process.env.STRIPE_SECRETKEY);
+
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -118,8 +119,7 @@ app.get('/api/admin/orders', aC.readAllOrders)
 app.get('/api/bag/:userid',bC.read);
 app.post('/api/bag/', bC.add);
 
-//Stripe Controller
-app.post('/api/save-stripe-token',stripe_ctrl.paymentAPI)
+
 
 //Cloudinary Endpoint
 
@@ -142,7 +142,24 @@ app.get('/api/upload', (req, res) => {
             res.json(payload);
     })
     
-    
+//Stripe Controller
+// app.use(require("body-parser").text());
+// app.post("/charge", async (req, res) => {
+//     try {
+//       let {status} = await stripe.charges.create({
+//         amount: 2000,
+//         currency: "usd",
+//         description: "An example charge",
+//         source: req.body
+//       });
+  
+//       res.json({status});
+//     }catch (err) {
+//       res.status(500).end();
+//     }
+//   });
+  
+
 // const path = require('path')
 // app.get('*',(req,res)=> {
 //     res.sendFile(path.join(__dirname, '../build/index.html'));

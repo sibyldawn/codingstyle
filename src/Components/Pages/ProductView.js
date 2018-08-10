@@ -120,8 +120,9 @@ export default class ProductView extends Component {
         currentCart[index].itemTotal = (+currentCart[index].qty * +currentCart[index].price).toFixed(2);
         }
     localStorage.setItem('cart', JSON.stringify(currentCart))
+    window.location.reload();
     }
-   return this.getUpdatedCart();
+   
    } 
    
   

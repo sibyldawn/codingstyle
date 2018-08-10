@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Elements, StripeProvider} from 'react-stripe-elements';
 import './App.css';
 import Header from './Components/Components/Header/Header';
 import Routes from './routes';
@@ -11,7 +12,8 @@ class App extends Component {
       <div>
         <Header/>
         <Routes/>
-     
+
+        
       </div>   
      );
   }

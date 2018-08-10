@@ -44,27 +44,22 @@ class ShoppingBag extends Component {
         super();
         this.state = {
             user: {},
-            cart: [],
+            cart: JSON.parse(localStorage.getItem('cart')),
             total: 0,
             size: '',
         };
         this.login = this.login.bind(this)
-        // this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
+      
     } 
     componentDidMount(){
         this.setState({
-            cart:JSON.parse(localStorage.getItem('cart'))
-            // total:JSON.parse(localStorage.getItem('total'))
+            cart:JSON.parse(localStorage.getItem('cart')),
           })
      }
 
-    //  componentWillReceiveProps(sum){
-    //   axios.post('/api/user/session/total', {total: sum}).then(response =>{
-    //       console.log("axios sent total", response)
-    //       this.setState({total: response.data.total})
-    //   }}
-
-    
+    //  componentWillReceiveProps(nextProps) {
+    //    console.log("NEXT PROPS",nextProps);
+    //  }
     
     
 
@@ -83,46 +78,47 @@ class ShoppingBag extends Component {
          for(let i=0;i<cart.length;i++){
              console.log("cart[i] itemTotal", +cart[i].itemTotal);
              sum += +cart[i].itemTotal
-             console.log("totalPrice", sum)
-             
-         return sum.toFixed(2) 
-         localStorage.setItem('total',parseInt(sum,10))
-         
-         } 
+          }
+         localStorage.setItem('total', JSON.stringify((sum.toFixed(2))))
+         return JSON.parse(localStorage.getItem('total'))
          
         }
       }
 
 
-    deleteFromCart = (id) => {
-      const currentCart = JSON.parse(localStorage.getItem('cart'))
-      const index= this.state.currentCart.findIndex(e => e.id === id)
-      JSON.parse(localStorage.removeItem('cart')[index])
-      this.setState({
-        cart:currentCart
-      })
-    }
-
-
    
-    // changeQty = (value,id,qty,itemTotal) => {
-    //         let currentCart = JSON.parse(localStorage.getItem('cart'))
-    //         console.log("currentCart",currentCart)
-    //         let index = currentCart.findIndex( e => e.id === id)
-    //         console.log("index",index)
-    //         currentCart[index].qty = value;
-    //         console.log("currentCart.qty", currentCart.qty)
 
-    //         { value === 0 ? 
-    //           JSON.parse(localStorage.removeItem('cart')[index])
-    //           :
-    //         currentCart[index].itemTotal = currentCart[index].qty * currentCart[index].price
-    //         console.log("curretCart item total", currentCart[index].itemTotal)
-    //         this.setState({
-    //           cart: currentCart
-    //         })
-    //       }
-    //     }
+    changeQty = (value,id,qty,itemTotal) => {
+            let currentCart = JSON.parse(localStorage.getItem('cart'))
+            console.log("currentCart",currentCart)
+            let index = currentCart.findIndex( e => e.id === id)
+            console.log("index",index)
+            currentCart[index].qty = value;
+            console.log("currentCart.qty", currentCart.qty)
+
+             if(value == 0){ 
+              let newCart = JSON.parse(localStorage.getItem('cart'))
+              
+              newCart.splice(index,1)
+              console.log(newCart)
+              this.setState(() => {
+                localStorage.setItem('cart' ,JSON.stringify(newCart));
+                return {
+                  cart: newCart
+                }
+              })
+              this.render();
+
+             }else{
+                currentCart[index].itemTotal = currentCart[index].qty * currentCart[index].price
+                console.log("curretCart item total", currentCart[index].itemTotal)
+                this.setState({
+                  cart: currentCart
+            })
+
+            
+          }
+        }
  
    
     render() {
@@ -131,6 +127,9 @@ class ShoppingBag extends Component {
         const {showCart} = this.state;
         const {classes} = this.props;
         const cartDisplay = this.state.cart ? this.state.cart.map(item => {
+            if(item === null ){
+              return ''
+            }else {
             return( <div key = {item.id}>
             <Paper className={classes.root}>
                 <Grid container spacing={16}>
@@ -163,13 +162,15 @@ class ShoppingBag extends Component {
                         }}
                         margin="normal"
                       />
-                     {/* <Typography style={{ cursor: 'pointer' }} onClick={this.deleteFromCart(item.id)}>Remove</Typography> */}
+                     <Typography style={{ cursor: 'pointer' }} onClick={(e)=>this.changeQty(0,item.id,item.qty,item.itemTotal)}>Remove</Typography>
                     </Grid>
                   </Grid>
                 </Grid>
               </Paper>
               </div>
-            )}): 'Your Cart is Empty';
+            )}
+          
+          }): 'Your Cart is Empty';
         console.log(this.state);
         return (
             <div className="shopping-window">
