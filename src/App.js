@@ -4,12 +4,14 @@ import Header from './Components/Components/Header/Header';
 import Routes from './routes';
 import ShoppingBag from './Components/Pages/ShoppingBag/ShoppingBag';
 
+
 class App extends Component {
   render() {
     return (
       <div>
         <Header/>
         <Routes/>
+     
       </div>   
      );
   }

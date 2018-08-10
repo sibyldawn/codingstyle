@@ -3,6 +3,7 @@ import Popup from "reactjs-popup";
 import ProductModal from '../Pages/Modal/ProductModal';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import ShoppingBag from './ShoppingBag/ShoppingBag';
 
 
 const contentStyle = {
@@ -48,6 +49,13 @@ export default class ProductView extends Component {
        open: false
      });
    };
+
+
+   getUpdatedCart = (updated) => {
+       this.setState({
+           cart: updated
+       })
+   }
 
 
    findProduct =(name,size,category) => {
@@ -113,26 +121,12 @@ export default class ProductView extends Component {
         }
     localStorage.setItem('cart', JSON.stringify(currentCart))
     }
+   return this.getUpdatedCart();
    } 
    
   
 
 
-
-        // minusOneQty = () => {
-        //     let currentCart = JSON.parse(localStorage.getItem('cart'))
-        //     let index = currentCart.findIndex( e => e.id === currentCart.id)
-        //     currentCart.qty -= 1;
-        //     currentCart.itemTotal = currentCart.qty * currentCart.price
-        // }
-
-        // plusOneQty = () => {
-        //     let currentCart = JSON.parse(localStorage.getItem('cart'))
-        //     let index = currentCart.findIndex( e => e.id === currentCart.id)
-        //     currentCart.qty += 1;
-        //     currentCart.total = currentCart.qty * currentCart.price
-        // }
-    
         handleChangeSize = (size) => {
             this.setState({
                 size: size

@@ -19,9 +19,7 @@ export default class AdminDashboard extends Component {
         return (
         <div className="dashboard">  
          <Add_Form/>
-         <Products/>
-         <Orders/>
-        
+         
         </div>
         )
     }

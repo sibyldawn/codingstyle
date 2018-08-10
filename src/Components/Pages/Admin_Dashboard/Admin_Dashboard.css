@@ -24,6 +24,7 @@
 .add-form{
     background: blue;
     flex:2;
+    margin-top: 300px;
 }
 
 .dashboard>nav{
@@ -61,3 +62,5 @@
   
   #Inventory {background-color: red;}
   #Orders {background-color: green;}
+
+ 

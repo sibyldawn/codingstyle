@@ -51,6 +51,8 @@ export default function reducer(state = initialState,action){
        
         case UPDATE_PRICE:
             return { ...state, price: action.payload };
+        case UPDATE_TOTAL:
+            return { ...state, total: action.payload };
 
         case UPDATE_QUANTITY:
             let index = state.cart.findIndex((e) => e.id === +action.payload.id);
@@ -77,8 +79,6 @@ export default function reducer(state = initialState,action){
         case UPDATE_CUSTOMERID:
             newState.customerId = action.payload;
             return { ...newState };
-        case SET_CART:
-            return { ...state, cart: action.payload };  
       
 
         

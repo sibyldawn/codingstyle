@@ -17,6 +17,18 @@ module.exports = {
             console.log('----create Error', error);
             res.status(500).send('Unable to Add Shipping Info');})
         
+    },
+    findAddress:(req,res) => {
+        const {user_id} = req.query;
+        console.log(req.query)
+        const db=req.app.get('db');
+        db.find_address([user_id]).then(address => {
+            console.log('SAVED ADDRESS', address);
+            res.status(200).send(address);
+        }).catch(error => {
+            console.log('--------find address error',error);
+            res.status(500).send('No address found')
+        })
     }
 }
 

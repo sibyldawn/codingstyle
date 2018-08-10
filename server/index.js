@@ -9,6 +9,7 @@ const pC = require('./product_controller');
 const bC = require('./bag_controller');
 const stripe_ctrl = require('./stripe_controller');
 const sessionVerify = require('./sessionVerify');
+const cloudinary = require('cloudinary');
 require('dotenv').config();
 
 //CONNECT TO DATABASE
@@ -20,7 +21,7 @@ massive(process.env.CONNECTION_STRING).then(db => {
 const app = express();
 // app.use(express.static(`${__dirname}/../build`));
 app.use(bodyParser.json());
-// app.use(sessionVerify);
+app.use(sessionVerify);
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -62,6 +63,7 @@ app.get('/auth/callback', (req,res) => {
             if(users.length){
                 const user = users[0];
                 req.session.user = user;
+                console.log("USER SESSION",req.session.user)
                 res.redirect('/CheckoutForm');
             }else{
                 const createUserData = [
@@ -69,12 +71,14 @@ app.get('/auth/callback', (req,res) => {
                     userInfoResponse.data.given_name,
                     userInfoResponse.data.family_name,
                     userInfoResponse.data.picture,
-                    userInfoResponse.data.email
+                    userInfoResponse.data.email,
+                    
                  ];
                 //  console.log('----createUserData',createUserData);
                  return db.add_user(createUserData).then( newUsers => {
                      const user = newUsers[0];
                      req.session.user = user;
+                     console.log("USER SESSION",req.session.user)
                      res.redirect('/CheckoutForm');
                  })
                 }
@@ -84,9 +88,17 @@ app.get('/auth/callback', (req,res) => {
 
  //Session Controller
 app.get('/api/user/session', uC.getSession)
+app.get('/api/user/shipping',uC.findAddress)
+app.post('/api/user/shipping/:user_id',uC.addShipping)
 app.post('/api/logout', (req,res)=>{
     req.session.destroy();
+    localStorage.clear();
     res.send('Logged Out!')
+})
+
+app.post('/api/user/session/total', (req, res) => {
+    req.session.user.total = req.body.total
+    console.log("DID WE ADD THE TOTAL?",req.session.user)
 })
 
 //Admin Controller
@@ -107,7 +119,30 @@ app.get('/api/bag/:userid',bC.read);
 app.post('/api/bag/', bC.add);
 
 //Stripe Controller
+app.post('/api/save-stripe-token',stripe_ctrl.paymentAPI)
 
+//Cloudinary Endpoint
+
+app.get('/api/upload', (req, res) => {
+
+   
+        const timestamp = Math.round((new Date()).getTime() / 1000);
+    
+    
+        const api_secret  = process.env.CLOUDINARY_API_SECRET;
+    
+   
+        const signature = cloudinary.utils.api_sign_request({ timestamp: timestamp }, api_secret);
+    
+   
+        const payload = {
+            signature: signature,
+            timestamp: timestamp
+        };
+            res.json(payload);
+    })
+    
+    
 // const path = require('path')
 // app.get('*',(req,res)=> {
 //     res.sendFile(path.join(__dirname, '../build/index.html'));

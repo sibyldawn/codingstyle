@@ -10,24 +10,31 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
+import Button from '@material-ui/core/Button';
+
+import TextField from '@material-ui/core/TextField';
 import {updateNotAdmin, updateAdmin, setCart, updateUser, updateLogin, updateTotal} from '../../../ducks/reducer';
 
 
 const styles = theme => ({
     root: {
       flexGrow: 1,
-      maxWidth: 800,
+      maxWidth: 500,
+      maxHeight: 200,
       padding: theme.spacing.unit * 2,
     },
     image: {
-      width: 128,
-      height: 128,
+      width: 120,
+      height: 120,
     },
     img: {
       margin: 'auto',
       display: 'block',
       maxWidth: '100%',
       maxHeight: '100%',
+    }, 
+    button: {
+      margin: theme.spacing.unit,
     },
   });
   
@@ -37,20 +44,29 @@ class ShoppingBag extends Component {
         super();
         this.state = {
             user: {},
-            showBag: false,
             cart: [],
             total: 0,
             size: '',
-            qty: 0,
         };
         this.login = this.login.bind(this)
+        // this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
     } 
     componentDidMount(){
         this.setState({
-            cart:JSON.parse(localStorage.getItem('cart'))})
-        
+            cart:JSON.parse(localStorage.getItem('cart'))
+            // total:JSON.parse(localStorage.getItem('total'))
+          })
+     }
+
+    //  componentWillReceiveProps(sum){
+    //   axios.post('/api/user/session/total', {total: sum}).then(response =>{
+    //       console.log("axios sent total", response)
+    //       this.setState({total: response.data.total})
+    //   }}
+
     
-    }
+    
+    
 
     login(){
       const redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`);
@@ -68,11 +84,45 @@ class ShoppingBag extends Component {
              console.log("cart[i] itemTotal", +cart[i].itemTotal);
              sum += +cart[i].itemTotal
              console.log("totalPrice", sum)
-         }
-         return sum;
-    console.log("totalPrice",sum);
+             
+         return sum.toFixed(2) 
+         localStorage.setItem('total',parseInt(sum,10))
+         
+         } 
+         
         }
+      }
+
+
+    deleteFromCart = (id) => {
+      const currentCart = JSON.parse(localStorage.getItem('cart'))
+      const index= this.state.currentCart.findIndex(e => e.id === id)
+      JSON.parse(localStorage.removeItem('cart')[index])
+      this.setState({
+        cart:currentCart
+      })
     }
+
+
+   
+    // changeQty = (value,id,qty,itemTotal) => {
+    //         let currentCart = JSON.parse(localStorage.getItem('cart'))
+    //         console.log("currentCart",currentCart)
+    //         let index = currentCart.findIndex( e => e.id === id)
+    //         console.log("index",index)
+    //         currentCart[index].qty = value;
+    //         console.log("currentCart.qty", currentCart.qty)
+
+    //         { value === 0 ? 
+    //           JSON.parse(localStorage.removeItem('cart')[index])
+    //           :
+    //         currentCart[index].itemTotal = currentCart[index].qty * currentCart[index].price
+    //         console.log("curretCart item total", currentCart[index].itemTotal)
+    //         this.setState({
+    //           cart: currentCart
+    //         })
+    //       }
+    //     }
  
    
     render() {
@@ -97,14 +147,23 @@ class ShoppingBag extends Component {
                         </Typography>
                         <Typography gutterBottom>{item.category}</Typography>
                         <Typography gutterBottom>Size: {item.size}</Typography>
-                        <Typography color="textSecondary">QTY: {item.qty}</Typography>
-                      </Grid>
-                      <Grid item>
-                        <Typography style={{ cursor: 'pointer' }}>Remove</Typography>
                       </Grid>
                     </Grid>
                     <Grid item>
                       <Typography variant="subheading">${item.itemTotal}</Typography>
+                      <TextField
+                        id="number"
+                        label="QTY"
+                        defaultValue={item.qty}
+                        onChange={(e)=>this.changeQty(e.target.value,item.id,item.qty,item.itemTotal)}
+                        type="number"
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        margin="normal"
+                      />
+                     {/* <Typography style={{ cursor: 'pointer' }} onClick={this.deleteFromCart(item.id)}>Remove</Typography> */}
                     </Grid>
                   </Grid>
                 </Grid>
@@ -114,18 +173,18 @@ class ShoppingBag extends Component {
         console.log(this.state);
         return (
             <div className="shopping-window">
-             <div><h3>CART SUMMARY:</h3></div>
+             <div><h4>CART SUMMARY:</h4></div>
              <div className="cart-gallery">
                 { cartDisplay}
                 
              </div>
-             <Paper style={{ width: '400px' }}>
+             <Paper style={{ width: '500px' }}>
              <div className="total-price">
-                <h3>Est. Total: $ {this.getTotal()}</h3>
+                <h3>Total: $ {this.getTotal()}</h3>
              </div>
              </Paper>
              <div>
-             <Link to='//CheckoutForm'> <button onClick={this.login}>CHECKOUT</button></Link>
+             <Button variant="contained" size="large" color="primary" className={classes.button} onClick={this.login}>CHECKOUT</Button>
                 
              </div>
             </div>
@@ -140,7 +199,7 @@ ShoppingBag.propTypes = {
 
 function mapStateToProps(state){
     return {
-        state,
+        total: state.total,
     }
 }
 

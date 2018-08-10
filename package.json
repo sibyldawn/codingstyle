@@ -8,6 +8,7 @@
     "@material-ui/icons": "^2.0.1",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
+    "cloudinary": "^1.11.0",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
@@ -15,6 +16,7 @@
     "now": "^11.3.5",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-dropzone": "^4.3.0",
     "react-lottie": "^1.2.3",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
@@ -23,7 +25,8 @@
     "react-stripe-elements": "^2.0.1",
     "react-tabs": "^2.2.2",
     "reactjs-popup": "^1.1.1",
-    "redux": "^4.0.0"
+    "redux": "^4.0.0",
+    "stripe": "^6.7.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
@@ -12,11 +13,17 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import ShippingInfo from '../Pages/ShippingInfo';
 import Stripe from './Stripe';
+import {updateTotal} from '../../ducks/reducer';
+
 
 
 const styles = theme => ({
     root: {
-      marginTop: '300px',  
+      ...theme.mixins.gutters(),
+      paddingTop: theme.spacing.unit * 2,
+      paddingBottom: theme.spacing.unit * 2,
+      marginTop: '100px',  
+      margin: 'auto',
       width: '90%',
       fontSize: 50,
       
@@ -35,11 +42,11 @@ const styles = theme => ({
   });
 
   function getSteps() {
-    return ['Confirm User Information', 'Add Shipping Information', 'Payment Method','Place Your Order'];
+    return ['Confirm User Information', 'Add Shipping Information', 'Place Your Order'];
   }
   
-  function getStepContent(step, first_name, last_name,email) {
-      
+  function getStepContent(step, first_name, last_name,email,user,userAddress,userCity,userState,userZipcode,findAddress,total) {
+      console.log(total)
     switch (step) {
       case 0:
         return (<div>
@@ -51,14 +58,22 @@ const styles = theme => ({
                  </div>
             </div>);
       case 1:
-        return (<ShippingInfo  />);
+        // return   ({user} ? 
+        //           {findAddress}
+        //           :
+                 return <ShippingInfo  />
+                // );
     case 2:
-        return (<Stripe/>);
-    case 3:
-        return `Try out different ad text to see what brings in the most customers,
-                and learn how to enhance your ads using features like ad extensions.
-                If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.`;
+         return ( <div>
+                
+                <h4>Sub Total:$ {total}</h4>
+                  <hr/>
+                <Stripe />
+                
+                </div>
+                );
+    
+        
       default:
         return 'Unknown step';
     }
@@ -71,6 +86,10 @@ class CheckoutForm extends Component {
 
         this.state={
             user: [],
+            userAddress: '',
+            userCity: '',
+            userState: '',
+            userZipcode: 0,
             activeStep:0,
         }
 
@@ -78,7 +97,7 @@ class CheckoutForm extends Component {
 
     componentDidMount(){
         axios.get('/api/user/session').then(user => {
-            console.log("=====userLogin",user);
+            // console.log("=====userLogin",user);
         this.setState({
             user: user.data,
             
@@ -114,12 +133,29 @@ class CheckoutForm extends Component {
         });
       };
     
+     
+      findSavedInfo = (userId) => {
+        axios.get(`/api/user/shipping/?userId=${userId}`).then(response => {
+          this.setState({
+            userAddress: response.data.address,
+            userCity: response.data.city,
+            userState: response.data.state,
+            userZipcode: response.data.zipcode,
+          })
+        })
+      }
+      
+
       render() {
+        // console.log(this.state)
+        console.log("SESSION TOTAL",this.state.user.total)
         const { classes } = this.props;
         const steps = getSteps();
         const { activeStep } = this.state;
     
         return (
+        <div>
+          <Paper className={classes.root} elevation={1}>
           <div id='stepper' className={classes.root}>
             <Stepper activeStep={activeStep} orientation="vertical" >
               {steps.map((label, index) => {
@@ -129,7 +165,8 @@ class CheckoutForm extends Component {
                     <StepContent>
                       <Typography variant="headline">
                      
-                      {getStepContent(index, this.state.user.first_name, this.state.user.last_name, this.state.user.email,this.state.user.id)}
+                      {getStepContent(index, this.state.user.first_name, this.state.user.last_name, this.state.user.email,this.state.user.total,
+                      this.state.userAddress,this.state.userAddress,this.state.userState,this.state.userZipcode,this.props.total )}
                       
                       </Typography>
                       <div className={classes.actionsContainer}>
@@ -166,6 +203,8 @@ class CheckoutForm extends Component {
               </Paper>
             )}
           </div>
+          </Paper>
+        </div>
         );
       }
     }
@@ -174,10 +213,11 @@ class CheckoutForm extends Component {
       classes: PropTypes.object,
     };
 
-export default withStyles(styles)(CheckoutForm);
+    function mapStateToProps(state){
+      return {
+          total: state.total,
+      }
+  }
 
-// {this.state.user != null ?
-//     <div> <h1>Welcome {this.state.user.first_name} !!!</h1> </div>
-//      :
-//      <div ><h4>PLEASE SIGN IN</h4></div>
-//   }
+export default connect(mapStateToProps,{updateTotal})(withStyles(styles)(CheckoutForm));
+

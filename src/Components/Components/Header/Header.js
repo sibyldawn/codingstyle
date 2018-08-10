@@ -12,19 +12,20 @@ import {connect} from 'react-redux';
 import {updateNotAdmin, updateAdmin, setCart, updateUser, updateLogin, updateUserImage} from '../../../ducks/reducer';
 
 
+
 class Header extends Component {
     constructor(props){
         super(props);
         this.state = {
             menuIsStopped: true,
             showMenu: false,
+            showBag: false,
             user_img:'',
         };
         this.login = this.login.bind(this);
+       
     }
 
-
-   
 
     login(){
         const redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`);
@@ -52,7 +53,7 @@ class Header extends Component {
 
         const { showMenu } = this.state;
         const { showBag } = this.state;
-
+        console.log(showBag)
         return (
            <div className="header-wrap">
             <div className="menu">
@@ -84,8 +85,10 @@ class Header extends Component {
                
              </div>
              <div className="bag">
-              <Link to='/ShoppingBag'><img src={bag}/></Link>
-             
+             <img src={bag} onClick={()=> this.setState({showBag : !showBag})} className="dropdown"/>
+             <div className={ showBag ? "dropdown-content hide" : "dropdown-content show" }>
+               <ShoppingBag/>
+            </div>
              </div>
             </div>
           </div>
