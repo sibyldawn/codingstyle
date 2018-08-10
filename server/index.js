@@ -91,16 +91,15 @@ app.get('/auth/callback', (req,res) => {
 app.get('/api/user/session', uC.getSession)
 app.get('/api/user/shipping',uC.findAddress)
 app.post('/api/user/shipping/:user_id',uC.addShipping)
+app.post('/api/user/cartSession',uC.cartToSession)
+app.get('/api/user/userdetails/:userId',uC.userdetailsbyID)
+app.post('/api/user/totalSession',uC.totalToSession)
 app.post('/api/logout', (req,res)=>{
     req.session.destroy();
     localStorage.clear();
     res.send('Logged Out!')
 })
 
-app.post('/api/user/session/total', (req, res) => {
-    req.session.user.total = req.body.total
-    console.log("DID WE ADD THE TOTAL?",req.session.user)
-})
 
 //Admin Controller
 app.get('/api/admin/orders', aC.readAllOrders)
@@ -141,23 +140,11 @@ app.get('/api/upload', (req, res) => {
         };
             res.json(payload);
     })
+
+//STRIPE
+app.post('/api/payment',stripe_ctrl.paymentAPI)
     
-//Stripe Controller
-// app.use(require("body-parser").text());
-// app.post("/charge", async (req, res) => {
-//     try {
-//       let {status} = await stripe.charges.create({
-//         amount: 2000,
-//         currency: "usd",
-//         description: "An example charge",
-//         source: req.body
-//       });
-  
-//       res.json({status});
-//     }catch (err) {
-//       res.status(500).end();
-//     }
-//   });
+
   
 
 // const path = require('path')

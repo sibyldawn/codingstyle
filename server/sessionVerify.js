@@ -9,6 +9,7 @@ module.exports = function(req,res,next){
             picture: '',
             email: '',
             admin: false,
+            cart:[],
             total: 0,
         };
     }

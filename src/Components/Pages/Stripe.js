@@ -1,96 +1,74 @@
-import React, {Component} from 'react';
-import {CardElement, injectStripe} from 'react-stripe-elements';
+import React, {Component} from "react";
+import StripeCheckout from "react-stripe-checkout";
+import axios from 'axios';
+import { Redirect } from "react-router-dom";
 
-class Stripe extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {complete: false};
+const CURRENCY = "USD"
+const CONVERT = total => +total * 100;
 
-    this.submit = this.submit.bind(this);
+export default  class TakeMoney extends Component {
+  constructor(){
+    super()
+
+    this.state = {
+      orderComplete: false,
+      orderId: 0,
+      lineItem: [],
+      total: JSON.parse(localStorage.getItem('total'))
+    };
   }
 
-  async submit(ev) {
-    let {token} = await this.props.stripe.createToken({name: "Name"});
-    let response = await fetch("/charge", {
-      method: "POST",
-      headers: {"Content-Type": "text/plain"},
-      body: token.id
-    });
-  
-    if (response.ok)this.setState({complete: true})
-  }
+onToken = (amount) => token => {
+axios.post("/api/payment", {
+    source: token.id,
+    currency: CURRENCY,
+    email: token.email,
+    amount: amount
+  })
+  .then(console.log("PAYMENT SUCCESSFUL",token))
+  .catch(console.log("STRIPE ERROR"));
+  this.sendCartToSession();
+}
+
+
+sendCartToSession(){
+ let cart = JSON.parse(localStorage.getItem('cart'))
+ let total = JSON.parse(localStorage.getItem('total'))
+let obj = {
+  cart: cart,
+  total: total
+}
+ axios.post('/api/user/cartSession',obj).then( response => {
+  //  axios.post('/api/user/totalSession',total).then( response =>{
+     console.log(response)
+  //   }
+ }).catch(error => console.log(error));
+}
+
+
+
 
   render() {
+    const amount = CONVERT(this.state.total)
+    if (this.state.orderComplete) {
+      return <Redirect to={'/OrderConfirm'} />;
+    }
+
+  
     return (
-      <div className="checkout">
-        <p>Would you like to complete the purchase?</p>
-        <CardElement />
-        <button onClick={this.submit}>Send</button>
+      <div>
+        <StripeCheckout
+          name="CodingStyleShop"
+          image="https://res.cloudinary.com/djsmw5c9x/image/upload/v1532538581/cslogo.png"
+          amount={amount}
+          token={this.onToken(amount)}
+          currency={CURRENCY}
+          stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}
+          bitcoin="true"
+        />
       </div>
     );
   }
 }
 
-export default injectStripe(Stripe);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // import StripeCheckout from 'react-stripe-checkout';
-// import axios from 'axios';
-// import logo from '../../Assets/cslogo.png';
-// // import stripePackage from 'stripe';
-
-// // const stripe = stripePackage('sk_test_y57ensIPZu6sek1eogUAA5qw');
-
-
-//  {
-//   // onToken = (token) => {
-//   //  axios.post('/api/save-stripe-token',JSON.stringify(token))
-//   //  .then(response => {
-//   //    console.log("STRIPE RESPONSE". response)
-//   //     response.json().then(data => {
-//   //       alert(`We are in business, ${data.email}`);
-//   //     });
-//   //   });
-//   // }
-
-  
-  
-//   render() {
-//     return (
-//       // ...
-//       // <StripeCheckout
-//       //   name="CodingStyle"
-//       //   image="http://res.cloudinary.com/djsmw5c9x/image/upload/v1532538581/cslogo.png"
-//       //   // bitcoin="true"
-//       //   amount= {9999999}
-//       //   currency= 'USD'
-//       //   receipt_email= 'jenny.rosen@example.com'
-//       //   token={this.onToken}
-//       //   stripeKey="pk_test_FhmaCpKORaHC1ZDPNxyXv4lR"
-//       // />
-//     )
-//   }
-// }

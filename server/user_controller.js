@@ -29,6 +29,52 @@ module.exports = {
             console.log('--------find address error',error);
             res.status(500).send('No address found')
         })
+    },
+    cartToSession: (req,res) => {
+        console.log("REQ.BODY",req.body)
+        const {id} = req.session.user;
+        const cart = JSON.stringify(req.body.cart);
+        let total = req.body.total;
+        total = parseFloat(total)
+        console.log("======>SESSION.USER", req.session.user);
+        console.log("cart", cart, total)
+        req.app.get('db').add_to_bag([cart,total,id]).then(order => {
+            res.status(200).send(order)
+            console.log(order);
+        }).catch(error => {
+            console.log("PAYMENT API ERROR",error);
+            res.status(500).send("Unable to Save Order!")
+        })
+        // res.end()
+    },
+    totalToSession: (req,res) => {
+        console.log("REQ.BODY",req.body)
+        req.session.user.total = req.body.total
+        console.log("======>SESSION.USER", req.session.user);
+
+        const {id} = req.session.user;
+            // console.log("localStorage", localStorage)
+            const cart = req.session.user.cart;
+            const total = req.session.user.total;
+
+            console.log("NEW ORDER", req.session.user)
+            console.log("cart", cart, total)
+
+            //SEND NEW ORDER TO DATABASE
+            req.app.get('db').add_to_bag([cart,total,id]).then(order => {
+                res.status(200).send(order)
+                console.log(order);
+            }).catch(error => {
+                console.log("PAYMENT API ERROR",error);
+                res.status(500).send("Unable to Save Order!")
+            })
+        // res.end()
+    },
+    userdetailsbyID:(req,res) => {
+        const {userId} = req.params;
+        const db=req.app.get('db');
+        db.find_user_shippingInfo(userId).then(user => res.status(200).send(user))
+        .catch(error => console.log(error));
     }
 }
 

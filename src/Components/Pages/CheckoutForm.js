@@ -66,7 +66,7 @@ const styles = theme => ({
     case 2:
          return ( <div>
                 
-                <h4>Sub Total:$ {total}</h4>
+                <h4>Sub Total:$ {JSON.parse(localStorage.getItem('total'))}</h4>
                   <hr/>
                 <Stripe />
                 
@@ -86,6 +86,7 @@ class CheckoutForm extends Component {
 
         this.state={
             user: [],
+            total: JSON.parse(localStorage.getItem('total')),
             userAddress: '',
             userCity: '',
             userState: '',
@@ -147,8 +148,9 @@ class CheckoutForm extends Component {
       
 
       render() {
+        
         // console.log(this.state)
-        console.log("SESSION TOTAL",this.state.user.total)
+        console.log("SESSION USER====>",this.state.user)
         const { classes } = this.props;
         const steps = getSteps();
         const { activeStep } = this.state;
@@ -166,7 +168,7 @@ class CheckoutForm extends Component {
                       <Typography variant="headline">
                      
                       {getStepContent(index, this.state.user.first_name, this.state.user.last_name, this.state.user.email,this.state.user.total,
-                      this.state.userAddress,this.state.userAddress,this.state.userState,this.state.userZipcode,this.props.total )}
+                      this.state.userAddress,this.state.userAddress,this.state.userState,this.state.userZipcode,this.state.total )}
                       
                       </Typography>
                       <div className={classes.actionsContainer}>

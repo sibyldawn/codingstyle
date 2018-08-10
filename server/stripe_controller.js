@@ -3,28 +3,27 @@ const stripe = require('stripe')(process.env.STRIPE_SECRETKEY)
 
 module.exports = {
     paymentAPI(req,res){
-    const { source,currency,amount,acct,email } = req.body
+    const { source,currency,amount,email } = req.body
 
-    stripe.charges.create({source, currency, amount}, {stripe_account:acct}, (stripeErr, stripeRes) => {
+    stripe.charges.create({source, currency, amount}, (stripeErr, stripeRes) => {
         if(stripeErr){
             res.status(500).send({error: stripeErr})
         } else {
-            const {id} = req.session.user;
-            const amount = (req.session.user.total/100)
-            console.log("AMOUNT", amount)
-            const cart = JSON.parse(localStorage.getItem('cart'));
-            console.log("NEW ORDER", req.session.user)
-            console.log("cart", cart);
+            // const {id} = req.session.user;
+            // console.log("AMOUNT", amount)
+            // const cart = req.session.user.cart;
+            // const total = req.session.user.total;
+            // console.log("NEW ORDER", req.session.user)
+            // console.log("cart", cart)
 
-            cart.map((e) => {
-                req.app.get('db').add_to_bag([e.id,e.qty,id]).then(orders => {
-                    res.status(200).send(orders)
-                    console.log("STRIPE PURCHASE", orders)
-                }).catch(error => {
-                    console.log("STRIPE CONTROLLER ERROR", error);
-                })
-            })
-            
+            // //SEND NEW ORDER TO DATABASE
+            // req.app.get('db').add_to_bag([cart,total,id]).then(order => {
+            //     res.status(200).send(order)
+            //     console.log(order);
+            // }).catch(error => {
+            //     console.log("PAYMENT API ERROR",error);
+            //     res.status(500).send("Unable to Save Order!")
+            // })
         }
     
     })

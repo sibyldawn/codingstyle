@@ -34,6 +34,14 @@ class Header extends Component {
         
     }
 
+    showBag = () => {
+
+        
+        this.setState((prevState)=>{
+            showBag : !prevState.showBag
+        })
+    }
+
 
    
 
@@ -85,7 +93,7 @@ class Header extends Component {
                
              </div>
              <div className="bag">
-             <img src={bag} onClick={()=> this.setState({showBag : !showBag})} className="dropdown"/>
+             {/* <img src={bag} onClick={()=> } className="dropdown"/> */}
              <div className={ showBag ? "dropdown-content hide" : "dropdown-content show" }>
                <ShoppingBag/>
             </div>
