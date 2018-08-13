@@ -174,14 +174,14 @@ class ShoppingBag extends Component {
         console.log(this.state);
         return (
             <div className="shopping-window">
-             <div><h4>CART SUMMARY:</h4></div>
+             <div><h3>CART SUMMARY:</h3></div>
              <div className="cart-gallery">
                 { cartDisplay}
                 
              </div>
              <Paper style={{ width: '500px' }}>
              <div className="total-price">
-                <h3>Total: $ {this.getTotal()}</h3>
+                <h1>Total: $ {this.getTotal()}</h1>
              </div>
              </Paper>
              <div>

@@ -76,7 +76,7 @@ class Header extends Component {
             </div>
 
             <div className="logo">
-            <Link to='/'><img src={ logo }/></Link>
+            <Link to='/'><img src={ logo } id="headerLogo"/></Link>
             <Link to='/'><h2>coding style</h2></Link>
             </div>
              
@@ -86,7 +86,7 @@ class Header extends Component {
                
              </div>
              <div className="bag">
-            <img src={bag} onClick={()=> this.setState({showBag : !showBag})} className="dropdown"/> 
+            <img src={bag} id="headerBag" onClick={()=> this.setState({showBag : !showBag})} className="dropdown"/> 
              <div className={ showBag ? "dropdown-content hide" : "dropdown-content show" }>
                <ShoppingBag/>
             </div>

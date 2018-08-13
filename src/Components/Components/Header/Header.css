@@ -36,11 +36,11 @@
    flex: 3;
    position: fixed;
    top: 10px;
-   left: 150px;
+   left: 50px;
   }
-  .logo>img{
-    height: 100px;
-    width: 100px;
+  #headerLogo{
+    height: 70px;
+    width: 70px;
   }
 
   .drawer{
@@ -62,16 +62,22 @@
     z-index: 100;
     
   }
-  
+
   img{
-    height: 70px;
-    width: 70px;
+    height: 20vh;
+    width: 20vw;
   }
+  
 
   .bag{
     position: fixed;
-    right: 150px;
+    right: 50px;
     top: 10px;
+  }
+
+  .bag>#headerBag{
+    height: 70px;
+    width: 70px;
   }
 
   .login{
@@ -82,12 +88,14 @@
 
   h2{
     font-family: 'Monoton', cursive;
-    color: white;
+    background: -webkit-linear-gradient(rgb(207, 163, 16), rgb(226, 219, 178));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-weight: heavy;
     font-size: 3em;
     position: fixed;
     top: 30px;
-    left: 250px;
+    left: 150px;
   }
 
 

@@ -11,8 +11,10 @@
   }
 
   h3{
-      color: rgb(45, 5, 62);
-      font-family: 'Arvo', serif;
+    background: -webkit-linear-gradient(rgb(207, 163, 16), rgb(226, 219, 178));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Monoton', cursive;
       font-size: 40px;
 
   }
@@ -20,8 +22,8 @@
 
 
   #preview{
-    height: 500px;
-    width: 500px;
+    height: '30vh';
+    width: '30vw';
     margin: 0 auto;
     
   }
@@ -34,20 +36,21 @@
     position: relative;
     top: 100px;
     height: 50vh;
-    width: 100%;
+    width: 1800px;
 }
 
 .modal {
     background: white;
     font-size: 12px;
     align-content: center;
-    height: 700px;
+    height:400px;
 
 
   }
   .modal > .header {
-    background: purple;
-    color: yellow;
+    background: linear-gradient(to right, rgba(119,158,249,1) 0%,rgba(114,44,106,1) 54%,rgba(114,44,106,1) 65%,rgba(78,26,94,1) 95%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#779ef9', endColorstr='#4e1a5e',GradientType=1 ); /* IE6-9 */
+    color: white;
     width: 100%;
     border-bottom: 1px solid gray;
     font-size: 18px;
@@ -72,4 +75,9 @@
     text-align: center;
   }
 
-  
+  #img-gif{
+    background: black;
+    margin-top: 90px;
+    height: 700px;
+    width:100%;
+  }

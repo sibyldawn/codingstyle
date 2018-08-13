@@ -159,7 +159,7 @@ export default class ProductView extends Component {
         console.log(this.state.itemTotal);
         return (
             <div className="product">
-              <button className="product-button" onClick={this.openModal}>QUICK VIEW</button>
+              <button className="btn-grad" onClick={this.openModal}>VIEW</button>
               <Popup 
                 open = {this.state.open}
                 closeOnDocumentClick
@@ -170,7 +170,7 @@ export default class ProductView extends Component {
                 <div className="modal">
                    
                     <div className ="header">
-                      <h4>Product View</h4>
+                      <h3>Product View</h3>
                     </div>
                     <div className="content">
                             <div>
@@ -205,7 +205,7 @@ export default class ProductView extends Component {
 
                         </div>
                 <div>
-                    <button onClick={() =>this.findProduct(this.props.name,this.state.size,this.props.category )} className="add-cart" >ADD TO CART</button>
+                    <button onClick={() =>this.findProduct(this.props.name,this.state.size,this.props.category )} className="btn-grad" >ADD TO CART</button>
                 </div>
               </div>
                </Popup> 

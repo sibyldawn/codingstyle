@@ -266,7 +266,7 @@ const styles = theme => ({
                             margin="normal"
                             />
                         </form>
-                        <button onClick={this.saveShippingInfo}>SAVE SHIPPING INFORMATION</button>
+                        <button onClick={this.saveShippingInfo} className="btn-grad">SAVE SHIPPING INFORMATION</button>
                         </div>
               }
                  </div>
