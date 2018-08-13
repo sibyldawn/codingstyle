@@ -11,6 +11,7 @@ import AdminDashboard from './Components/Pages/Admin_Dashboard/Admin_Dashboard';
 import Add_Form from './Components/Components/Add_Form';
 import Products from './Components/Components/Products';
 import Orders from './Components/Components/Orders';
+import Redirect from './Components/Components/Redirect';
 
 export default class routes extends Component{
     render(){
@@ -22,6 +23,7 @@ export default class routes extends Component{
              <Route path="/OrderConfirm" component={OrderConfirm}/>
              {/* <Route path="/ShoppingBag" component={ShoppingBag}/> */}
              <Route path="/Dashboard" component={AdminDashboard}/>
+             <Route path="/Redirect"  component={Redirect}/>
    
           </Switch>
     }

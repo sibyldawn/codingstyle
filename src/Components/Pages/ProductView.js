@@ -21,8 +21,7 @@ export default class ProductView extends Component {
         this.state = {
 
           open: false,
-          cart: JSON.parse(localStorage.getItem('cart')) || [],
-          total: JSON.parse(localStorage.getItem('total')) || [],   
+          cart: JSON.parse(localStorage.getItem('cart')),
           id: 0,
           name:'',
           size: '',
@@ -61,6 +60,10 @@ export default class ProductView extends Component {
    findProduct =(name,size,category) => {
     if( !this.state.size   ){
         alert('Please choose a size.')
+        return 
+    }
+    if( !this.state.qty   ){
+        alert('Please enter quantity.')
         return 
     }
     let product = [
@@ -116,13 +119,11 @@ export default class ProductView extends Component {
     if(index !== -1){
         
         console.log('currentCart[index] item.qty',currentCart[index].qty,item.qty) ;
-        // currentCart[index].qty += +item.qty;
         currentCart[index].itemTotal = (+currentCart[index].qty * +currentCart[index].price).toFixed(2);
         }
     localStorage.setItem('cart', JSON.stringify(currentCart))
     window.location.reload();
     }
-   
    } 
    
   
@@ -147,7 +148,7 @@ export default class ProductView extends Component {
             
             console.log('=======price qty',price, qty)
             let subtotal = (+qty * +price).toFixed(2)
-            console.log('ite subtotal ==============',subtotal)
+            console.log('item subtotal ==============',subtotal)
             this.setState({
                 itemTotal: subtotal
             })

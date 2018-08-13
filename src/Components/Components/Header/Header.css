@@ -80,10 +80,12 @@
     width: 70px;
   }
 
-  .login{
+  #headerLogin{
     position: fixed;
-    right: 250px;
+    right: 200px;
     top: 10px;
+    height: 70px;
+    width: 70px;
   }
 
   h2{

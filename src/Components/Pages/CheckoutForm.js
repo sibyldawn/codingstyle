@@ -14,7 +14,7 @@ import TextField from '@material-ui/core/TextField';
 import ShippingInfo from '../Pages/ShippingInfo';
 import Stripe from './Stripe';
 import {updateTotal} from '../../ducks/reducer';
-import OrderConfirm from '../Pages/OrderConfirm';
+
 
 
 
@@ -43,7 +43,7 @@ const styles = theme => ({
   });
 
   function getSteps() {
-    return ['Confirm User Information', 'Add Shipping Information', 'Place Your Order','Order Confirmation'];
+    return ['Confirm User Information', 'Add Shipping Information', 'Place Your Order'];
   }
   
   function getStepContent(step, first_name, last_name,email,user,userAddress,userCity,userState,userZipcode,findAddress,total) {
@@ -70,9 +70,6 @@ const styles = theme => ({
                  
                 </div>
                 );
-     case 3:
-          return <OrderConfirm/>
-    
         
       default:
         return 'Unknown step';
@@ -85,25 +82,23 @@ class CheckoutForm extends Component {
         super();
 
         this.state={
-            user: [],
-            total: JSON.parse(localStorage.getItem('total')),
+            user: JSON.parse(localStorage.getItem('user')) || [],
+            total: JSON.parse(localStorage.getItem('total')) || 0,
             userAddress: '',
             userCity: '',
             userState: '',
             userZipcode: 0,
             activeStep:0,
+            isAuthenticated: false,
         }
 
     }
 
     componentDidMount(){
-        axios.get('/api/user/session').then(user => {
-            // console.log("=====userLogin",user);
+      if(this.state.user !== null){
         this.setState({
-            user: user.data,
-            
-        })
-     })
+            isAuthenticated: true,
+        })} 
     }
     
  
@@ -114,6 +109,7 @@ class CheckoutForm extends Component {
             this.setState({
                 user:''
             })
+            localStorage.removeItem('user');
         })
     }
     handleNext = () => {

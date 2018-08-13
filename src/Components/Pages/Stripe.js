@@ -69,7 +69,6 @@ sendCartToSession(){
           token={this.onToken(amount)}
           currency={CURRENCY}
           stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}
-          bitcoin="true"
         />
       </div>
     );

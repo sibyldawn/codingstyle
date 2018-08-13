@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
-
+import { Redirect } from 'react-router-dom'; 
 import TextField from '@material-ui/core/TextField';
 import {updateNotAdmin, updateAdmin, setCart, updateUser, updateLogin, updateTotal} from '../../../ducks/reducer';
 
@@ -43,31 +43,33 @@ class ShoppingBag extends Component {
         
         super();
         this.state = {
-            user: {},
+            user: JSON.parse(localStorage.getItem('user')) || [],
             cart: JSON.parse(localStorage.getItem('cart')),
             total: 0,
             size: '',
+            isAuthenticated: false,
         };
-        this.login = this.login.bind(this)
+        this.redirectToCheckOut = this.redirectToCheckOut.bind(this)
       
     } 
     componentDidMount(){
         this.setState({
             cart:JSON.parse(localStorage.getItem('cart')),
+            user:JSON.parse(localStorage.getItem('user'))
           })
      }
-
-    //  componentWillReceiveProps(nextProps) {
-    //    console.log("NEXT PROPS",nextProps);
-    //  }
-    
     
 
-    login(){
+    redirectToCheckOut(){
+      console.log('hit')
+      if(this.state.user !== null){
+        console.log('redirect');
+        return window.location = '/CheckoutForm'
+      }else{
+        console.log('login')
       const redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`);
- 
       window.location = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/authorize?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${redirectUri}&response_type=code`
-      
+      }
    }
 
     getTotal = () => {
@@ -185,7 +187,7 @@ class ShoppingBag extends Component {
              </div>
              </Paper>
              <div>
-             <Button variant="contained" size="large" color="primary" className={classes.button} onClick={this.login}>CHECKOUT</Button>
+             <Button variant="contained" size="large" color="primary" className={classes.button} onClick={this.redirectToCheckOut}>CHECKOUT</Button>
                 
              </div>
             </div>

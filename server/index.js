@@ -65,7 +65,7 @@ app.get('/auth/callback', (req,res) => {
                 const user = users[0];
                 req.session.user = user;
                 console.log("USER SESSION",req.session.user)
-                res.redirect('/CheckoutForm');
+                res.redirect('/Redirect');
             }else{
                 const createUserData = [
                     auth0id,
@@ -80,7 +80,7 @@ app.get('/auth/callback', (req,res) => {
                      const user = newUsers[0];
                      req.session.user = user;
                      console.log("USER SESSION",req.session.user)
-                     res.redirect('/CheckoutForm');
+                     res.redirect('/Redirect');
                  })
                 }
             })
