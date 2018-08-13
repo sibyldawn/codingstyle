@@ -30,8 +30,6 @@ class Add_Form extends Component {
     
   }
   handleImageUpload = (file) => {
-
-    
             axios.get('/api/upload').then(response => {
                 console.log(response.data.signature)
   

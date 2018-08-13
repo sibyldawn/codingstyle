@@ -63,6 +63,8 @@ table {
 	margin-bottom: 10px;
 	font-size:20px;
 	font-family: 'Play', sans-serif;
+	position:relative;
+	bottom:10px;
 
 
 }

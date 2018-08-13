@@ -157,6 +157,16 @@ export default class ProductView extends Component {
             
         }
     render() {
+        let styles={
+            height: '20vh',
+            width: '20vw',
+            fontSize: '20px'
+        }
+
+        let buttonstyle = {
+            position: 'relative',
+            top: '200px',
+        }
         console.log(this.state.itemTotal);
         return (
             <div className="product">
@@ -173,10 +183,10 @@ export default class ProductView extends Component {
                     <div className ="header">
                       <h3>Product View</h3>
                     </div>
-                    <div className="content">
+                    <div className="content" style={styles}>
                             <div>
                             <div className="show-grid">
-                                <img  id="preview" src={this.props ? this.props.picture : ' '}/> 
+                                <img style={styles} id="preview" src={this.props ? this.props.picture : ' '}/> 
                             </div>
                             <div className="show-grid">
                                 <h4>{this.props ? this.props.name : ''}</h4>
@@ -206,7 +216,7 @@ export default class ProductView extends Component {
 
                         </div>
                 <div>
-                    <button onClick={() =>this.findProduct(this.props.name,this.state.size,this.props.category )} className="btn-grad" >ADD TO CART</button>
+                    <button style={buttonstyle} onClick={() =>this.findProduct(this.props.name,this.state.size,this.props.category )} className="btn-grad" >ADD TO CART</button>
                 </div>
               </div>
                </Popup> 

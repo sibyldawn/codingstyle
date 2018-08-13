@@ -28,10 +28,13 @@ export default class Men extends Component {
    
 
     render() {
-        
+        let styles = {
+            height: 400,
+            width:400
+        }
         const men = this.state.men.map( r => {
             return <div className="product-box" key={r.id}>
-                <div className="image"><img src={r.picture}/></div>
+                <div className="image"><img src={r.picture} style={styles}/></div>
                 <div><p>{r.name}</p></div>
                 <div><p>Price: ${r.price}</p></div>
                 <div><ProductView

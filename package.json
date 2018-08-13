@@ -23,6 +23,7 @@
     "react-scripts": "1.1.4",
     "react-stripe-checkout": "^2.6.3",
     "react-stripe-elements": "^2.0.1",
+    "react-swipeable-views": "^0.12.16",
     "react-tabs": "^2.2.2",
     "reactjs-popup": "^1.1.1",
     "redux": "^4.0.0",

@@ -23,7 +23,8 @@ create table products(
     name text not null,
     price decimal not null,
     size text not null,
-    category text not null
+    category text not null,
+    picture text not null,
 );
 
 create table bag(

@@ -50,6 +50,7 @@ class ShoppingBag extends Component {
             isAuthenticated: false,
         };
         this.redirectToCheckOut = this.redirectToCheckOut.bind(this)
+       
       
     } 
     componentDidMount(){
@@ -62,15 +63,17 @@ class ShoppingBag extends Component {
 
     redirectToCheckOut(){
       console.log('hit')
-      if(this.state.user !== null){
+      if(this.state.user != null){
         console.log('redirect');
         return window.location = '/CheckoutForm'
       }else{
-        console.log('login')
+      console.log('login')
       const redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`);
       window.location = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/authorize?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${redirectUri}&response_type=code`
       }
    }
+
+
 
     getTotal = () => {
         console.log("this.state.cart",this.state.cart);

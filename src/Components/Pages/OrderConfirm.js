@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { Redirect } from 'react-router-dom';
 import './OrderConfirm.css';
 import axios from 'axios';
 
@@ -62,6 +63,7 @@ class OrderConfirm extends Component {
 
     componentDidMount(){
         axios.get(`/api/orderconfirmation/${this.props.orderId}`).then(order => {
+          console.log("order confirmation", order)
             this.setState({
                 order: order.data
             })
@@ -71,39 +73,22 @@ class OrderConfirm extends Component {
  render() {
   
     const { classes } = this.props;
+    const data = this.state.order.map(n => {
+      return (
+        <div key={n.id}>
+          <h3>Thank you for your Order!</h3>
+          <h4>Order Date: {n.date}</h4>
+          <h4>Order ID: {n.id}</h4>
+          <h4>Total: {n.total}</h4>
+        </div>
+      );
+    })
 
   return (
    <div className="confirm-body">
-   <h3>Order Confirmation</h3>
-   <h4></h4>
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <CustomTableCell>Dessert (100g serving)</CustomTableCell>
-            <CustomTableCell numeric>Calories</CustomTableCell>
-            <CustomTableCell numeric>Fat (g)</CustomTableCell>
-            <CustomTableCell numeric>Carbs (g)</CustomTableCell>
-            <CustomTableCell numeric>Protein (g)</CustomTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map(n => {
-            return (
-              <TableRow className={classes.row} key={n.id}>
-                <CustomTableCell component="th" scope="row">
-                  {n.name}
-                </CustomTableCell>
-                <CustomTableCell numeric>{n.calories}</CustomTableCell>
-                <CustomTableCell numeric>{n.fat}</CustomTableCell>
-                <CustomTableCell numeric>{n.carbs}</CustomTableCell>
-                <CustomTableCell numeric>{n.protein}</CustomTableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </Paper>
+   <Paper>
+   {data} 
+   </Paper>
   </div>
   );
  }

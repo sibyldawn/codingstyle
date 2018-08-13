@@ -9,6 +9,7 @@ import login from '../../../Assets/login.png';
 import axios from 'axios';
 import ShoppingBag from '../../Pages/ShoppingBag/ShoppingBag';
 import {connect} from 'react-redux';
+import admin from '../../../Assets/gearIcon.png';
 import {updateNotAdmin, updateAdmin, setCart, updateUser, updateLogin, updateUserImage} from '../../../ducks/reducer';
 
 
@@ -20,6 +21,7 @@ class Header extends Component {
             menuIsStopped: true,
             showMenu: false,
             showBag: false,
+            isAdmin:'',
             user_img:'',
         };
         this.login = this.login.bind(this);
@@ -28,8 +30,13 @@ class Header extends Component {
 
     componentDidMount(){
         axios.get('/api/user/session').then(user => {
-            console.log("++++LOG IN USER",user.data)
+            this.setState({
+                isAdmin: user.data.admin
+            })
+            console.log("++++LOG IN USER++++",user.data)
+            console.log("Is Admin?",this.state.isAdmin)
             localStorage.setItem('user', JSON.stringify(user.data))}
+            
         )}
 
 
@@ -83,6 +90,16 @@ class Header extends Component {
                 <br/>
                 <Link to="/Women">Women's Collection</Link>
             </div>
+            
+
+             <div className="adminIcon" id="adminOnly">
+                 {this.state.isAdmin === true ?
+                    <Link to="/Dashboard"><img src={ admin } id="headerAdmin"/></Link> 
+                    :
+                    ''
+                }
+             </div>   
+
 
             <div className="logo">
             <Link to='/'><img src={ logo } id="headerLogo"/></Link>

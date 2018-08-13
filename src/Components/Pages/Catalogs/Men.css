@@ -20,11 +20,11 @@
 
 .image>img{
     margin: 0 auto;
-    height: "50vh";
-    width: "50vw";
+    height: "20vh";
+    width: "20vw";
     position: relative;
     top: 10px;
-    left: 0px;
+    left: -150px;
 }
 
 .top>img{
@@ -43,14 +43,11 @@
     align-items: center;
     margin: 5 5;
     -webkit-box-shadow: 3px 6px 5px 2px rgba(168,168,168,1);
--moz-box-shadow: 3px 6px 5px 2px rgba(168,168,168,1);
-box-shadow: 3px 6px 5px 2px rgba(168,168,168,1);
+    -moz-box-shadow: 3px 6px 5px 2px rgba(168,168,168,1);
+    box-shadow: 3px 6px 5px 2px rgba(168,168,168,1);
 
 }
 
-.product-box>img{
-
-}
 
 .product-box>div{
     font-size:20px;
@@ -60,10 +57,14 @@ box-shadow: 3px 6px 5px 2px rgba(168,168,168,1);
     margin: 0 auto;
     padding: 10px;
     text-align: center;
-   
 
 }
 
+.product-box>img{
+    position:relative;
+    top: 5px;
+    left: 2px;
+}
 
 @media(max-width:720px){
     .grid-container {
@@ -78,5 +79,17 @@ box-shadow: 3px 6px 5px 2px rgba(168,168,168,1);
         grid-template-rows: 1fr 1fr 1fr;
         grid-template-areas: ". . ." ". . .";
       }
+
+      .image>img{
+        position:relative;
+        left:-100px
+      }
     
+}
+
+@media(min-width:1500px){
+    .image>img{
+        position:relative;
+        left:-50px
+      }
 }

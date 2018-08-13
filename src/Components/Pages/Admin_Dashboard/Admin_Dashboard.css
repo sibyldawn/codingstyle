@@ -1,34 +1,34 @@
 .dashboard{
-    background: peachpuff;
+
     padding-right: 10px;
 }
 
 .nav-flex{
     margin-top: 200px;
-    background: yellow;
+ 
     display:flex;
 }
 
 .products-board{
-    background: blueviolet;
+
     flex: 2;
     
 }
 
 
 .orders-board{
-    background: plum;
+
     flex:4;
 }
 
 .add-form{
-    background: blue;
+   
     flex:2;
     margin-top: 300px;
 }
 
 .dashboard>nav{
-    background: yellow;
+
     position: fixed;
     top: 150px;
     left: 160px;
@@ -60,7 +60,3 @@
     height: 100%;
   }
   
-  #Inventory {background-color: red;}
-  #Orders {background-color: green;}
-
- 

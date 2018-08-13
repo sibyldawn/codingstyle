@@ -63,10 +63,10 @@
     
   }
 
-  img{
+  /* .images img{
     height: 20vh;
     width: 20vw;
-  }
+  } */
   
 
   .bag{
@@ -80,12 +80,23 @@
     width: 70px;
   }
 
-  #headerLogin{
+#headerLogin{
     position: fixed;
     right: 200px;
     top: 10px;
     height: 70px;
     width: 70px;
+  }
+
+  
+
+
+  #headerAdmin{
+    position: fixed;
+    right: 300px;
+    top: 10px;
+    height: 70px !important;
+    width: 70px !important;
   }
 
   h2{

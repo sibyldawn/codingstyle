@@ -55,9 +55,6 @@ sendCartToSession(){
 
   render() {
     const amount = CONVERT(this.state.total)
-    if (this.state.orderComplete) {
-      return <OrderConfirm orderId = {this.state.orderId}/>
-    }
 
   
     return (

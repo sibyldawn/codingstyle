@@ -14,6 +14,7 @@ import TextField from '@material-ui/core/TextField';
 import ShippingInfo from '../Pages/ShippingInfo';
 import Stripe from './Stripe';
 import {updateTotal} from '../../ducks/reducer';
+import OrderConfirm from '../Pages/OrderConfirm';
 
 
 
@@ -43,7 +44,7 @@ const styles = theme => ({
   });
 
   function getSteps() {
-    return ['Confirm User Information', 'Add Shipping Information', 'Place Your Order'];
+    return ['Confirm User Information', 'Add Shipping Information', 'Place Your Order','Done'];
   }
   
   function getStepContent(step, first_name, last_name,email,user,userAddress,userCity,userState,userZipcode,findAddress,total) {
@@ -70,7 +71,9 @@ const styles = theme => ({
                  
                 </div>
                 );
-        
+    case 3:
+          return <h3>Thank you for your Order!</h3>
+                      
       default:
         return 'Unknown step';
     }
@@ -82,7 +85,7 @@ class CheckoutForm extends Component {
         super();
 
         this.state={
-            user: JSON.parse(localStorage.getItem('user')) || [],
+            user:JSON.parse(localStorage.getItem('user')) || [],
             total: JSON.parse(localStorage.getItem('total')) || 0,
             userAddress: '',
             userCity: '',
@@ -98,7 +101,14 @@ class CheckoutForm extends Component {
       if(this.state.user !== null){
         this.setState({
             isAuthenticated: true,
-        })} 
+        })}else{
+        localStorage.setItem('location', window.location.pathname)
+        const local = localStorage.getItem('location')
+        const redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`);
+   
+        window.location = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/authorize?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${redirectUri}&response_type=code`
+      
+        }
     }
     
  
