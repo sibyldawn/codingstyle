@@ -14,6 +14,7 @@ import TextField from '@material-ui/core/TextField';
 import ShippingInfo from '../Pages/ShippingInfo';
 import Stripe from './Stripe';
 import {updateTotal} from '../../ducks/reducer';
+import OrderConfirm from '../Pages/OrderConfirm';
 
 
 
@@ -42,7 +43,7 @@ const styles = theme => ({
   });
 
   function getSteps() {
-    return ['Confirm User Information', 'Add Shipping Information', 'Place Your Order'];
+    return ['Confirm User Information', 'Add Shipping Information', 'Place Your Order','Order Confirmation'];
   }
   
   function getStepContent(step, first_name, last_name,email,user,userAddress,userCity,userState,userZipcode,findAddress,total) {
@@ -50,7 +51,7 @@ const styles = theme => ({
     switch (step) {
       case 0:
         return (<div>
-                {/* <img src={picture} height="100" width="100"/> */}
+               
                 <div>
                  Name: <h4>{first_name} {last_name}</h4>
                  E-mail: <h4>{email}</h4>
@@ -58,20 +59,19 @@ const styles = theme => ({
                  </div>
             </div>);
       case 1:
-        // return   ({user} ? 
-        //           {findAddress}
-        //           :
                  return <ShippingInfo  />
-                // );
-    case 2:
+               
+      case 2:
          return ( <div>
                 
                 <h4>Sub Total:$ {JSON.parse(localStorage.getItem('total'))}</h4>
                   <hr/>
                 <Stripe />
-                
+                 
                 </div>
                 );
+     case 3:
+          return <OrderConfirm/>
     
         
       default:
@@ -106,7 +106,7 @@ class CheckoutForm extends Component {
      })
     }
     
-
+ 
    
     
     logout(){

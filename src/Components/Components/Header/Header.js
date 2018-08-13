@@ -82,7 +82,7 @@ class Header extends Component {
              
            <div className="icon-wrap">
              <div className="login">
-                <img src={login} onClick={this.login}/>
+                {/* <img src={login} onClick={this.login}/> */}
                
              </div>
              <div className="bag">

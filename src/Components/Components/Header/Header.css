@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Arvo|Monoton');
 
 .header-wrap{
-  background: rgb(33, 3, 33);
+  background: linear-gradient(to right, rgba(119,158,249,1) 0%,rgba(114,44,106,1) 54%,rgba(114,44,106,1) 65%,rgba(78,26,94,1) 95%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#779ef9', endColorstr='#4e1a5e',GradientType=1 ); /* IE6-9 */
   height: 100px;
   width: 100vw;
   position: fixed;
@@ -81,7 +82,7 @@
 
   h2{
     font-family: 'Monoton', cursive;
-    color: gold;
+    color: white;
     font-weight: heavy;
     font-size: 3em;
     position: fixed;

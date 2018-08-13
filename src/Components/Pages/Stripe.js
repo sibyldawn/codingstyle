@@ -1,7 +1,9 @@
 import React, {Component} from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from 'axios';
-import { Redirect } from "react-router-dom";
+import OrderConfirm from './OrderConfirm';
+import Redirect from 'react-router-dom';
+
 
 const CURRENCY = "USD"
 const CONVERT = total => +total * 100;
@@ -34,15 +36,18 @@ axios.post("/api/payment", {
 sendCartToSession(){
  let cart = JSON.parse(localStorage.getItem('cart'))
  let total = JSON.parse(localStorage.getItem('total'))
-let obj = {
-  cart: cart,
-  total: total
-}
+ let obj = {
+    cart: cart,
+    total: total
+  }
  axios.post('/api/user/cartSession',obj).then( response => {
-  
-     console.log(response)
-  //   }
+    this.setState({
+    orderId: response.data.id,
+    orderComplete: true
+  })
  }).catch(error => console.log(error));
+
+
 }
 
 
@@ -51,7 +56,7 @@ let obj = {
   render() {
     const amount = CONVERT(this.state.total)
     if (this.state.orderComplete) {
-      return <Redirect to={'/OrderConfirm'} />;
+      return <OrderConfirm orderId = {this.state.orderId}/>
     }
 
   

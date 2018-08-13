@@ -19,7 +19,7 @@ massive(process.env.CONNECTION_STRING).then(db => {
 }).catch(error => console.log('massive error',error));
 
 const app = express();
-// app.use(express.static(`${__dirname}/../build`));
+app.use(express.static(`${__dirname}/../build`));
 app.use(bodyParser.json());
 const stripe = require("stripe")(process.env.STRIPE_SECRETKEY);
 
@@ -117,6 +117,7 @@ app.get('/api/admin/orders', aC.readAllOrders)
 //Bag_Controller
 app.get('/api/bag/:userid',bC.read);
 app.post('/api/bag/', bC.add);
+app.get('/api/orderconfirmation/:orderId',bC.orderConfirmation );
 
 
 
@@ -147,10 +148,10 @@ app.post('/api/payment',stripe_ctrl.paymentAPI)
 
   
 
-// const path = require('path')
-// app.get('*',(req,res)=> {
-//     res.sendFile(path.join(__dirname, '../build/index.html'));
-// })
+const path = require('path')
+app.get('*',(req,res)=> {
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+})
 
 
 const PORT = 4000;
