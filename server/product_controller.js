@@ -76,12 +76,14 @@ module.exports={
     },
     update: (req,res) => {
         const db=req.app.get('db');
-        const{ id }=req.params;
         const { price } = req.body;
-        db.update_product([price,id])
-        .then( updatedItem => {
-            console.log('----updatedItem',updatedItem);
-            res.status(200).send(updatedItem);
+        console.log(req.params);
+        const{ productid }=req.params;
+        // console.log("price id",price,id)
+        db.update_product([price,productid])
+        .then( response => {
+            console.log('----updatedItem',response);
+            res.status(200).send(response);
         }).catch( error => {
             console.log('------updateError',error);
             res.status(500).send('Unable to Update Price');
