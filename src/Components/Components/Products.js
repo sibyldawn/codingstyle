@@ -1,106 +1,61 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
+import React, { Component } from 'react';
 import axios from 'axios';
-
-const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'scroll',
-    height: '400',
-    backgroundColor: theme.palette.background.paper,
-  },
-  gridList: {
-    width: '100%',
-    height: '80%',
-  },
-  icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
-  },
-});
-
-/**
- * The example data is structured as follows:
- *
- * import image from 'path/to/image.jpg';
- * [etc...]
- *
- * const tileData = [
- *   {
- *     img: image,
- *     title: 'Image',
- *     author: 'author',
- *   },
- *   {
- *     [etc...]
- *   },
- * ];
- */
+import '../Pages/Catalogs/Men.css';
 
 
-
-class Products extends Component {
+export default class Men extends Component {
     constructor(props){
-        super()
+        super(props);
 
         this.state={
-            products:[]
+           products:[],
+            
         }
     }
-  
+
     componentDidMount(){
-        axios.get('/api/products').then(response => {
-            console.log("products response", response);
+        axios.get('/api/products').then( response => {
+            console.log('--------getAll', response.data)
             this.setState({
-                products: response.data
+                products:response.data
             })
         })
     }
+    
+   
 
+    render() {
+        let styles = {
+            height: 400,
+            width:400
+        }
+        const men = this.state.products.map( r => {
+            return <div className="product-box" key={r.id}>
+                <div><p>{r.name}</p></div>
+                <div><p>Price: ${r.price}</p></div>
+                <div><ProductView
+                            name={r.name}
+                            category={r.category}
+                            price={r.price}
+                            picture={r.picture}
+                /></div>
 
-
-render(){
-    const { classes } = this.props;
-    const products = this.state.products.map(tile => {
-        return <div> <GridListTile key={tile.id}>
-          <figure><img src={tile.picture} alt={tile.name} height={300} width={300}/></figure>
-          <GridListTileBar
-            title={tile.name}
-            price={<p>$ {tile.price}</p>}
-            category={<p>Category: {tile.category}</p>}
-            // actionIcon={
-            //   <IconButton className={classes.icon}>
-               
-            //   </IconButton>
-            // }
-          />
-        </GridListTile>
+                </div>
+        })
+        return (
+         <div>
+             <div className="top">
+                <img className="large" src={ menHeader }/>
+            </div>
+           <div className="grid-body">
+            <div className="grid-container">
+            
+             {products}
+             
+            </div>
+          </div>
         </div>
-    })
-  return (
-    <div className={classes.root}>
-      <GridList cellHeight={500} className={classes.gridList}>
-        <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
-          <ListSubheader component="div"><h3>Inventory</h3></ListSubheader>
-        </GridListTile>
-         {products}
-      </GridList>
-    </div>
-  );
- }
+        )
+    }
 }
-
-Products.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(Products);
-  
+ 
