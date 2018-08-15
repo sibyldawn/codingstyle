@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
+import Paper from '@material-ui/core/Paper';
 import { connect } from 'react-redux';
 import '../Pages/Admin_Dashboard/Admin_Dashboard.css';
 import { updateName, updatePrice, updateSize, updateCategory,updatePicture} from '../../ducks/reducer';
@@ -56,9 +57,15 @@ class Add_Form extends Component {
   
   
   render() {
+    let selectStyle = {
+      height: 30,
+      width: 300,
+      fontSize: 20,
+    }
     console.log("cloudinary response",this.state.uploadedFileCloudinaryUrl);
     const { updateName, updatePrice, updateSize, updateCategory,updatePicture} = this.props;
     return (
+      <Paper style={{width: 500, margin: '0 auto'}}>
       <div className="add-form">
         <form onSubmit={this.addProduct}>
          <label>
@@ -71,7 +78,7 @@ class Add_Form extends Component {
           </label>
           <label>
           <br/><br/>
-          <select value={this.props.size} onChange={(e)=> updateSize(e.target.value)}>
+          <select style={selectStyle} value={this.props.size} onChange={(e)=> updateSize(e.target.value)}>
           <option value="default">SIZE</option>
             <option value="S">Small</option>
             <option value="M">Medium</option>
@@ -81,7 +88,7 @@ class Add_Form extends Component {
         </label>
         <label>
           <br/><br/>
-          <select value={this.props.category} onChange={(e)=> updateCategory(e.target.value)} > 
+          <select style={selectStyle} value={this.props.category} onChange={(e)=> updateCategory(e.target.value)} > 
             <option value="default">CATEGORY</option>
             <option value="Men">Men</option>
             <option value="Women">Women</option>
@@ -91,14 +98,16 @@ class Add_Form extends Component {
         <label>
         <div className='upload-form'>
             
-            <input type='file' onChange={(e) => this.handleImageUpload(e.target.files)} />
+            <input style={selectStyle} type='file' onChange={(e) => this.handleImageUpload(e.target.files)} />
             
           
             </div>
           </label>
-          <input type="submit" value="Submit" />
+          <input style={selectStyle} type="submit" value="Submit" className='btn-grad' style={{position: 'relative', bottom:-10}}/>
         </form>
+        <br/>
       </div>
+      </Paper>
     )
   }
 }

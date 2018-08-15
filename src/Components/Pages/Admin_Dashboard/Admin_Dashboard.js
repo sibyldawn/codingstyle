@@ -11,7 +11,7 @@ import Orders from '../../Components/Orders';
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+    <Typography component="div" style={{ padding: 10 }}>
       {props.children}
     </Typography>
   );
@@ -25,8 +25,8 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
+    fontSize:50,
     marginTop: 100,
-    fontSize:30,
   },
 });
 
@@ -42,14 +42,17 @@ class AdminDashboard extends React.Component {
   render() {
     const { classes } = this.props;
     const { value } = this.state;
+    let styles = {
+      fontSize: 30
+    }
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar  position="static">
           <Tabs value={value} onChange={this.handleChange}>
-            <Tab label="Add a Product" />
-            <Tab label="Products" />
-            <Tab label="Orders" href="#basic-tabs" />
+            <Tab style={styles}  label="Add a Product" />
+            <Tab style={styles}  label="Products" />
+            <Tab style={styles}  label="Orders" href="#basic-tabs" />
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer><Add_Form/></TabContainer>}

@@ -6,25 +6,26 @@
 .nav-flex{
     margin-top: 200px;
  
-    display:flex;
 }
 
 .products-board{
-
-    flex: 2;
-    
 }
 
 
 .orders-board{
-
-    flex:4;
 }
 
 .add-form{
-   
-    flex:2;
-    margin-top: 300px;
+    font-size: 30px;
+    margin-top: 50px;
+    text-align: center;
+    padding-top: 20px;
+    font-family: 'Play', sans-serif;
+}
+
+input{
+    height: 20px;
+    width: 300px;
 }
 
 .dashboard>nav{
@@ -60,3 +61,11 @@
     height: 100%;
   }
   
+  figure{
+    width: 300px;
+    height: 300px;
+  }
+  
+  figure > img {
+    height: 100%
+  }

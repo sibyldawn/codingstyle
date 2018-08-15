@@ -72,7 +72,10 @@ const styles = theme => ({
                 </div>
                 );
     case 3:
-          return <h3>Thank you for your Order!</h3>
+          return (<h3>Thank you for your Order!</h3>
+          )
+
+
                       
       default:
         return 'Unknown step';
