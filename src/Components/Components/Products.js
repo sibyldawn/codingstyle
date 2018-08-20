@@ -46,19 +46,32 @@ export default class Men extends Component {
         })
     }
    
+    deleteProduct = (id) => {
+        console.log("sending delete", id);
+        axios.delete(`/api/products/${id}`).then(response => {
+            axios.get('/api/products').then(response=>{
+                this.setState({
+                    products: response.data
+                   })
+            }).catch(error => {
+                console.log("DELETE ERROR", error);
+        })
+     })
+   }
 
     render() {
         let styles = {
-            height: 400,
+            height: 500,
             width:400
         }
         const products = this.state.products.map( r => {
             return <div className="product-box" key={r.id}>
-                <div><img src={r.picture} height={200} width={200}/>
+                <div><img src={r.picture} height={250} width={300}/>
                 </div>
                 <div><p>{r.name}</p></div>
                 <span><h4>Price:</h4><input defaultValue={r.price} onChange={(e)=> this.handleChange(e.target.value)} width={20}></input>
-                    <button onClick={()=> this.updatePrice(r.id)}>UPDATE PRICE</button>
+                    <button className="btn-grad" onClick={()=> this.updatePrice(r.id)}>UPDATE PRICE</button>
+                    <button className="btn-grad" onClick={()=> this.deleteProduct(r.id)}>DELETE</button>
                 </span>
                 </div>
     

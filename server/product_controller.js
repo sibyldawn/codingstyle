@@ -91,11 +91,11 @@ module.exports={
 
     },
     deleteItem: (req,res) => {
-        const{ id }=req.params;
+        const{ productid }=req.params;
         const db=req.app.get('db');
-        db.delete_product([id])
-        .then( () => {
-            res.status(200).send('Deleted Item!')
+        db.delete_product([productid])
+        .then( response => {
+            res.status(200).send(response)
         }).catch( error => {
             res.status(500).send('Unable to Delete');
             console.log('------deleteError', error);

@@ -30,6 +30,8 @@ export default class Women extends Component {
             })
         })
     }
+
+    
     render() {
         let styles = {
             height: 400,
