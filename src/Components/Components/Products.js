@@ -64,15 +64,24 @@ export default class Men extends Component {
             height: 500,
             width:400
         }
+
+        let inputStyle = {
+            marginTop:10,
+            marginLeft: 20,
+            marginBottom: 20,
+            fontSize: 20,
+            width: 100,
+            display:'inline',
+        }
         const products = this.state.products.map( r => {
             return <div className="product-box" key={r.id}>
                 <div><img src={r.picture} height={250} width={300}/>
                 </div>
                 <div><p>{r.name}</p></div>
-                <span><h4>Price:</h4><input defaultValue={r.price} onChange={(e)=> this.handleChange(e.target.value)} width={20}></input>
+                <span>Price: $<input defaultValue={r.price} onChange={(e)=> this.handleChange(e.target.value)} style={inputStyle}></input></span>
                     <button className="btn-grad" onClick={()=> this.updatePrice(r.id)}>UPDATE PRICE</button>
                     <button className="btn-grad" onClick={()=> this.deleteProduct(r.id)}>DELETE</button>
-                </span>
+                
                 </div>
     
         })
