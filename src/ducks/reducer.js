@@ -12,7 +12,7 @@ const initialState = {
     total: 0,
     submitted: false,
     userId: null,
-    cart:'',
+    cart:[],
 }
 const UPDATE_NAME = "UPDATE_NAME";
 const UPDATE_USER_IMAGE = "UPDATE_USER_IMAGE";
@@ -31,14 +31,24 @@ const DELETE_FROM_CART = "DELETE_FROM_CART";
 const UPDATE_SUBMITTED = "UPDATED_SUBMITTED";
 const UPDATE_CUSTOMERID = "UPDATE_CUSTOMERID";
 const UPDATE_QUANTITY = "UPDATE_QUANTITY";
-const SET_CART = "SET_CART";
+const UPDATE_CART = "UPDATE_CART";
 
 
 export default function reducer(state = initialState,action){
     let newState = { ...state }
     switch(action.type){
+        case UPDATE_CART:
+            localStorage.setItem('cart', JSON.stringify( [...state.cart, action.payload] ))
+            return {
+                ...state, 
+                cart: [...state.cart, action.payload]
+            }
+            
+            // case UPDATE_DUPLICATE:
+            // localStorage.clear()
+            // localStorage.setItem('cart', JSON.stringify( [...action.payload] ))
+            //     return {...state, cart: [...action.payload]}
 
-        
         case UPDATE_LOGIN:
         return {...state, login: action.payload};
         case UPDATE_USER:
@@ -84,6 +94,12 @@ export default function reducer(state = initialState,action){
         
         default:return state
         
+    }
+}
+export function updateCart(cart) {
+    return {
+        type: UPDATE_USER,
+        payload: cart
     }
 }
 
@@ -188,9 +204,4 @@ export function updateCustomerID(id) {
         payload: id,
     }
 }
-export function setCart(cart) {
-    return {
-        type: SET_CART,
-        payload: cart,
-    }
-}
+

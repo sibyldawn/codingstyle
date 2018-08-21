@@ -13,7 +13,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
 import { Redirect } from 'react-router-dom'; 
 import TextField from '@material-ui/core/TextField';
-import {updateNotAdmin, updateAdmin, setCart, updateUser, updateLogin, updateTotal} from '../../../ducks/reducer';
+import {updateNotAdmin, updateAdmin, updateUser, updateLogin, updateTotal, updateCart} from '../../../ducks/reducer';
 
 
 const styles = theme => ({
@@ -40,38 +40,44 @@ const styles = theme => ({
   
 class ShoppingBag extends Component {
     constructor(props){
-        
-        super();
+        super(props);
         this.state = {
             user: JSON.parse(localStorage.getItem('user')) || [],
-            cart: JSON.parse(localStorage.getItem('cart')),
+            cart: [],
             total: 0,
             size: '',
             isAuthenticated: false,
         };
         this.redirectToCheckOut = this.redirectToCheckOut.bind(this)
-       
+        this.login = this.login.bind(this)
       
     } 
     componentDidMount(){
         this.setState({
-            cart:JSON.parse(localStorage.getItem('cart')),
+            cart: JSON.parse(localStorage.getItem('cart')),
             user:JSON.parse(localStorage.getItem('user'))
           })
      }
-    
+
 
     redirectToCheckOut(){
       console.log('hit')
-      if(this.state.user != null){
+      if(this.state.user){
         console.log('redirect');
         return window.location = '/CheckoutForm'
       }else{
-      console.log('login')
-      const redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`);
-      window.location = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/authorize?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${redirectUri}&response_type=code`
-      }
+        this.login();
+     }
    }
+
+   login(){
+    localStorage.setItem('location', window.location.pathname)
+    const local = localStorage.getItem('location')
+    const redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`);
+
+    window.location = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/authorize?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${redirectUri}&response_type=code`
+  
+}
 
 
 
@@ -206,8 +212,9 @@ ShoppingBag.propTypes = {
 function mapStateToProps(state){
     return {
         total: state.total,
+        cart: state.cart
     }
 }
 
-export default connect(mapStateToProps,{updateNotAdmin, updateAdmin, setCart, updateUser, updateLogin,updateTotal})(withStyles(styles)(ShoppingBag));
+export default connect(mapStateToProps,{updateNotAdmin, updateAdmin, updateUser, updateLogin,updateTotal, updateCart})(withStyles(styles)(ShoppingBag));
 

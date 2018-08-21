@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Popup from "reactjs-popup";
 import ProductModal from '../Pages/Modal/ProductModal';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { updateCart } from '../../ducks/reducer';
 import ShoppingBag from './ShoppingBag/ShoppingBag';
 
 
@@ -13,7 +15,7 @@ const contentStyle = {
   padding: "10px",
 };
 
-export default class ProductView extends Component {
+class ProductView extends Component {
  
     constructor(props) {
         super(props);
@@ -21,7 +23,7 @@ export default class ProductView extends Component {
         this.state = {
 
           open: false,
-          cart: JSON.parse(localStorage.getItem('cart')),
+          cart: [],
           id: 0,
           name:'',
           size: '',
@@ -75,7 +77,7 @@ export default class ProductView extends Component {
         console.log('------sentProduct',product);
         console.log('----findproduct', response);
         let item = response.data
-        console.log(item)
+        console.log("found item",item)
         let data;
         this.setState ({
             id: item[0].id,
@@ -122,12 +124,12 @@ export default class ProductView extends Component {
         currentCart[index].itemTotal = (+currentCart[index].qty * +currentCart[index].price).toFixed(2);
         }
     localStorage.setItem('cart', JSON.stringify(currentCart))
-    window.location.reload();
+    this.props.updateCart(currentCart)
+    window.location.reload()
     }
    } 
    
   
-
 
         handleChangeSize = (size) => {
             this.setState({
@@ -158,8 +160,8 @@ export default class ProductView extends Component {
         }
     render() {
         let styles={
-            height: '20vh',
-            width: '20vw',
+            height: 400,
+            width: 400,
             fontSize: '20px'
         }
 
@@ -174,7 +176,7 @@ export default class ProductView extends Component {
               <Popup 
                 open = {this.state.open}
                 closeOnDocumentClick
-                // onClose = {this.closeModal}
+                onClose = {this.closeModal}
                 position="top center"
                 contentStyle={contentStyle}
                 >
@@ -224,6 +226,14 @@ export default class ProductView extends Component {
         )
     }
 }
+
+const mapStateToProps = (store) => {
+    return {
+        cart: store.cart
+    }
+}
+
+export default withRouter(connect(mapStateToProps, {updateCart})(ProductView))
 
 
  

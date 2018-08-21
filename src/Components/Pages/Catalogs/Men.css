@@ -18,14 +18,7 @@
     grid-template-areas: ". . ." ". . ." ". . ." ". . .";
   }
 
-.image>img{
-    margin: 0 auto;
-    height: "20vh";
-    width: "20vw";
-    position: relative;
-    top: 10px;
-    left: -150px;
-}
+
 
 .top>img{
     position: relative;
@@ -48,6 +41,12 @@
 
 }
 
+/* .gallerypic>img{
+    height: 80%;
+    width: 100%;
+    margin: auto;
+} */
+
 
 .product-box>div{
     font-size:20px;
@@ -60,37 +59,10 @@
 
 }
 
-.product-box>img{
+/* .product-box>img{
     position:relative;
     top: 5px;
     left: 2px;
-}
+} */
 
 
-@media(max-width:720px){
-    .grid-container {
-        display: grid;
-        position: relative;
-        top:100px;
-        margin: 0 auto;
-        height: 100%;
-        width: 80%;
-        padding: 0 auto; 
-        grid-template-columns: 1fr 1fr ;
-        grid-template-rows: 1fr 1fr 1fr;
-        grid-template-areas: ". . ." ". . .";
-      }
-
-      .image>img{
-        position:relative;
-        left:-100px
-      }
-    
-}
-
-@media(min-width:1500px){
-    .image>img{
-        position:relative;
-        left:-50px
-      }
-}

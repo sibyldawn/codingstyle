@@ -19,7 +19,7 @@ class Header extends Component {
         super(props);
         this.state = {
             menuIsStopped: true,
-            showMenu: false,
+            // showMenu: false,
             showBag: false,
             isAdmin:'',
             user_img:'',
@@ -64,9 +64,6 @@ class Header extends Component {
                 preserveAspectRatio: 'xMidYMid slice'
             }
         }
-        
-    
-
 
         const { showMenu } = this.state;
         const { showBag } = this.state;
@@ -84,12 +81,12 @@ class Header extends Component {
              </div>
             </nav>
             
-            <div className={ showMenu ? "drawer open": "drawer"}>
+            {/* <div className={ showMenu ? "drawer open": "drawer"}>
                 <br/>
                 <Link to="/Men"> Men's Collection </Link>
                 <br/>
                 <Link to="/Women">Women's Collection</Link>
-            </div>
+            </div> */}
             
 
              <div className="adminIcon" id="adminOnly">
@@ -114,7 +111,7 @@ class Header extends Component {
              <div className="bag">
             <img src={bag} id="headerBag" onClick={()=> this.setState({showBag : !showBag})} className="dropdown"/> 
              <div className={ showBag ? "dropdown-content hide" : "dropdown-content show" }>
-               <ShoppingBag/>
+               <ShoppingBag />
             </div>
              </div>
             </div>
@@ -129,4 +126,4 @@ function mapStateToProps(state){
         state,
     }
 }
-export default connect(mapStateToProps,{updateNotAdmin, updateAdmin, setCart, updateUser, updateLogin, updateUserImage})(Header);
+export default connect(mapStateToProps,{updateNotAdmin, updateAdmin, updateUser, updateLogin, updateUserImage})(Header);

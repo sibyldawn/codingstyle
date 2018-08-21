@@ -113,6 +113,7 @@ EnhancedTableHead.propTypes = {
 const toolbarStyles = theme => ({
   root: {
     paddingRight: theme.spacing.unit,
+    fontSize: 20
   },
   highlight:
     theme.palette.type === 'light'
@@ -151,7 +152,7 @@ let EnhancedTableToolbar = props => {
           </Typography>
         ) : (
           <Typography variant="title" id="tableTitle">
-            Nutrition
+            Orders
           </Typography>
         )}
       </div>
