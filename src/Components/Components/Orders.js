@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -20,9 +21,9 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
 let counter = 0;
-function createData(name, calories, fat, carbs, protein) {
+function createData(id,date,total,first_name,last_name,address,city,state,zipcode) {
   counter += 1;
-  return { id: counter, name, calories, fat, carbs, protein };
+  return { id: counter, id,date,total,first_name,last_name,address,city,state,zipcode };
 }
 
 function desc(a, b, orderBy) {
@@ -40,11 +41,16 @@ function getSorting(order, orderBy) {
 }
 
 const rows = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
-  { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
-  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
-  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
+  { id: 'id', numeric: true, disablePadding: true, label: 'Order ID' },
+  { id: 'date', numeric: true, disablePadding: false, label: 'Date' },
+  { id: 'total', numeric: true, disablePadding: false, label: 'Order Total' },
+  { id: 'first_name', numeric: false, disablePadding: false, label: 'First Name' },
+  { id: 'last_name', numeric: false, disablePadding: false, label: 'Last Name' },
+  { id: 'address', numeric: false, disablePadding: false, label: 'Address' },
+  { id: 'city', numeric: false, disablePadding: false, label: 'City' },
+  { id: 'state', numeric: false, disablePadding: false, label: 'State' },
+  { id: 'zipcode', numeric: true, disablePadding: false, label: 'Zipcode' },
+
 ];
 
 class EnhancedTableHead extends React.Component {
@@ -194,24 +200,21 @@ class EnhancedTable extends React.Component {
     order: 'asc',
     orderBy: 'calories',
     selected: [],
-    data: [
-      createData('Cupcake', 305, 3.7, 67, 4.3),
-      createData('Donut', 452, 25.0, 51, 4.9),
-      createData('Eclair', 262, 16.0, 24, 6.0),
-      createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-      createData('Gingerbread', 356, 16.0, 49, 3.9),
-      createData('Honeycomb', 408, 3.2, 87, 6.5),
-      createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-      createData('Jelly Bean', 375, 0.0, 94, 0.0),
-      createData('KitKat', 518, 26.0, 65, 7.0),
-      createData('Lollipop', 392, 0.2, 98, 0.0),
-      createData('Marshmallow', 318, 0, 81, 2.0),
-      createData('Nougat', 360, 19.0, 9, 37.0),
-      createData('Oreo', 437, 18.0, 63, 4.0),
-    ],
+    orders:[],
     page: 0,
     rowsPerPage: 5,
   };
+
+  componentDidMount(){
+    axios.get('/api/admin/orders').then( res => {
+        console.log("orders", res.data);
+        this.setState({
+            orders: res.data
+        })
+    })
+}
+
+
 
   handleRequestSort = (event, property) => {
     const orderBy = property;
@@ -226,7 +229,7 @@ class EnhancedTable extends React.Component {
 
   handleSelectAllClick = (event, checked) => {
     if (checked) {
-      this.setState(state => ({ selected: state.data.map(n => n.id) }));
+      this.setState(state => ({ selected: state.orders.map(n => n.id) }));
       return;
     }
     this.setState({ selected: [] });
@@ -265,8 +268,41 @@ class EnhancedTable extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+    const {  order, orderBy, selected, rowsPerPage, page,orders } = this.state;
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, orders.length - page * rowsPerPage);
+    
+    const list = this.state.orders.sort(getSorting(order, orderBy))
+        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+        .map(n => {
+          const isSelected = this.isSelected(n.id);
+          return (
+            <TableRow
+              hover
+              onClick={event => this.handleClick(event, n.id)}
+              role="checkbox"
+              aria-checked={isSelected}
+              tabIndex={-1}
+              key={n.id}
+              selected={isSelected}
+            >
+              <TableCell padding="checkbox">
+                <Checkbox checked={isSelected} />
+              </TableCell>
+              <TableCell component="th" scope="row" padding="none">
+                {n.id}
+              </TableCell>
+              <TableCell numeric>{n.date}</TableCell>
+              <TableCell numeric>{n.total}</TableCell>
+              <TableCell>{n.first_name}</TableCell>
+              <TableCell>{n.last_name}</TableCell>
+              <TableCell>{n.address}</TableCell>
+              <TableCell>{n.city}</TableCell>
+              <TableCell>{n.state}</TableCell>
+              <TableCell numeric>{n.zipcode}</TableCell>
+            </TableRow>
+          );
+        });
+
 
     return (
       <Paper className={classes.root}>
@@ -279,37 +315,10 @@ class EnhancedTable extends React.Component {
               orderBy={orderBy}
               onSelectAllClick={this.handleSelectAllClick}
               onRequestSort={this.handleRequestSort}
-              rowCount={data.length}
+              rowCount={orders.length}
             />
             <TableBody>
-              {data
-                .sort(getSorting(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(n => {
-                  const isSelected = this.isSelected(n.id);
-                  return (
-                    <TableRow
-                      hover
-                      onClick={event => this.handleClick(event, n.id)}
-                      role="checkbox"
-                      aria-checked={isSelected}
-                      tabIndex={-1}
-                      key={n.id}
-                      selected={isSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox checked={isSelected} />
-                      </TableCell>
-                      <TableCell component="th" scope="row" padding="none">
-                        {n.name}
-                      </TableCell>
-                      <TableCell numeric>{n.calories}</TableCell>
-                      <TableCell numeric>{n.fat}</TableCell>
-                      <TableCell numeric>{n.carbs}</TableCell>
-                      <TableCell numeric>{n.protein}</TableCell>
-                    </TableRow>
-                  );
-                })}
+              {list}
               {emptyRows > 0 && (
                 <TableRow style={{ height: 49 * emptyRows }}>
                   <TableCell colSpan={6} />
@@ -320,7 +329,7 @@ class EnhancedTable extends React.Component {
         </div>
         <TablePagination
           component="div"
-          count={data.length}
+          count={orders.length}
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
@@ -371,14 +380,7 @@ export default withStyles(styles)(EnhancedTable);
 //         }
 //     }
 
-//     componentDidMount(){
-//         axios.get('/api/admin/orders').then( res => {
-//             console.log("orders", res.data);
-//             this.setState({
-//                 orders: res.data
-//             })
-//         })
-//     }
+    
 
 //     render() {
 //         const orders = this.state.orders.map( r => {
