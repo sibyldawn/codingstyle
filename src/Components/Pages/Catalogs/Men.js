@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Men.css';
+import loading from '../../../Assets/load.gif';
 import axios from 'axios';
 import menHeader from '../../../Assets/Men.png';
 import ProductView from '../../Pages/ProductView';
@@ -28,12 +29,13 @@ export default class Men extends Component {
    
 
     render() {
+     
         let styles = {
             height: 300,
             width:300,
             marginLeft: -8,
         }
-        const men = this.state.men.map( r => {
+        const menShirts = this.state.men.map( r => {
             return <div className="product-box" key={r.id}>
                 <div className="gallerypic"><img src={r.picture} style={styles}/></div>
                 <div><p>{r.name}</p></div>
@@ -54,9 +56,7 @@ export default class Men extends Component {
             </div>
            <div className="grid-body">
             <div className="grid-container">
-            
-             {men}
-             
+            {this.state.men.length ? {menShirts} :  <img src={loading} alt="loading"/>}
             </div>
           </div>
         </div>
