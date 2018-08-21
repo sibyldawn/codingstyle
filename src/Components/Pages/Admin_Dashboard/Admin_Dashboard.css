@@ -16,7 +16,7 @@
     font-family: 'Play', sans-serif;
 }
 
-input{
+.add-form>input{
     height: 20px;
     width: 300px;
 }

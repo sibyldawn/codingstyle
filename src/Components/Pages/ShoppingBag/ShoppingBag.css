@@ -4,3 +4,7 @@ h1{
   font-size:40px;
 	font-family: 'Play', sans-serif;
 }
+
+input{
+  width: 30
+}

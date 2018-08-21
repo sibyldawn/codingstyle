@@ -133,6 +133,9 @@ class ShoppingBag extends Component {
  
    
     render() {
+        const inputStyle = {
+          width: 30
+        }
         console.log("TOTAL======>",this.state.total)
         console.log("CART",this.state.cart);
         const {showCart} = this.state;
@@ -172,6 +175,7 @@ class ShoppingBag extends Component {
                           shrink: true,
                         }}
                         margin="normal"
+                       
                       />
                      <Typography style={{ cursor: 'pointer' }} onClick={(e)=>this.changeQty(0,item.id,item.qty,item.itemTotal)}>Remove</Typography>
                     </Grid>
