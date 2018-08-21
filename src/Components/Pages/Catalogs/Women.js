@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Men.css';
 import axios from 'axios';
+import loading from '../../../Assets/load.gif';
 import WomenHeader from '../../../Assets/Women.png';
 import ProductView from '../../Pages/ProductView';
 
@@ -11,23 +12,17 @@ export default class Women extends Component {
 
         this.state={
             women:[],
-            id: '',
-            name: '',
-            price: 0,
-            size: '',
-            category: '',
-            picture: '',
-            itemTotal: 0,
-            qty: 0,
+            isLoading: true,
         }
     }
 
     componentDidMount(){
         axios.get('/api/products/Women').then( response => {
             console.log('--------getWomen', response.data)
-            this.setState({
-                women:response.data
-            })
+            setTimeout(()=>this.setState({
+                women:response.data,
+                isLoading: false,
+            }),2000)
         })
     }
 
@@ -37,6 +32,10 @@ export default class Women extends Component {
             height: 300,
             width:300,
             marginLeft: -8,
+        }
+        let loaderStyle = {
+            marginTop: 200,
+            marginLeft:'45%',
         }
         const women = this.state.women.map( r => {
             return <div className="product-box" key={r.id}>
@@ -58,10 +57,12 @@ export default class Women extends Component {
                 <img className="large" src={ WomenHeader }/>
             </div>
            <div className="grid-body">
-            <div className="grid-container">
-            
-             {women}
-             
+           <div>
+           {this.state.isLoading === true ? 
+                        <img src={loading} alt="loading" style={loaderStyle}/> : 
+                 <div className="grid-container">
+                     {women}
+                </div> }
             </div>
           </div>
         </div>

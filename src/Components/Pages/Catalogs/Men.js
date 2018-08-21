@@ -13,16 +13,17 @@ export default class Men extends Component {
 
         this.state={
             men:[],
-            
+            isLoading: true,
         }
     }
 
     componentDidMount(){
         axios.get('/api/products/Men').then( response => {
-            console.log('--------getMen', response.data)
-            this.setState({
-                men:response.data
-            })
+            console.log('--------getMen', response)
+            setTimeout(()=>this.setState({
+                men:response.data,
+                isLoading: false,
+            }),2000)
         })
     }
     
@@ -34,6 +35,11 @@ export default class Men extends Component {
             height: 300,
             width:300,
             marginLeft: -8,
+        }
+
+        let loaderStyle = {
+            marginTop: 200,
+            marginLeft:'45%',
         }
         const menShirts = this.state.men.map( r => {
             return <div className="product-box" key={r.id}>
@@ -55,8 +61,12 @@ export default class Men extends Component {
                 <img className="large" src={ menHeader }/>
             </div>
            <div className="grid-body">
-            <div className="grid-container">
-            {this.state.men.length ? {menShirts} :  <img src={loading} alt="loading"/>}
+            <div>
+            {this.state.isLoading === true ? 
+                        <img src={loading} alt="loading" style={loaderStyle}/> : 
+                 <div className="grid-container">
+                     {menShirts}
+                </div> }
             </div>
           </div>
         </div>
