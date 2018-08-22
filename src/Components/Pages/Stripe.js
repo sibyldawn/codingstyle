@@ -47,7 +47,7 @@ sendCartToSession(){
    setTimeout(()=>this.setState({
     orderId: response.data[0].id,
     orderComplete: true
-  }),4000)
+  }),2000)
  }).catch(error => console.log(error));
 
 

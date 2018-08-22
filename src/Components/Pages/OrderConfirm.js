@@ -30,9 +30,19 @@ class OrderConfirm extends Component {
         this.setState({
                 order: order.data
             })
-        })
+        }).then(() =>localStorage.clear())
     }
 
+      logout=()=>{
+        localStorage.clear();
+        window.location.reload();
+          axios.post('/api/logout').then(response => {
+              this.setState({
+                  user:''
+              })
+             
+          })
+      }
  render() {
     
     const data = this.state.order.map(n => {
@@ -60,6 +70,7 @@ class OrderConfirm extends Component {
     <Paper>
    {data} 
    </Paper>
+   <Link to="/"><button onClick={this.logout} className="btn-grad">LOG OUT</button></Link>
    </div>
   </div>
   );

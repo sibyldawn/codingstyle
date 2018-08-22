@@ -43,13 +43,13 @@ class ShoppingBag extends Component {
         super(props);
         this.state = {
             user: JSON.parse(localStorage.getItem('user')) || [],
-            cart: [],
+            cart: JSON.parse(localStorage.getItem('cart'))||[],
             total: 0,
             size: '',
             isAuthenticated: false,
         };
         this.redirectToCheckOut = this.redirectToCheckOut.bind(this)
-        this.login = this.login.bind(this)
+      
       
     } 
     componentDidMount(){
@@ -66,19 +66,16 @@ class ShoppingBag extends Component {
         console.log('redirect');
         return window.location = '/CheckoutForm'
       }else{
-        this.login();
+        localStorage.setItem('location', window.location.pathname)
+        const local = localStorage.getItem('location')
+        const redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`);
+    
+        window.location = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/authorize?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${redirectUri}&response_type=code`
+      
      }
    }
 
-   login(){
-    localStorage.setItem('location', window.location.pathname)
-    const local = localStorage.getItem('location')
-    const redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`);
-
-    window.location = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/authorize?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${redirectUri}&response_type=code`
   
-}
-
 
 
     getTotal = () => {

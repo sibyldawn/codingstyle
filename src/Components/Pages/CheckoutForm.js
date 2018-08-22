@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -44,7 +45,7 @@ const styles = theme => ({
   });
 
   function getSteps() {
-    return ['Confirm User Information', 'Add Shipping Information', 'Place Your Order','Done'];
+    return ['Did You Login?', 'Add Shipping Information', 'Place Your Order'];
   }
   
   function getStepContent(step, first_name, last_name,email,user,userAddress,userCity,userState,userZipcode,findAddress,total) {
@@ -71,11 +72,6 @@ const styles = theme => ({
                  
                 </div>
                 );
-    case 3:
-          return (<h3>Thank you for your Order!</h3>
-          )
-
-
                       
       default:
         return 'Unknown step';
@@ -88,43 +84,49 @@ class CheckoutForm extends Component {
         super();
 
         this.state={
-            user:JSON.parse(localStorage.getItem('user')) || [],
-            total: JSON.parse(localStorage.getItem('total')) || 0,
-            userAddress: '',
-            userCity: '',
-            userState: '',
-            userZipcode: 0,
-            activeStep:0,
-            isAuthenticated: false,
-        }
+          user:JSON.parse(localStorage.getItem('user')) || [],
+          total: JSON.parse(localStorage.getItem('total')) || 0,
+          userAddress: '',
+          userCity: '',
+          userState: '',
+          userZipcode: 0,
+          activeStep:0,
+          isAuthenticated: false,
+      }
 
-    }
+  }
 
-    componentDidMount(){
-      if(this.state.user !== null){
-        this.setState({
-            isAuthenticated: true,
-        })}else{
-        localStorage.setItem('location', window.location.pathname)
-        const local = localStorage.getItem('location')
-        const redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`);
-   
-        window.location = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/authorize?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${redirectUri}&response_type=code`
-      
-        }
-    }
+  componentDidMount(){
+    if(this.state.user!== null){
+      this.setState({
+          isAuthenticated: true,
+      })
+    }else{
+      this.login();
+      }
+  }
+
+  login(){
+    localStorage.setItem('location', window.location.pathname)
+    const local = localStorage.getItem('location')
+    const redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`);
+
+    window.location = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/authorize?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${redirectUri}&response_type=code`
+  
+}
     
- 
-   
     
-    logout(){
+    logout=()=>{
+      localStorage.clear();
+      window.location.reload();
         axios.post('/api/logout').then(response => {
             this.setState({
                 user:''
             })
-            localStorage.removeItem('user');
+           
         })
     }
+
     handleNext = () => {
         this.setState(state => ({
           activeStep: state.activeStep + 1,
@@ -177,7 +179,7 @@ class CheckoutForm extends Component {
                       <Typography variant="headline">
                      
                       {getStepContent(index, this.state.user.first_name, this.state.user.last_name, this.state.user.email,this.state.user.total,
-                      this.state.userAddress,this.state.userAddress,this.state.userState,this.state.userZipcode,this.state.total )}
+                      this.state.userAddress,this.state.userAddress,this.state.userState,this.state.userZipcode,this.state.total, this.logout )}
                       
                       </Typography>
                       <div className={classes.actionsContainer}>
@@ -215,6 +217,10 @@ class CheckoutForm extends Component {
             )}
           </div>
           </Paper>
+          <div>
+          <Link to="/"><button className="btn-grad ">Keep Shopping</button></Link>
+          <Link to="/"><button onClick={this.logout} className="btn-grad">Log Out</button></Link>
+          </div>
         </div>
         );
       }

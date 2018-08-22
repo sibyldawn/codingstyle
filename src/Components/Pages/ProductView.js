@@ -23,7 +23,7 @@ class ProductView extends Component {
         this.state = {
 
           open: false,
-          cart: [],
+          cart: JSON.parse(localStorage.getItem('cart')) || [],
           id: 0,
           name:'',
           size: '',
@@ -116,19 +116,16 @@ class ProductView extends Component {
     }else {
     let currentCart = JSON.parse(localStorage.getItem('cart'));
     console.log(currentCart)
-    currentCart.push(item)
-    let index =  currentCart.findIndex(e => e.id === this.state.id);
+    let index =  currentCart.findIndex(e => e.id === id);
     if(index !== -1){
-        
-        console.log('currentCart[index] item.qty',currentCart[index].qty,item.qty) ;
-        currentCart[index].itemTotal = (+currentCart[index].qty * +currentCart[index].price).toFixed(2);
-        }
+        alert("Item already in bag. Adjust quantity there.")
+        }else{currentCart.push(item)}
     localStorage.setItem('cart', JSON.stringify(currentCart))
-    this.props.updateCart(currentCart)
     window.location.reload()
+      
     }
    } 
-   
+
   
 
         handleChangeSize = (size) => {
