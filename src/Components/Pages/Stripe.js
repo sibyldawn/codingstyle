@@ -2,13 +2,15 @@ import React, {Component} from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from 'axios';
 import OrderConfirm from './OrderConfirm';
-import Redirect from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { updateOrderId } from '../../ducks/reducer';
 
 
 const CURRENCY = "USD"
 const CONVERT = total => +total * 100;
 
-export default  class TakeMoney extends Component {
+class TakeMoney extends Component {
   constructor(){
     super()
 
@@ -41,10 +43,11 @@ sendCartToSession(){
     total: total
   }
  axios.post('/api/user/cartSession',obj).then( response => {
-    this.setState({
-    orderId: response.data.id,
+   console.log("response",response)
+   setTimeout(()=>this.setState({
+    orderId: response.data[0].id,
     orderComplete: true
-  })
+  }),4000)
  }).catch(error => console.log(error));
 
 
@@ -54,8 +57,13 @@ sendCartToSession(){
 
 
   render() {
-    const amount = CONVERT(this.state.total)
+    if(this.state.orderComplete){
+      return <Redirect to={`/OrderConfirm/${this.state.orderId}`}/>
+    }
 
+
+    const amount = CONVERT(this.state.total)
+    
   
     return (
       <div>
@@ -71,5 +79,14 @@ sendCartToSession(){
     );
   }
 }
+function mapStateToProps(state){
+  return {
+    orderId: state.orderId
+  }
+}
+
+
+export default connect(mapStateToProps,{ updateOrderId})(TakeMoney);
+
 
 

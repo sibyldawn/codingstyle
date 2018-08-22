@@ -20,7 +20,7 @@ export default class routes extends Component{
              <Route path="/Men" component={Men}/>
              <Route path="/Women" component={Women}/>
              <Route path="/CheckoutForm" component={CheckoutForm}/>
-             <Route path="/OrderConfirm" component={OrderConfirm}/>
+             <Route path="/OrderConfirm/:orderId" component={OrderConfirm}/>
              {/* <Route path="/ShoppingBag" component={ShoppingBag}/> */}
              <Route path="/Dashboard" component={AdminDashboard}/>
              <Route path="/Redirect"  component={Redirect}/>

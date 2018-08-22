@@ -1,5 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Arvo|Cairo|Monoton|Play');
+
 .confirm-body{
-    margin-top: 150px;
-    width: 80vw;
-    margin: auto;
+    width: 100vw;
+    font-size: 30px;
+}
+
+.order-details{
+    margin-top: 200px;
+    margin-left: 0px;
+    font-family: 'Play', sans-serif;
+    padding-top:20px;
+    text-align:center;
+    
 }

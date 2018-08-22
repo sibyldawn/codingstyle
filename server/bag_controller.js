@@ -26,8 +26,9 @@ add: (req,res)=>{
  },
  orderConfirmation: (req,res) => {
      const { orderId } = req.params;
+     console.log(orderId)
      const db=req.app.get('db');
-     db.order_confirmation([orderId]).then( order => {
+     db.order_confirmation(orderId).then( order => {
          console.log("order confirmation", order);
          res.status(200).send(order);
      }).catch( error => {

@@ -13,8 +13,10 @@ const initialState = {
     submitted: false,
     userId: null,
     cart:[],
+    orderId: 0,
 }
 const UPDATE_NAME = "UPDATE_NAME";
+const UPDATE_ORDER_ID = "UPDATE_ORDER_ID"
 const UPDATE_USER_IMAGE = "UPDATE_USER_IMAGE";
 const UPDATE_PRICE = "UPDATE_PRICE";
 const UPDATE_USER = 'UPDATE_USER';
@@ -54,7 +56,7 @@ export default function reducer(state = initialState,action){
         case UPDATE_USER:
         return {...state,user: action.payload};
         case UPDATE_USER_IMAGE:
-        return {...state,user_imgs: action.payload};
+        return {...state,user_img: action.payload};
 
         case UPDATE_NAME:
             return { ...state, name: action.payload };
@@ -89,6 +91,9 @@ export default function reducer(state = initialState,action){
         case UPDATE_CUSTOMERID:
             newState.customerId = action.payload;
             return { ...newState };
+
+        case UPDATE_ORDER_ID:
+           return {...state, orderId:action.payload };
       
 
         
@@ -205,3 +210,9 @@ export function updateCustomerID(id) {
     }
 }
 
+export function updateOrderId(orderId){
+    return{
+        type: UPDATE_ORDER_ID,
+        payload: orderId
+    }
+}
