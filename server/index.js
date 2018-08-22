@@ -56,7 +56,7 @@ app.get('/auth/callback', (req,res) => {
     }
 
     function storeUserInfoInDatabase(userInfoResponse){
-        // console.log('userInfoResponse',userInfoResponse.data);
+        console.log('userInfoResponse',userInfoResponse);
         const auth0id = userInfoResponse.data.sub;
         const db = req.app.get('db');
         return db.find_user(auth0id).then( users => {
@@ -73,9 +73,10 @@ app.get('/auth/callback', (req,res) => {
                     userInfoResponse.data.family_name,
                     userInfoResponse.data.picture,
                     userInfoResponse.data.email,
+                
                     
                  ];
-                //  console.log('----createUserData',createUserData);
+                 console.log('----createUserData',createUserData);
                  return db.add_user(createUserData).then( newUsers => {
                      const user = newUsers[0];
                      req.session.user = user;
@@ -93,7 +94,9 @@ app.get('/api/user/shipping',uC.findAddress)
 app.post('/api/user/shipping/:user_id',uC.addShipping)
 app.post('/api/user/cartSession',uC.cartToSession)
 app.get('/api/user/userdetails/:userId',uC.userdetailsbyID)
+app.get('/api/user/:authId',uC.findUser)
 app.post('/api/user/totalSession',uC.totalToSession)
+app.post('/api/user/userinfo/:userId',uC.addName)
 app.post('/api/logout', (req,res)=>{
     req.session.destroy();
     localStorage.clear();

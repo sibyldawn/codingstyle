@@ -75,6 +75,21 @@ module.exports = {
         const db=req.app.get('db');
         db.find_user_shippingInfo(userId).then(user => res.status(200).send(user))
         .catch(error => console.log(error));
+    },
+    findUser:(req,res)=> {
+        const {authId} = req.params;
+        const db=req.app.get('db');
+        db.find_user(authId).then(user =>
+        res.status(200).send(user))
+        .catch(error => console.log("Unable to find user", error));
+    },
+    addName:(req,res) => {
+        const {userId} = req.params;
+        const { first_name,last_name } =req.body;
+        const db=req.app.get('db');
+        db.add_name([first_name,last_name,userId]).then(user =>
+        res.status(200).send(user))
+        .catch(error => console.log(error));
     }
 }
 

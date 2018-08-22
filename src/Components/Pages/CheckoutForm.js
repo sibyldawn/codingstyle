@@ -16,6 +16,7 @@ import ShippingInfo from '../Pages/ShippingInfo';
 import Stripe from './Stripe';
 import {updateTotal} from '../../ducks/reducer';
 import OrderConfirm from '../Pages/OrderConfirm';
+import UserInfo from './UserInfo';
 
 
 
@@ -48,20 +49,38 @@ const styles = theme => ({
     return ['Did You Login?', 'Add Shipping Information', 'Place Your Order'];
   }
   
-  function getStepContent(step, first_name, last_name,email,user,userAddress,userCity,userState,userZipcode,findAddress,total) {
+  function getStepContent(step, first_name, last_name,email,user,userAddress,userCity,userState,userZipcode,findAddress,total,id) {
       console.log(total)
     switch (step) {
-      case 0:
+      case 0:   
         return (<div>
-               
+               { first_name 
+               ?
                 <div>
-                 Name: <h4>{first_name} {last_name}</h4>
+                 Name: <p>{first_name} {last_name}</p>
                  E-mail: <h4>{email}</h4>
-                 
                  </div>
+                 :
+                  <UserInfo id={id}/>
+               }
             </div>);
-      case 1:
-                 return <ShippingInfo  />
+      case 1: return(<div>
+                      { userAddress 
+                        ?
+                        <div>
+                          <div >
+                            <h4>{userAddress}</h4> 
+                            <h4>{userCity}, {userState}</h4>
+                            <h4>{userZipcode}</h4>
+                                            
+                              </div>
+                          </div>
+                          :
+                          <ShippingInfo  />
+                        }
+                    </div>);
+                
+      
                
       case 2:
          return ( <div>
@@ -179,7 +198,7 @@ class CheckoutForm extends Component {
                       <Typography variant="headline">
                      
                       {getStepContent(index, this.state.user.first_name, this.state.user.last_name, this.state.user.email,this.state.user.total,
-                      this.state.userAddress,this.state.userAddress,this.state.userState,this.state.userZipcode,this.state.total, this.logout )}
+                      this.state.userAddress,this.state.userAddress,this.state.userState,this.state.userZipcode,this.state.total, this.logout,this.state.user.id )}
                       
                       </Typography>
                       <div className={classes.actionsContainer}>
