@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { updateOrderId } from '../../ducks/reducer';
 
 
+
 const CURRENCY = "USD"
 const CONVERT = total => +total * 100;
 

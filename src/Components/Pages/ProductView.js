@@ -112,6 +112,7 @@ class ProductView extends Component {
     if(JSON.parse(localStorage.getItem('cart')) == null){
         cart.push(item)
         localStorage.setItem('cart', JSON.stringify(cart));
+        window.location.reload()
         
     }else {
     let currentCart = JSON.parse(localStorage.getItem('cart'));

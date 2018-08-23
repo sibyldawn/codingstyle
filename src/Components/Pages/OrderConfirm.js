@@ -14,12 +14,14 @@ import axios from 'axios';
 
 
 
+
 class OrderConfirm extends Component {
     constructor(props){
         super();
 
         this.state = {
             order: [],
+            run: false,
         }
     }
 
@@ -31,6 +33,7 @@ class OrderConfirm extends Component {
                 order: order.data
             })
         }).then(() =>localStorage.clear())
+       
     }
 
       logout=()=>{
@@ -38,7 +41,8 @@ class OrderConfirm extends Component {
         window.location.reload();
           axios.post('/api/logout').then(response => {
               this.setState({
-                  user:''
+                  user:'',
+                  run: true,
               })
              
           })
