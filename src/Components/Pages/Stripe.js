@@ -18,6 +18,7 @@ class TakeMoney extends Component {
     this.state = {
       orderComplete: false,
       orderId: 0,
+      orderDate:'',
       lineItem: [],
       total: JSON.parse(localStorage.getItem('total'))
     };
@@ -30,13 +31,14 @@ axios.post("/api/payment", {
     email: token.email,
     amount: amount
   })
-  .then(console.log("PAYMENT SUCCESSFUL",token))
-  .catch(console.log("STRIPE ERROR"));
+  .then(token => {
+    console.log("PAYMENT SUCCESSFUL",token)
+  }).catch(console.log("STRIPE ERROR"));
   this.sendCartToSession();
 }
 
 
-sendCartToSession(){
+sendCartToSession=()=>{
  let cart = JSON.parse(localStorage.getItem('cart'))
  let total = JSON.parse(localStorage.getItem('total'))
  let obj = {
@@ -45,16 +47,33 @@ sendCartToSession(){
   }
  axios.post('/api/user/cartSession',obj).then( response => {
    console.log("response",response)
-   setTimeout(()=>this.setState({
+   this.setState({
     orderId: response.data[0].id,
-    orderComplete: true
-  }),2000)
- }).catch(error => console.log(error));
-
-
-}
-
-
+    orderComplete: true,
+    orderDate: response.data[0].date
+   })
+  }).then(()=>{
+    let total = JSON.parse(localStorage.getItem('total'))
+    let address = JSON.parse(localStorage.getItem('address'))
+    let user = JSON.parse(localStorage.getItem('user'))
+        let userAddress = {
+          email: user.email,
+          first_name: user.first_name,
+          date: this.state.orderDate,
+          total: this.state.total,
+          orderId: this.state.orderId,
+          address: address[0].address,
+          city: address[0].city,
+          state: address[0].state,
+          zipcode: address[0].zipcode
+          }
+        console.log("userAddress",userAddress);
+        axios.post('/api/email',userAddress).then(res => {
+          console.log("sendMail",res);
+        }).catch(err => console.log("sendMail error",err));
+      })
+   }
+ 
 
 
   render() {

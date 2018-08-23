@@ -64,6 +64,7 @@ const styles = theme => ({
                         user: user.data,
                         shippingInfo: response.data
                     })
+                    localStorage.setItem('address', JSON.stringify(this.state.shippingInfo))
                 })
             
          })
@@ -121,6 +122,7 @@ const styles = theme => ({
             axios.post(`/api/user/shipping/${this.state.user.id}`,userAddress).then(response => {
                 console.log('------userAddress',userAddress);
                 console.log('----addedInfo', response);
+                localStorage.setItem('address', JSON.stringify(response.data))
                 let line= response.data
                 console.log(line)
                 let data;
@@ -132,27 +134,26 @@ const styles = theme => ({
                     zipcode: line.zipcode,
                     
                 })
-                
             })
            }
 
           render() {
             
-            //  const shippingInfo = this.state.shippingInfo.map( info => {
-            //      return <div key={info.id}>
-            //                 <h4>{info.address}</h4> 
-            //                 <h4>{info.city}, {info.state}</h4>
-            //                 <h4>{info.zipcode}</h4>
+             const shippingInfo = this.state.shippingInfo.map( info => {
+                 return <div key={info.id}>
+                            <h4>{info.address}</h4> 
+                            <h4>{info.city}, {info.state}</h4>
+                            <h4>{info.zipcode}</h4>
                             
-            //             </div>
-            //  })
+                        </div>
+             })
               console.log("USER ID===========>", this.state.user.id)  
               console.log("SHIPPING INFO state",this.state.shippingInfo);
 
             const { classes } = this.props;
             return (
                 <div>
-                    {/* {this.state.shippingInfo !== null ?
+                    {this.state.shippingInfo !== null ?
                         <div>
                             <span>SHIPPING INFORMATION:</span>
                                 <Paper className={classes.root} elevation={1}>
@@ -161,8 +162,8 @@ const styles = theme => ({
 
                         </div>
 
-                        : */}
-                    {/* <div> */}
+                        : 
+                        <div>
                     
                         <form className={classes.container} noValidate autoComplete="on">
                             <TextField
@@ -267,9 +268,9 @@ const styles = theme => ({
                             />
                         </form>
                         <button onClick={this.saveShippingInfo} className="btn-grad">SAVE SHIPPING INFORMATION</button>
-                        {/* </div> */}
-                 
-                  </div>
+                        </div>
+                    }
+                    </div>
                 )      
           }
     };  

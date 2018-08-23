@@ -10,6 +10,7 @@ const bC = require('./bag_controller');
 const stripe_ctrl = require('./stripe_controller');
 const sessionVerify = require('./sessionVerify');
 const cloudinary = require('cloudinary');
+const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 //CONNECT TO DATABASE
@@ -106,6 +107,29 @@ app.post('/api/logout', (req,res)=>{
 
 //Admin Controller
 app.get('/api/admin/orders', aC.readAllOrders)
+app.post('/api/email', (req,res) => {
+    const { email, first_name, date, total, orderId, address, city, state,zipcode } = req.body;
+    const transporter = nodemailer.createTransport({
+        service:'yahoo',
+        auth:{
+            user:'sib_codingstyleshop@yahoo.com',
+            pass: process.env.EMAIL_PASSWORD
+        }
+    })
+    const mailOptions =  {
+        from: '"CodingStyleShop👕" <sib_codingstyleshop@yahoo.com',
+        to: String(email),
+        subject: "Order Confirmation",
+        html: `<h1>Hi ${first_name}!</h1> <p>Thank you for your recent purchase from CodingStyleShop.com!</p><br><h2>Order Details</h2><hr><p>Purchase Date: ${date}</p><p>Order Number: ${orderId}</p><p>Total: ${total}</p><br><h2>Shipping Information:</h2><hr><p>${address}<br>${city},${state}<br>${zipcode}</p><br><p>We are now processing your order, please allow 5-7 business days for delivery.</p><br><p>Thank you!</p><br><p>-From us at CodingStyleShop.com</p>`
+    }
+    transporter.sendMail(mailOptions,(error,info) => {
+        if(error){
+            return console.log('NODEMAILER ERROR',error);
+        }else{
+            return console.log('EMAIL SENT' + info.response);
+        }
+    })
+})
 
  //Products Controller
  app.get('/api/products/Men',pC.getmen);

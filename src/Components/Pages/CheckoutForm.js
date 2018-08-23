@@ -64,21 +64,7 @@ const styles = theme => ({
                   <UserInfo id={id}/>
                }
             </div>);
-      case 1: return(<div>
-                      { userAddress 
-                        ?
-                        <div>
-                          <div >
-                            <h4>{userAddress}</h4> 
-                            <h4>{userCity}, {userState}</h4>
-                            <h4>{userZipcode}</h4>
-                                            
-                              </div>
-                          </div>
-                          :
-                          <ShippingInfo  />
-                        }
-                    </div>);
+      case 1: return(  <ShippingInfo  />);
                 
       
                
