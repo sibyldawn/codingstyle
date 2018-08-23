@@ -1,4 +1,4 @@
 update products
 set price = $1
-where id = $2
+where name= $2
 returning *;

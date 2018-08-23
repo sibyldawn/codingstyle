@@ -1,2 +1,2 @@
 delete from products
-where id = $1
+where name = $1

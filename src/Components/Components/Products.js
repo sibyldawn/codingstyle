@@ -31,10 +31,10 @@ export default class Men extends Component {
         })
     }
 
-    updatePrice = (id) => {
+    updatePrice = (name) => {
         const {price, products} = this.state;
-        console.log("sending", id, price)
-        axios.put(`/api/admin/products/${id}`, {price}).then(response =>{
+        console.log("sending", name, price)
+        axios.put(`/api/admin/products/${name}`, {price}).then(response =>{
         console.log('responseUpdate', response);
         products.push(response.data)
         console.log('products',products)
@@ -46,9 +46,9 @@ export default class Men extends Component {
         })
     }
    
-    deleteProduct = (id) => {
-        console.log("sending delete", id);
-        axios.delete(`/api/products/${id}`).then(response => {
+    deleteProduct = (name) => {
+        console.log("sending delete", name);
+        axios.delete(`/api/products/${name}`).then(response => {
             axios.get('/api/products').then(response=>{
                 this.setState({
                     products: response.data
@@ -79,8 +79,8 @@ export default class Men extends Component {
                 </div>
                 <div><p>{r.name}</p></div>
                 <span>Price: $<input defaultValue={r.price} onChange={(e)=> this.handleChange(e.target.value)} style={inputStyle}></input></span>
-                    <button className="btn-grad" onClick={()=> this.updatePrice(r.id)}>UPDATE PRICE</button>
-                    <button className="btn-grad" onClick={()=> this.deleteProduct(r.id)}>DELETE</button>
+                    <button className="btn-grad" onClick={()=> this.updatePrice(r.name)}>UPDATE PRICE</button>
+                    <button className="btn-grad" onClick={()=> this.deleteProduct(r.name)}>DELETE</button>
                 
                 </div>
     

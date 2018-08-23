@@ -78,9 +78,8 @@ module.exports={
         const db=req.app.get('db');
         const { price } = req.body;
         console.log(req.params);
-        const{ productid }=req.params;
-        // console.log("price id",price,id)
-        db.update_product([price,productid])
+        const{ productname }=req.params;
+        db.update_product([price,productname])
         .then( response => {
             console.log('----updatedItem',response);
             res.status(200).send(response);
@@ -91,9 +90,9 @@ module.exports={
 
     },
     deleteItem: (req,res) => {
-        const{ productid }=req.params;
+        const{ productname }=req.params;
         const db=req.app.get('db');
-        db.delete_product([productid])
+        db.delete_product([productname])
         .then( response => {
             res.status(200).send(response)
         }).catch( error => {

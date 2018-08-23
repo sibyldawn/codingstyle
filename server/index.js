@@ -138,8 +138,8 @@ app.post('/api/email', (req,res) => {
  app.get('/api/findproduct',pC.findProduct);
  app.post('/api/admin/products',pC.create);
  app.get('/api/products',pC.getProduct);
- app.put('/api/admin/products/:productid',pC.update);
- app.delete('/api/products/:productid',pC.deleteItem);
+ app.put('/api/admin/products/:productname',pC.update);
+ app.delete('/api/products/:productname',pC.deleteItem);
 
 //Bag_Controller
 app.get('/api/bag/:userid',bC.read);
