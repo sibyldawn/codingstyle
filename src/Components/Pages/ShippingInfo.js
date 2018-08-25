@@ -152,7 +152,16 @@ const styles = theme => ({
             const { classes } = this.props;
             return (
                 <div>
-                    {this.state.shippingInfo === null ?
+                    {this.state.shippingInfo.length ?
+                    <div>
+                    <span>SHIPPING INFORMATION:</span>
+                        <Paper className={classes.root} elevation={1}>
+                         {shippingInfo}
+                         </Paper>
+
+                      </div> 
+
+                   :
                         <div>
                         <form className={classes.container} noValidate autoComplete="on">
                             <TextField
@@ -259,14 +268,8 @@ const styles = theme => ({
                         <button onClick={this.saveShippingInfo} className="btn-grad">SAVE SHIPPING INFORMATION</button>
                         </div>
                         
-                        : 
-                        <div>
-                            <span>SHIPPING INFORMATION:</span>
-                                <Paper className={classes.root} elevation={1}>
-                                 {shippingInfo}
-                                 </Paper>
-
-                        </div> 
+                       
+                        
                     
                     }
                     </div>
