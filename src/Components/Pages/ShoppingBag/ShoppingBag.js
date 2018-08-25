@@ -127,6 +127,17 @@ class ShoppingBag extends Component {
             
           }
         }
+
+        logout=()=>{
+          localStorage.clear();
+          window.location.reload();
+            axios.post('/api/logout').then(response => {
+                this.setState({
+                    user:''
+                })
+               
+            })
+        }
  
    
     render() {
@@ -182,7 +193,7 @@ class ShoppingBag extends Component {
               </div>
             )}
           
-          }): 'Your Cart is Empty';
+          }): <h4>Your Cart is Empty</h4>;
         console.log(this.state);
         return (
             <div className="shopping-window">
@@ -197,6 +208,7 @@ class ShoppingBag extends Component {
              </div>
              </Paper>
              <div>
+             <Button variant="contained" size="large" color="primary" className={classes.button} onClick={this.logout}>LOGOUT</Button>
              <Button variant="contained" size="large" color="primary" className={classes.button} onClick={this.redirectToCheckOut}>CHECKOUT</Button>
                 
              </div>

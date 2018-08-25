@@ -45,7 +45,7 @@ app.get('/auth/callback', (req,res) => {
             client_secret: process.env.AUTH0_CLIENT_SECRET,
             code: req.query.code,
             grant_type: 'authorization_code',
-            redirect_uri: `http://${req.headers.host}/auth/callback`
+            redirect_uri: `https://${req.headers.host}/auth/callback`
         };
         return axios.post(`https://${process.env.REACT_APP_AUTH0_DOMAIN}/oauth/token`,payload);
     }
@@ -120,7 +120,7 @@ app.post('/api/email', (req,res) => {
         from: '"CodingStyleShop👕" <sib_codingstyleshop@yahoo.com',
         to: String(email),
         subject: "Order Confirmation",
-        html: `<h1>Hi ${first_name}!</h1> <p>Thank you for your recent purchase from CodingStyleShop.com!</p><br><h2>Order Details</h2><hr><p>Purchase Date: ${date}</p><p>Order Number: ${orderId}</p><p>Total: ${total}</p><br><h2>Shipping Information:</h2><hr><p>${address}<br>${city},${state}<br>${zipcode}</p><br><p>We are now processing your order, please allow 5-7 business days for delivery.</p><br><p>Thank you!</p><br><p>-From us at CodingStyleShop.com</p>`
+        html: `<h1>Hi ${first_name}!</h1><p>Thank you for your recent purchase from CodingStyleShop.com!</p><br><h2>Order Details</h2><hr><p>Purchase Date: ${date}</p><p>Order Number: ${orderId}</p><p>Total: ${total}</p><br><h2>Shipping Information:</h2><hr><p>${address}<br>${city},${state}<br>${zipcode}</p><br><p>We are now processing your order, please allow 5-7 business days for delivery.</p><br><p>Thank you!</p><br><p>-From us at CodingStyleShop.com</p>`
     }
     transporter.sendMail(mailOptions,(error,info) => {
         if(error){
