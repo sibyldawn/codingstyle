@@ -153,7 +153,7 @@ const styles = theme => ({
             const { classes } = this.props;
             return (
                 <div>
-                    {this.state.shippingInfo !== null ?
+                    {this.state.shippingInfo ?
                         <div>
                             <span>SHIPPING INFORMATION:</span>
                                 <Paper className={classes.root} elevation={1}>
