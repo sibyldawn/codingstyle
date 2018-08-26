@@ -144,6 +144,7 @@ app.post('/api/email', (req,res) => {
 //Bag_Controller
 app.get('/api/bag/:userid',bC.read);
 app.post('/api/bag/', bC.add);
+app.get('/api/user/orderhistory/:userId',bC.orderHistory)
 app.get('/api/orderconfirmation/:orderId',bC.orderConfirmation );
 
 

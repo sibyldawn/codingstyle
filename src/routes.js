@@ -12,6 +12,7 @@ import Add_Form from './Components/Components/Add_Form';
 import Products from './Components/Components/Products';
 import Orders from './Components/Components/Orders';
 import Redirect from './Components/Components/Redirect';
+import OrderHistory from './Components/Components/OrderHistory';
 
 export default class routes extends Component{
     render(){
@@ -21,7 +22,7 @@ export default class routes extends Component{
              <Route path="/Women" component={Women}/>
              <Route path="/CheckoutForm" component={CheckoutForm}/>
              <Route path="/OrderConfirm/:orderId" component={OrderConfirm}/>
-             {/* <Route path="/ShoppingBag" component={ShoppingBag}/> */}
+             <Route path="/OrderHistory" component={OrderHistory}/>
              <Route path="/Dashboard" component={AdminDashboard}/>
              <Route path="/Redirect"  component={Redirect}/>
    

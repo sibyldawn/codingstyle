@@ -199,7 +199,7 @@ const styles = theme => ({
 class EnhancedTable extends React.Component {
   state = {
     order: 'asc',
-    orderBy: 'calories',
+    orderBy: 'date',
     selected: [],
     orders:[],
     page: 0,
@@ -207,7 +207,7 @@ class EnhancedTable extends React.Component {
   };
 
   componentDidMount(){
-    axios.get('/api/admin/orders').then( res => {
+    axios.get('/api/admin/orders/').then( res => {
         console.log("orders", res.data);
         this.setState({
             orders: res.data

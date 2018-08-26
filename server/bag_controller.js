@@ -35,5 +35,15 @@ add: (req,res)=>{
          res.status(500).send('Order Confirmation Error')
      })
 
- }
+ },
+ orderHistory: (req,res)=> {
+    const db = req.app.get('db');
+    const {userId} = req.params;
+    db.view_order_history(userId)
+    .then(products => {res.status(200).send(products)
+    }).catch( error => {
+       res.status(500).send("ERROR");
+       console.log('-------readProducts ERROR',error);
+   })
+}
 }

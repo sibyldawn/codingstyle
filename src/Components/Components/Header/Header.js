@@ -19,7 +19,7 @@ class Header extends Component {
         super(props);
         this.state = {
             menuIsStopped: true,
-            // showMenu: false,
+            showMenu: false,
             showBag: false,
             isAdmin:'',
             user_img:'',
@@ -72,21 +72,21 @@ class Header extends Component {
            <div className="header-wrap">
             <div className="menu">
             <nav>
-            {/* <div className="menu-nav" onClick={()=> this.setState({showMenu : !showMenu, menuIsStopped: false})}>
+            <div className="menu-nav" onClick={()=> this.setState({showMenu : !showMenu, menuIsStopped: false})}>
              <Lottie options={menuNav}
                      height = {100}
                      width  = {100}
                      isStopped = {this.state.menuIsStopped}/>
               
-             </div> */}
+             </div>
             </nav>
             
-            {/* <div className={ showMenu ? "drawer open": "drawer"}>
+            <div className={ showMenu ? "drawer open": "drawer"}>
                 <br/>
                 <Link to="/Men"> Men's Collection </Link>
                 <br/>
                 <Link to="/Women">Women's Collection</Link>
-            </div> */}
+            </div>
             
 
              <div className="adminIcon" id="adminOnly">

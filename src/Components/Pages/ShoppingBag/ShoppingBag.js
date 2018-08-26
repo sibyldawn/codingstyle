@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CheckoutForm from '../CheckoutForm';
+import OrderHistory from '../../Components/OrderHistory';
 import './ShoppingBag.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -43,7 +44,7 @@ class ShoppingBag extends Component {
         super(props);
         this.state = {
             user: JSON.parse(localStorage.getItem('user')) || [],
-            cart: JSON.parse(localStorage.getItem('cart'))||[],
+            cart:[],
             total: 0,
             size: '',
             isAuthenticated: false,
@@ -210,8 +211,13 @@ class ShoppingBag extends Component {
              <div>
              <Button variant="contained" size="large" color="primary" className={classes.button} onClick={this.logout}>LOGOUT</Button>
              <Button variant="contained" size="large" color="primary" className={classes.button} onClick={this.redirectToCheckOut}>CHECKOUT</Button>
-                
              </div>
+             { this.state.user.length ? 
+              <Link to='/OrderHistory'><button className='.btn-grad'>View Order History</button></Link>
+                :
+                ''
+            }
+            
             </div>
 
         )
