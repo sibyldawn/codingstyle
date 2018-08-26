@@ -137,7 +137,9 @@ class ShoppingBag extends Component {
                     user:''
                 })
                
-            })
+            }).then(
+              <Redirect to={"/"}/>
+              )
         }
  
    
