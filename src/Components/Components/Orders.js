@@ -365,35 +365,3 @@ export default withStyles(styles)(EnhancedTable);
 
 
 
-
-
-
-
-// import React, { Component } from 'react';
-// import axios from 'axios';
-
-// export default class Orders extends Component {
-//     constructor(props){
-//         super(props)
-
-//         this.state = {
-//             orders: [],
-//         }
-//     }
-
-    
-
-//     render() {
-//         const orders = this.state.orders.map( r => {
-//             return 
-                  
-                
-//         })
-//         return (
-//             <div>
-               
-                
-//             </div>
-//         );
-//     }
-// }

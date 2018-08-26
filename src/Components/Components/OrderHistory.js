@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -48,7 +49,7 @@ class OrderHistory extends Component {
     }
 
     render() {
-        const { classes } = props;
+        const { classes } = this.props;
         const purchases = this.state.orders.cart.map(item => {
             return(
                 <div key = {item.id}>
