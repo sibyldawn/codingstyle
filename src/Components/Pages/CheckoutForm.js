@@ -17,6 +17,7 @@ import Stripe from './Stripe';
 import {updateTotal} from '../../ducks/reducer';
 import OrderConfirm from '../Pages/OrderConfirm';
 import UserInfo from './UserInfo';
+import { Redirect } from 'react-router-dom';
 
 
 

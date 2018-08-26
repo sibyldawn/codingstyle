@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import { Redirect,Link } from 'react-router-dom';
 import './OrderConfirm.css';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -37,15 +38,16 @@ class OrderConfirm extends Component {
     }
 
       logout=()=>{
-        localStorage.clear();
+       localStorage.clear();
         window.location.reload();
           axios.post('/api/logout').then(response => {
               this.setState({
                   user:'',
                   run: true,
               })
-             
-          })
+          }).then(
+            <Redirect to={"/"}/>
+            )
       }
  render() {
     
