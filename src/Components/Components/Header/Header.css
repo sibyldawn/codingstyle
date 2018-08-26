@@ -26,9 +26,9 @@
   }
   .menu-nav{
     flex: 1;
-    position:relative;
-    top:10;
-    left: 30;
+    position:fixed;
+    top:10px;
+    left:50px;
   }
   .icon-wrap{
     flex: 1;

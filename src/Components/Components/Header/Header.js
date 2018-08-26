@@ -57,7 +57,7 @@ class Header extends Component {
     render() {
 
         const menuNav = {
-            loop: false,
+            loop: true,
             autoplay: true,
             animationData: menuIcon,
             rendererSettings: {
@@ -76,7 +76,7 @@ class Header extends Component {
              <Lottie options={menuNav}
                      height = {50}
                      width  = {50}
-                     isStopped = {this.state.menuIsStopped}/>
+                     isStopped = {false}/>
               
              </div>
             </nav>
