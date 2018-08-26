@@ -17,7 +17,7 @@ import OrderHistory from './Components/Components/OrderHistory';
 export default class routes extends Component{
     render(){
     return <Switch>
-             <Route exact path ="/" component={Home}/>
+             <Route exact path ="/" component={App}/>
              <Route path="/Men" component={Men}/>
              <Route path="/Women" component={Women}/>
              <Route path="/CheckoutForm" component={CheckoutForm}/>

@@ -131,7 +131,7 @@ class CheckoutForm extends Component {
             })
            
         }).then(
-        <Redirect to={"/"}/>
+          <Redirect to="/"/>
         )
     }
 
