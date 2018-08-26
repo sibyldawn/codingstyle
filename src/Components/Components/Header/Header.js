@@ -86,6 +86,7 @@ class Header extends Component {
                 <Link to="/Men"> Men's Collection </Link>
                 <br/>
                 <Link to="/Women">Women's Collection</Link>
+                
             </div>
             
 

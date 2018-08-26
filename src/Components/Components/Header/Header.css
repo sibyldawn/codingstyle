@@ -36,7 +36,7 @@
    flex: 3;
    position: fixed;
    top: 10px;
-   left: 200px;
+   left: 150px;
   }
   #headerLogo{
     height: 70px;
@@ -48,11 +48,13 @@
     top: 100px;
     left: 0;
     width: 0px;
-    background: palegoldenrod;
+    background: white;
     display:none;
     color: white;
     height: calc(100vh - 50px);
     transition: 1s;
+    text-decoration: none;
+    font-size:20px;
     
   }
 
