@@ -14,6 +14,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
 import { Redirect } from 'react-router-dom'; 
 import TextField from '@material-ui/core/TextField';
+import { Redirect } from 'react-router-dom';
 import {updateNotAdmin, updateAdmin, updateUser, updateLogin, updateTotal, updateCart} from '../../../ducks/reducer';
 
 
