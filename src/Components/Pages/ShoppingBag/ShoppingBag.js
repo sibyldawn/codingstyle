@@ -138,7 +138,7 @@ class ShoppingBag extends Component {
                 })
                
             }).then(
-              <Redirect to={"/"}/>
+              <Redirect to="/"/>
               )
         }
  
