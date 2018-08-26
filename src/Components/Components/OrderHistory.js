@@ -91,7 +91,7 @@ class OrderHistory extends Component {
                         <p>Order Date: {date}</p>
                         <p>Ordered by: {first_name} {last_name}</p>
                         <p>Shipping Info: {address},{city},{state},{zipcode}</p>
-                        <p>Items: {purchases}</p>
+                        {purchases}
                         <p>Total: $ {total}</p>
                         </Typography>
                     </ExpansionPanelDetails>

@@ -56,10 +56,12 @@ sendCartToSession=()=>{
     let total = JSON.parse(localStorage.getItem('total'))
     let address = JSON.parse(localStorage.getItem('address'))
     let user = JSON.parse(localStorage.getItem('user'))
+    const date = Date.parse(this.state.orderDate);
+    const orderDate = new Date(date).toLocaleString();
         let userAddress = {
           email: user.email,
           first_name: user.first_name,
-          date: this.state.orderDate,
+          date: orderDate,
           total: this.state.total,
           orderId: this.state.orderId,
           address: address[0].address,
