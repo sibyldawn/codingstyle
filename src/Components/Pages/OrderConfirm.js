@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import { Redirect,Link } from 'react-router-dom';
 import './OrderConfirm.css';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+
 
 
 
