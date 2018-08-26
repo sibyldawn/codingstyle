@@ -18,7 +18,7 @@ class Header extends Component {
     constructor(props){
         super(props);
         this.state = {
-            menuIsStopped: true,
+            menuIsStopped: false,
             showMenu: false,
             showBag: false,
             isAdmin:'',
@@ -58,7 +58,7 @@ class Header extends Component {
 
         const menuNav = {
             loop: false,
-            autoplay: false,
+            autoplay: true,
             animationData: menuIcon,
             rendererSettings: {
                 preserveAspectRatio: 'xMidYMid slice'
@@ -72,10 +72,10 @@ class Header extends Component {
            <div className="header-wrap">
             <div className="menu">
             <nav>
-            <div className="menu-nav" onClick={()=> this.setState({showMenu : !showMenu, menuIsStopped: false})}>
+            <div className="menu-nav" onClick={()=> this.setState({showMenu : !showMenu, menuIsStopped: true})}>
              <Lottie options={menuNav}
-                     height = {100}
-                     width  = {100}
+                     height = {20}
+                     width  = {20}
                      isStopped = {this.state.menuIsStopped}/>
               
              </div>
