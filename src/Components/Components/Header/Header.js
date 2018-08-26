@@ -74,8 +74,8 @@ class Header extends Component {
             <nav>
             <div className="menu-nav" onClick={()=> this.setState({showMenu : !showMenu, menuIsStopped: true})}>
              <Lottie options={menuNav}
-                     height = {20}
-                     width  = {20}
+                     height = {50}
+                     width  = {50}
                      isStopped = {this.state.menuIsStopped}/>
               
              </div>
