@@ -130,9 +130,7 @@ class CheckoutForm extends Component {
                 user:''
             })
            
-        }).then(
-          <Redirect to="/"/>
-        )
+        })
     }
 
     handleNext = () => {

@@ -29,8 +29,7 @@ export default class Women extends Component {
     
     render() {
         let styles = {
-            height: 300,
-            width:300,
+            height: '100%',
             marginLeft: -8,
         }
         let loaderStyle = {
@@ -39,7 +38,10 @@ export default class Women extends Component {
         }
         const women = this.state.women.map( r => {
             return <div className="product-box" key={r.id}>
-                <div className="gallerypic"><img src={r.picture} style={styles}/></div>
+                <div className="gallerypic">
+                <figure style={{height:'100%'}}>
+                <img src={r.picture} style={styles}/>
+                </figure></div>
                 <div><p>{r.name}</p></div>
                 <div><p>Price: ${r.price}</p></div>
                 <div><ProductView

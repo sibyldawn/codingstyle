@@ -45,9 +45,7 @@ class OrderConfirm extends Component {
                   user:'',
                   run: true,
               })
-          }).then(
-            <Redirect to="/"/>
-            )
+          })
       }
  render() {
     
