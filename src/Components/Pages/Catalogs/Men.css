@@ -41,11 +41,10 @@
 
 }
 
-/* .gallerypic>img{
-    height: 80%;
-    width: 100%;
+.gallerypic{
+    height: 400px;
     margin: auto;
-} */
+}
 
 
 .product-box>div{
@@ -64,5 +63,4 @@
     top: 5px;
     left: 2px;
 } */
-
 

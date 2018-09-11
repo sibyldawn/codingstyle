@@ -70,3 +70,10 @@ table {
 
 }
 .btn-grad:hover { background-position: right center; }
+
+a{
+	font-family: 'Play', sans-serif;
+	text-decoration: none;
+	margin-bottom: 20px;
+	cursor: pointer;
+}

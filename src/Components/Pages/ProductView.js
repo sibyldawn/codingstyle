@@ -122,7 +122,7 @@ class ProductView extends Component {
         alert("Item already in bag. Adjust quantity there.")
         }else{currentCart.push(item)}
     localStorage.setItem('cart', JSON.stringify(currentCart))
-    window.location.reload()
+    // window.location.reload()
       
     }
    } 

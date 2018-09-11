@@ -10,7 +10,6 @@ import axios from 'axios';
 import ShoppingBag from '../../Pages/ShoppingBag/ShoppingBag';
 import {connect} from 'react-redux';
 import admin from '../../../Assets/gearIcon.png';
-import {updateNotAdmin, updateAdmin, setCart, updateUser, updateLogin, updateUserImage} from '../../../ducks/reducer';
 
 
 
@@ -74,8 +73,8 @@ class Header extends Component {
             <nav>
             <div className="menu-nav" onClick={()=> this.setState({showMenu : !showMenu, menuIsStopped: true})}>
              <Lottie options={menuNav}
-                     height = {50}
-                     width  = {50}
+                     height = {40}
+                     width  = {40}
                      isStopped = {false}/>
               
              </div>
@@ -122,9 +121,6 @@ class Header extends Component {
     }
 }
 
-function mapStateToProps(state){
-    return {
-        state,
-    }
-}
-export default connect(mapStateToProps,{updateNotAdmin, updateAdmin, updateUser, updateLogin, updateUserImage})(Header);
+
+export default (Header);
+

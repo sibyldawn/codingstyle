@@ -30,10 +30,19 @@ export default class Men extends Component {
    
 
     render() {
-     
+        let figureStyle = {
+            width: 300,
+            display: 'block',
+            marginTop: '1em',
+            marginBottom: '1em',
+            marginLeft: 40,
+            marginRight: 40,
+        }
+
         let styles = {
-            height: '100%',
-            marginLeft: -8,
+            maxWidth: '100%',
+            height: '350px',
+            margin:'auto',
         }
 
         let loaderStyle = {
@@ -43,10 +52,9 @@ export default class Men extends Component {
         const menShirts = this.state.men.map( r => {
             return <div className="product-box" key={r.id}>
                 <div className="gallerypic">
-                <figure style={{height:'100%'}}>
                 <img src={r.picture} style={styles}/>
-                </figure>
                 </div>
+                <div className="info">
                 <div><p>{r.name}</p></div>
                 <div><p>Price: ${r.price}</p></div>
                 <div><ProductView
@@ -54,8 +62,9 @@ export default class Men extends Component {
                             category={r.category}
                             price={r.price}
                             picture={r.picture}
-                /></div>
-
+                />
+                </div>
+                </div>
                 </div>
         })
         return (

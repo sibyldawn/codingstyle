@@ -43,7 +43,7 @@ class ShoppingBag extends Component {
     constructor(props){
         super(props);
         this.state = {
-            user: JSON.parse(localStorage.getItem('user')) || [],
+            user:[],
             cart:[],
             total: 0,
             size: '',
@@ -59,6 +59,7 @@ class ShoppingBag extends Component {
             user:JSON.parse(localStorage.getItem('user'))
           })
      }
+
 
 
     redirectToCheckOut(){
@@ -77,8 +78,6 @@ class ShoppingBag extends Component {
    }
 
   
-
-
     getTotal = () => {
         console.log("this.state.cart",this.state.cart);
         const {cart} = this.state;
@@ -212,12 +211,6 @@ class ShoppingBag extends Component {
              <Button variant="contained" size="large" color="primary" className={classes.button} onClick={this.logout}>LOGOUT</Button>
              <Button variant="contained" size="large" color="primary" className={classes.button} onClick={this.redirectToCheckOut}>CHECKOUT</Button>
              </div>
-             { this.state.user.length ? 
-              <Link to='/OrderHistory'><button className='.btn-grad'>View Order History</button></Link>
-                :
-                ''
-            }
-            
             </div>
 
         )
