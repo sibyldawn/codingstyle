@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import Popup from "reactjs-popup";
-import ProductModal from '../Pages/Modal/ProductModal';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { updateCart } from '../../ducks/reducer';
-import ShoppingBag from './ShoppingBag/ShoppingBag';
 
 
 const contentStyle = {
@@ -74,11 +70,11 @@ class ProductView extends Component {
         this.props.category
     ];
     axios.get(`/api/findproduct/?name=${this.props.name}&size=${this.state.size}&category=${this.props.category}`).then(response => {
-        console.log('------sentProduct',product);
-        console.log('----findproduct', response);
+          console.log('------sentProduct',product);
+          console.log('----findproduct', response);
         let item = response.data
-        console.log("found item",item)
-        let data;
+          console.log("found item",item)
+       
         this.setState ({
             id: item[0].id,
             name:item.name,
@@ -92,8 +88,8 @@ class ProductView extends Component {
    }
 
    addToCart = (id,name,size,category) => {
-    //    setTimeout(() => console.log('ADDDDDDD', this.state), 1000)
-    console.log('ADDDDDDD', id)
+    //    setTimeout(() =>   console.log('ADDDDDDD', this.state), 1000)
+      console.log('ADDDDDDD', id)
     let item = {
         id: id,
         name: name,
@@ -107,16 +103,16 @@ class ProductView extends Component {
     let cart = []
             
     ;
-    console.log('item qty', item.qty)
-    console.log(JSON.parse(localStorage.getItem('cart')));
+      console.log('item qty', item.qty)
+      console.log(JSON.parse(localStorage.getItem('cart')));
     if(JSON.parse(localStorage.getItem('cart')) === null){
         cart.push(item)
         localStorage.setItem('cart', JSON.stringify(cart));
-        return window.location.reload()
+         window.location.reload()
         
     }else {
     let currentCart = JSON.parse(localStorage.getItem('cart'));
-    console.log(currentCart)
+      console.log(currentCart)
     let index =  currentCart.findIndex(e => e.id === id);
     if(index !== -1){
         alert("Item already in bag. Adjust quantity there.")
@@ -147,9 +143,9 @@ class ProductView extends Component {
         calculateSubtotal = (qty) => {
             const {price} = this.props;
             
-            console.log('=======price qty',price, qty)
+              console.log('=======price qty',price, qty)
             let subtotal = (+qty * +price).toFixed(2)
-            console.log('item subtotal ==============',subtotal)
+              console.log('item subtotal ==============',subtotal)
             this.setState({
                 itemTotal: subtotal
             })
@@ -168,7 +164,7 @@ class ProductView extends Component {
             position: 'relative',
             top: '200px',
         }
-        console.log(this.state.itemTotal);
+          console.log(this.state.itemTotal);
         return (
             <div className="product">
               <button className="btn-grad" onClick={this.openModal}>VIEW</button>
@@ -187,7 +183,7 @@ class ProductView extends Component {
                     <div className="content" style={styles}>
                             <div>
                             <div className="show-grid">
-                                <img style={styles} id="preview" src={this.props ? this.props.picture : ' '}/> 
+                                <img style={styles} id="preview" src={this.props ? this.props.picture : ' '} alt="T-shirt Model"/> 
                             </div>
                             <div className="show-grid">
                                 <h4>{this.props ? this.props.name : ''}</h4>
@@ -226,13 +222,9 @@ class ProductView extends Component {
     }
 }
 
-const mapStateToProps = (store) => {
-    return {
-        cart: store.cart
-    }
-}
 
-export default withRouter(connect(mapStateToProps, {updateCart})(ProductView))
+
+export default withRouter(ProductView);
 
 
  

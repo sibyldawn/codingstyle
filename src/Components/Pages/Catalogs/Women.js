@@ -18,7 +18,7 @@ export default class Women extends Component {
 
     componentDidMount(){
         axios.get('/api/products/Women').then( response => {
-            console.log('--------getWomen', response.data)
+              console.log('--------getWomen', response.data)
             setTimeout(()=>this.setState({
                 women:response.data,
                 isLoading: false,
@@ -28,14 +28,7 @@ export default class Women extends Component {
 
     
     render() {
-        let figureStyle = {
-            width: 300,
-            display: 'block',
-            marginTop: '1em',
-            marginBottom: '1em',
-            marginLeft: 40,
-            marginRight: 40,
-        }
+       
         let styles = {
             maxWidth: '100%',
             height: '350px',
@@ -48,7 +41,7 @@ export default class Women extends Component {
         const women = this.state.women.map( r => {
             return <div className="product-box" key={r.id}>
                 <div className="gallerypic">
-                <img src={r.picture} style={styles}/>
+                <img src={r.picture} style={styles} alt="Shirt"/>
                  </div>
                 <div><p>{r.name}</p></div>
                 <div><p>Price: ${r.price}</p></div>
@@ -64,7 +57,7 @@ export default class Women extends Component {
         return (
          <div>
              <div className="top">
-                <img className="large" src={ WomenHeader }/>
+                <img className="large" src={ WomenHeader } alt="Woman Model"/>
             </div>
            <div className="grid-body">
            <div>

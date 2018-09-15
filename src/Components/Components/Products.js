@@ -17,7 +17,7 @@ export default class Men extends Component {
 
     componentDidMount(){
         axios.get('/api/products').then( response => {
-            console.log('--------getAll', response.data)
+              console.log('--------getAll', response.data)
             this.setState({
                 products:response.data
             })
@@ -33,12 +33,11 @@ export default class Men extends Component {
 
     updatePrice = (name) => {
         const {price, products} = this.state;
-        console.log("sending", name, price)
+          console.log("sending", name, price)
         axios.put(`/api/admin/products/${name}`, {price}).then(response =>{
-        console.log('responseUpdate', response);
+          console.log('responseUpdate', response);
         products.push(response.data)
-        console.log('products',products)
-        return 
+          console.log('products',products)
         this.setState({
             products:products
         })
@@ -47,14 +46,14 @@ export default class Men extends Component {
     }
    
     deleteProduct = (name) => {
-        console.log("sending delete", name);
+          console.log("sending delete", name);
         axios.delete(`/api/products/${name}`).then(response => {
             axios.get('/api/products').then(response=>{
                 this.setState({
                     products: response.data
                    })
             }).catch(error => {
-                console.log("DELETE ERROR", error);
+                  console.log("DELETE ERROR", error);
         })
      })
    }
@@ -75,7 +74,7 @@ export default class Men extends Component {
         }
         const products = this.state.products.map( r => {
             return <div className="product-box" key={r.id}>
-                <div><img src={r.picture} height={250} width={300}/>
+                <div><img src={r.picture} height={250} width={300} alt="product pictures"/>
                 </div>
                 <div><p>{r.name}</p></div>
                 <span>Price: $<input defaultValue={r.price} onChange={(e)=> this.handleChange(e.target.value)} style={inputStyle}></input></span>

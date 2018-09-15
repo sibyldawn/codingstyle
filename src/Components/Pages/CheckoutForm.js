@@ -11,13 +11,11 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import ShippingInfo from '../Pages/ShippingInfo';
 import Stripe from './Stripe';
 import {updateTotal} from '../../ducks/reducer';
-import OrderConfirm from '../Pages/OrderConfirm';
 import UserInfo from './UserInfo';
-import { Redirect } from 'react-router-dom';
+
 
 
 
@@ -51,7 +49,7 @@ const styles = theme => ({
   }
   
   function getStepContent(step, first_name, last_name,email,user,userAddress,userCity,userState,userZipcode,findAddress,total,id) {
-      console.log(total)
+        console.log(total)
     switch (step) {
       case 0:   
         return (<div>
@@ -166,8 +164,8 @@ class CheckoutForm extends Component {
 
       render() {
         
-        // console.log(this.state)
-        console.log("SESSION USER====>",this.state.user)
+        //   console.log(this.state)
+          console.log("SESSION USER====>",this.state.user)
         const { classes } = this.props;
         const steps = getSteps();
         const { activeStep } = this.state;

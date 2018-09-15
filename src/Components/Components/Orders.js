@@ -21,9 +21,9 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
 let counter = 0;
-function createData(id,date,total,first_name,last_name,address,city,state,zipcode) {
+function createData(order_id,date,total,first_name,last_name,address,city,state,zipcode) {
   counter += 1;
-  return { id: counter, id,date,total,first_name,last_name,address,city,state,zipcode };
+  return { id: counter, order_id,date,total,first_name,last_name,address,city,state,zipcode };
 }
 
 function desc(a, b, orderBy) {
@@ -41,7 +41,7 @@ function getSorting(order, orderBy) {
 }
 
 const rows = [
-  { id: 'id', numeric: true, disablePadding: true, label: 'Order ID' },
+  { id: 'order_id', numeric: true, disablePadding: true, label: 'Order ID' },
   { id: 'date', numeric: true, disablePadding: false, label: 'Date' },
   { id: 'total', numeric: true, disablePadding: false, label: 'Order Total' },
   { id: 'first_name', numeric: false, disablePadding: false, label: 'First Name' },
@@ -208,7 +208,7 @@ class EnhancedTable extends React.Component {
 
   componentDidMount(){
     axios.get('/api/admin/orders/').then( res => {
-        console.log("orders", res.data);
+          console.log("orders", res.data);
         this.setState({
             orders: res.data
         })

@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from 'axios';
-import OrderConfirm from './OrderConfirm';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateOrderId } from '../../ducks/reducer';
@@ -32,8 +31,8 @@ axios.post("/api/payment", {
     amount: amount
   })
   .then(token => {
-    console.log("PAYMENT SUCCESSFUL",token)
-  }).catch(console.log("STRIPE ERROR"));
+      console.log("PAYMENT SUCCESSFUL",token)
+  }).catch(  console.log("STRIPE ERROR"));
   this.sendCartToSession();
 }
 
@@ -46,7 +45,7 @@ sendCartToSession=()=>{
     total: total
   }
  axios.post('/api/user/cartSession',obj).then( response => {
-   console.log("response",response)
+     console.log("response",response)
    this.setState({
     orderId: response.data[0].id,
     orderComplete: true,
@@ -69,10 +68,10 @@ sendCartToSession=()=>{
           state: address[0].state,
           zipcode: address[0].zipcode
           }
-        console.log("userAddress",userAddress);
+          console.log("userAddress",userAddress);
         axios.post('/api/email',userAddress).then(res => {
-          console.log("sendMail",res);
-        }).catch(err => console.log("sendMail error",err));
+            console.log("sendMail",res);
+        }).catch(err =>   console.log("sendMail error",err));
       })
    }
  

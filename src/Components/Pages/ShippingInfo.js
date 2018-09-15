@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -57,9 +56,9 @@ const styles = theme => ({
 
         componentDidMount(){
             axios.get('/api/user/session').then(user => {
-                console.log("=====userLogin",user);
+                  console.log("=====userLogin",user);
                 axios.get(`/api/user/shipping?user_id=${user.data.id}`).then(response => {
-                    console.log('nested axios', response.data)
+                      console.log('nested axios', response.data)
                     this.setState({
                         user: user.data,
                         shippingInfo: response.data
@@ -117,14 +116,12 @@ const styles = theme => ({
                 zipcode: this.state.zipcode
             };
             
-            console.log(userAddress)
+              console.log(userAddress)
             axios.post(`/api/user/shipping/${this.state.user.id}`,userAddress).then(response => {
-                console.log('------userAddress',userAddress);
-                console.log('----addedInfo', response);
+                  console.log('------userAddress',userAddress);
+                  console.log('----addedInfo', response);
                 localStorage.setItem('address', JSON.stringify(response.data))
                 let line= response.data
-                console.log(line)
-                let data;
                 this.setState ({
                     userid: line.user_id,
                     address: line.address,
@@ -146,8 +143,8 @@ const styles = theme => ({
                             
                         </div>
              })
-              console.log("USER ID===========>", this.state.user.id)  
-              console.log("SHIPPING INFO state",this.state.shippingInfo);
+                console.log("USER ID===========>", this.state.user.id)  
+                console.log("SHIPPING INFO state",this.state.shippingInfo);
 
             const { classes } = this.props;
             return (

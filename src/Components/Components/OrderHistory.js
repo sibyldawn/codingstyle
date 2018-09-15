@@ -10,8 +10,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+
+
 
 
 const styles = theme => ({
@@ -40,7 +40,7 @@ class OrderHistory extends Component {
         const user = JSON.parse(localStorage.getItem('user'))
         const userId = user.id;
         axios.get(`/api/user/orderhistory/${userId}`).then( res => {
-            console.log("orders", res.data);
+              console.log("orders", res.data);
             this.setState({
                 orders: res.data
             })

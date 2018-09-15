@@ -2,15 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import axios from 'axios';
-import Paper from '@material-ui/core/Paper';
-import { DEFAULT_POSTER_OPTIONS } from 'cloudinary/lib/utils';
+
 
 
 const styles = theme => ({
@@ -81,13 +74,12 @@ const styles = theme => ({
            
             };
             
-            console.log(userName)
+              console.log(userName)
             axios.post(`/api/user/userinfo/${this.props.id}`,userName).then(response => {
-                console.log('------userName',userName);
-                console.log('----addedInfo', response);
+                  console.log('------userName',userName);
+                  console.log('----addedInfo', response);
                 let line= response.data
-                console.log(line)
-                let data;
+                  console.log(line)
                 this.setState ({
                     user: line,
                     first_name: line.first_name,
@@ -100,7 +92,7 @@ const styles = theme => ({
 
           render() {
         
-              console.log("USER ID===========>", this.state.user.id) 
+                console.log("USER ID===========>", this.state.user.id) 
 
             const { classes } = this.props;
             return (

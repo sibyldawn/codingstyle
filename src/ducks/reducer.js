@@ -5,14 +5,11 @@ const initialState = {
     name: '',
     price: 0,
     picture: '',
-    qty: 0,
     category: null,
     size: null,
     isAdmin: false,
     total: 0,
     submitted: false,
-    userId: null,
-    cart:[],
     orderId: 0,
 }
 const UPDATE_NAME = "UPDATE_NAME";
@@ -22,35 +19,21 @@ const UPDATE_PRICE = "UPDATE_PRICE";
 const UPDATE_USER = 'UPDATE_USER';
 const UPDATE_LOGIN = 'UPDATE_LOGIN';
 const UPDATE_PICTURE = 'UPDATE_PICTURE';
-const UPDATE_QTY = 'UPDATE_QTY';
 const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
 const UPDATE_SIZE = 'UPDATE_SIZE';
 const UPDATE_ISADMIN = 'UPDATE_ISADMIN';
 const UPDATE_ISNOTADMIN = 'UPDATE_ISNOTADMIN';
 const UPDATE_TOTAL = 'UPDATE_TOTAL';
-const UPDATE_USERID = 'UPDATE_USERID';
 const DELETE_FROM_CART = "DELETE_FROM_CART";
 const UPDATE_SUBMITTED = "UPDATED_SUBMITTED";
 const UPDATE_CUSTOMERID = "UPDATE_CUSTOMERID";
-const UPDATE_QUANTITY = "UPDATE_QUANTITY";
-const UPDATE_CART = "UPDATE_CART";
+
 
 
 export default function reducer(state = initialState,action){
     let newState = { ...state }
     switch(action.type){
-        case UPDATE_CART:
-            localStorage.setItem('cart', JSON.stringify( [...state.cart, action.payload] ))
-            return {
-                ...state, 
-                cart: [...state.cart, action.payload]
-            }
-            
-            // case UPDATE_DUPLICATE:
-            // localStorage.clear()
-            // localStorage.setItem('cart', JSON.stringify( [...action.payload] ))
-            //     return {...state, cart: [...action.payload]}
-
+       
         case UPDATE_LOGIN:
         return {...state, login: action.payload};
         case UPDATE_USER:
@@ -66,10 +49,6 @@ export default function reducer(state = initialState,action){
         case UPDATE_TOTAL:
             return { ...state, total: action.payload };
 
-        case UPDATE_QUANTITY:
-            let index = state.cart.findIndex((e) => e.id === +action.payload.id);
-            state.cart[index].quantity = action.payload.quantity
-            return { ...state};
         case UPDATE_PICTURE:
             return { ...state, picture: action.payload };
         case UPDATE_CATEGORY:
@@ -99,12 +78,6 @@ export default function reducer(state = initialState,action){
         
         default:return state
         
-    }
-}
-export function updateCart(cart) {
-    return {
-        type: UPDATE_USER,
-        payload: cart
     }
 }
 
@@ -143,12 +116,6 @@ export function updatePrice(price) {
     };
 }
 
-export function updateQuantity(qty) { 
-    return {
-        type: UPDATE_QUANTITY,
-        payload: qty
-    }
-}
 export function updateSize(size) {
     return {
         type: UPDATE_SIZE,

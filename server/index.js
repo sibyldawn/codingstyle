@@ -15,9 +15,9 @@ require('dotenv').config();
 
 //CONNECT TO DATABASE
 massive(process.env.CONNECTION_STRING).then(db => {
-    console.log('Connected to Database');
+      console.log('Connected to Database');
     app.set('db',db)
-}).catch(error => console.log('massive error',error));
+}).catch(error =>   console.log('massive error',error));
 
 const app = express();
 app.use(express.static(`${__dirname}/../build`));
@@ -35,7 +35,7 @@ app.get('/auth/callback', (req,res) => {
     .then(exchangeAccessTokenForUserInfo)
     .then(storeUserInfoInDatabase)
     .catch( error => {
-        console.log('Auth Error', error);
+          console.log('Auth Error', error);
         res.status(500).send('An error occurred on the server.');
     });
 
@@ -51,21 +51,21 @@ app.get('/auth/callback', (req,res) => {
     }
 
     function exchangeAccessTokenForUserInfo(accessTokenResponse){
-        // console.log('accessTokenResponse', accessTokenResponse);
+        //   console.log('accessTokenResponse', accessTokenResponse);
         const accessToken = accessTokenResponse.data.access_token;
         return axios.get(`https://${process.env.REACT_APP_AUTH0_DOMAIN}/userinfo?access_token=${accessToken}`);
     }
 
     function storeUserInfoInDatabase(userInfoResponse){
-        console.log('userInfoResponse',userInfoResponse);
+          console.log('userInfoResponse',userInfoResponse);
         const auth0id = userInfoResponse.data.sub;
         const db = req.app.get('db');
         return db.find_user(auth0id).then( users => {
-            console.log('-----users',users);
+              console.log('-----users',users);
             if(users.length){
                 const user = users[0];
                 req.session.user = user;
-                console.log("USER SESSION",req.session.user)
+                  console.log("USER SESSION",req.session.user)
                 res.redirect('/Redirect');
             }else{
                 const createUserData = [
@@ -77,11 +77,11 @@ app.get('/auth/callback', (req,res) => {
                 
                     
                  ];
-                 console.log('----createUserData',createUserData);
+                   console.log('----createUserData',createUserData);
                  return db.add_user(createUserData).then( newUsers => {
                      const user = newUsers[0];
                      req.session.user = user;
-                     console.log("USER SESSION",req.session.user)
+                       console.log("USER SESSION",req.session.user)
                      res.redirect('/Redirect');
                  })
                 }
@@ -125,9 +125,9 @@ app.post('/api/email', (req,res) => {
     }
     transporter.sendMail(mailOptions,(error,info) => {
         if(error){
-            return console.log('NODEMAILER ERROR',error);
+            return   console.log('NODEMAILER ERROR',error);
         }else{
-            return console.log('EMAIL SENT' + info.response);
+            return   console.log('EMAIL SENT' + info.response);
         }
     })
 })
@@ -184,4 +184,4 @@ app.get('*',(req,res)=> {
 
 
 const PORT = 4000;
-app.listen(PORT, () => { console.log(`Server listening to port ${PORT}`);});
+app.listen(PORT, () => {   console.log(`Server listening to port ${PORT}`);});

@@ -4,7 +4,6 @@ import loading from '../../../Assets/load.gif';
 import axios from 'axios';
 import menHeader from '../../../Assets/Men.png';
 import ProductView from '../../Pages/ProductView';
-import ProductModal from '../Modal/ProductModal';
 
 
 export default class Men extends Component {
@@ -19,7 +18,7 @@ export default class Men extends Component {
 
     componentDidMount(){
         axios.get('/api/products/Men').then( response => {
-            console.log('--------getMen', response)
+              console.log('--------getMen', response)
             setTimeout(()=>this.setState({
                 men:response.data,
                 isLoading: false,
@@ -30,15 +29,6 @@ export default class Men extends Component {
    
 
     render() {
-        let figureStyle = {
-            width: 300,
-            display: 'block',
-            marginTop: '1em',
-            marginBottom: '1em',
-            marginLeft: 40,
-            marginRight: 40,
-        }
-
         let styles = {
             maxWidth: '100%',
             height: '350px',
@@ -52,7 +42,7 @@ export default class Men extends Component {
         const menShirts = this.state.men.map( r => {
             return <div className="product-box" key={r.id}>
                 <div className="gallerypic">
-                <img src={r.picture} style={styles}/>
+                <img src={r.picture} style={styles} alt="T-shirt Model"/>
                 </div>
                 <div className="info">
                 <div><p>{r.name}</p></div>
@@ -70,12 +60,12 @@ export default class Men extends Component {
         return (
          <div>
              <div className="top">
-                <img className="large" src={ menHeader }/>
+                <img className="large" src={ menHeader } alt="Men T-shirt Model"/>
             </div>
            <div className="grid-body">
             <div>
             {this.state.isLoading === true ? 
-                        <img src={loading} alt="loading" style={loaderStyle}/> : 
+                        <img src={loading} style={loaderStyle} alt="loading"/> : 
                  <div className="grid-container">
                      {menShirts}
                 </div> }

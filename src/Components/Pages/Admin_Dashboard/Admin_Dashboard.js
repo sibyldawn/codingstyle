@@ -6,10 +6,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-import Add_Form from '../../Components/Add_Form';
+import AddForm from '../../Components/Add_Form';
 import Products from '../../Components/Products';
 import Orders from '../../Components/Orders';
-import access from '../../../Assets/access.gif';
+
 
 function TabContainer(props) {
   return (
@@ -43,8 +43,8 @@ class AdminDashboard extends React.Component {
         this.setState({
             isAdmin: user.data.admin
         })
-        console.log("++++LOG IN USER++++",user.data)
-        console.log("Is Admin?",this.state.isAdmin)
+          console.log("++++LOG IN USER++++",user.data)
+          console.log("Is Admin?",this.state.isAdmin)
         localStorage.setItem('user', JSON.stringify(user.data))}
         
     )}
@@ -77,7 +77,7 @@ class AdminDashboard extends React.Component {
             <Tab style={styles}  label="Orders" href="#basic-tabs" />
           </Tabs>
         </AppBar>
-        {value === 0 && <TabContainer><Add_Form/></TabContainer>}
+        {value === 0 && <TabContainer><AddForm/></TabContainer>}
         {value === 1 && <TabContainer><Products/></TabContainer>}
         {value === 2 && <TabContainer><Orders/></TabContainer>}
       </div>

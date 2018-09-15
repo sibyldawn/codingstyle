@@ -1,19 +1,9 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Redirect,Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './OrderConfirm.css';
 import axios from 'axios';
-
-
-
-
 
 
 class OrderConfirm extends Component {
@@ -29,7 +19,7 @@ class OrderConfirm extends Component {
 
     componentDidMount(){
        axios.get(`/api/orderconfirmation/${this.props.match.params.orderId}`).then(order => {
-         console.log("DB Response", order)
+           console.log("DB Response", order)
         this.setState({
                 order: order.data
             })
@@ -81,5 +71,8 @@ class OrderConfirm extends Component {
  }
 }
 
+OrderConfirm.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
 
 export default OrderConfirm;

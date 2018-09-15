@@ -10,7 +10,7 @@ module.exports={
        .then(products => {res.status(200).send(products)
         }).catch( error => {
            res.status(500).send("ERROR");
-           console.log('-------readProducts ERROR',error);
+             console.log('-------readProducts ERROR',error);
        })
     },
     readAllOrders: (req,res)=> {
@@ -19,7 +19,7 @@ module.exports={
         .then(products => {res.status(200).send(products)
         }).catch( error => {
            res.status(500).send("ERROR");
-           console.log('-------readProducts ERROR',error);
+             console.log('-------readProducts ERROR',error);
        })
     },
     

@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import Lottie from 'react-lottie';
 import * as menuIcon from '../../../Assets/menu.json';
 import logo from '../../../Assets/cslogo.png';
-import style from './Header.css';
+import './Header.css';
 import bag from '../../../Assets/bag.png';
 import { Link } from 'react-router-dom';
 import login from '../../../Assets/login.png';
 import axios from 'axios';
 import ShoppingBag from '../../Pages/ShoppingBag/ShoppingBag';
-import {connect} from 'react-redux';
 import admin from '../../../Assets/gearIcon.png';
 
 
@@ -32,8 +31,8 @@ class Header extends Component {
             this.setState({
                 isAdmin: user.data.admin
             })
-            console.log("++++LOG IN USER++++",user.data)
-            console.log("Is Admin?",this.state.isAdmin)
+              console.log("++++LOG IN USER++++",user.data)
+              console.log("Is Admin?",this.state.isAdmin)
             localStorage.setItem('user', JSON.stringify(user.data))}
             
         )}
@@ -66,7 +65,7 @@ class Header extends Component {
 
         const { showMenu } = this.state;
         const { showBag } = this.state;
-        console.log(showBag)
+          console.log(showBag)
         return (
            <div className="header-wrap">
             <div className="menu">
@@ -91,7 +90,7 @@ class Header extends Component {
 
              <div className="adminIcon" id="adminOnly">
                  {this.state.isAdmin === true ?
-                    <Link to="/Dashboard"><img src={ admin } id="headerAdmin"/></Link> 
+                    <Link to="/Dashboard"><img src={ admin } id="headerAdmin" alt="Settings Icon"/></Link> 
                     :
                     ''
                 }
@@ -99,17 +98,17 @@ class Header extends Component {
 
 
             <div className="logo">
-            <Link to='/'><img src={ logo } id="headerLogo"/></Link>
+            <Link to='/'><img src={ logo } id="headerLogo" alt="codingstyle"/></Link>
             <Link to='/'><h2>coding style</h2></Link>
             </div>
              
            <div className="icon-wrap">
              <div>
-                <img src={login} onClick={this.login} id="headerLogin"/>
+                <img src={login} onClick={this.login} id="headerLogin" alt="Profile Icon"/>
                
              </div>
              <div className="bag">
-            <img src={bag} id="headerBag" onClick={()=> this.setState({showBag : !showBag})} className="dropdown"/> 
+            <img src={bag} id="headerBag" onClick={()=> this.setState({showBag : !showBag})} className="dropdown" alt="Bag Icon"/> 
              <div className={ showBag ? "dropdown-content hide" : "dropdown-content show" }>
                <ShoppingBag />
             </div>

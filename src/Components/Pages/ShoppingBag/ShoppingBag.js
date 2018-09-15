@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import CheckoutForm from '../CheckoutForm';
-import OrderHistory from '../../Components/OrderHistory';
 import './ShoppingBag.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -12,9 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
-import { Redirect } from 'react-router-dom'; 
 import TextField from '@material-ui/core/TextField';
-import {updateNotAdmin, updateAdmin, updateUser, updateLogin, updateTotal, updateCart} from '../../../ducks/reducer';
+import {updateNotAdmin, updateAdmin, updateUser, updateLogin, updateTotal} from '../../../ducks/reducer';
 
 
 const styles = theme => ({
@@ -63,9 +60,9 @@ class ShoppingBag extends Component {
 
 
     redirectToCheckOut(){
-      console.log('hit')
+        console.log('hit')
       if(this.state.user){
-        console.log('redirect');
+          console.log('redirect');
         return window.location = '/CheckoutForm'
       }else{
         localStorage.setItem('location', window.location.pathname)
@@ -79,12 +76,12 @@ class ShoppingBag extends Component {
 
   
     getTotal = () => {
-        console.log("this.state.cart",this.state.cart);
+          console.log("this.state.cart",this.state.cart);
         const {cart} = this.state;
         let sum = 0;
         if (cart){
          for(let i=0;i<cart.length;i++){
-             console.log("cart[i] itemTotal", +cart[i].itemTotal);
+               console.log("cart[i] itemTotal", +cart[i].itemTotal);
              sum += +cart[i].itemTotal
           }
          localStorage.setItem('total', JSON.stringify((sum.toFixed(2))))
@@ -98,17 +95,17 @@ class ShoppingBag extends Component {
 
     changeQty = (value,id,qty,itemTotal) => {
             let currentCart = JSON.parse(localStorage.getItem('cart'))
-            console.log("currentCart",currentCart)
+              console.log("currentCart",currentCart)
             let index = currentCart.findIndex( e => e.id === id)
-            console.log("index",index)
+              console.log("index",index)
             currentCart[index].qty = value;
-            console.log("currentCart.qty", currentCart.qty)
+              console.log("currentCart.qty", currentCart.qty)
 
-             if(value == 0){ 
+             if(value === 0){ 
               let newCart = JSON.parse(localStorage.getItem('cart'))
               
               newCart.splice(index,1)
-              console.log(newCart)
+                console.log(newCart)
               this.setState(() => {
                 localStorage.setItem('cart' ,JSON.stringify(newCart));
                 return {
@@ -119,7 +116,7 @@ class ShoppingBag extends Component {
 
              }else{
                 currentCart[index].itemTotal = currentCart[index].qty * currentCart[index].price
-                console.log("curretCart item total", currentCart[index].itemTotal)
+                  console.log("curretCart item total", currentCart[index].itemTotal)
                 this.setState({
                   cart: currentCart
             })
@@ -141,12 +138,7 @@ class ShoppingBag extends Component {
  
    
     render() {
-        const inputStyle = {
-          width: 30
-        }
-        console.log("TOTAL======>",this.state.total)
-        console.log("CART",this.state.cart);
-        const {showCart} = this.state;
+        
         const {classes} = this.props;
         const cartDisplay = this.state.cart ? this.state.cart.map(item => {
             if(item === null ){
@@ -194,7 +186,7 @@ class ShoppingBag extends Component {
             )}
           
           }): <h4>Your Cart is Empty</h4>;
-        console.log(this.state);
+          console.log(this.state);
         return (
             <div className="shopping-window">
              <div><h3>CART SUMMARY:</h3></div>
@@ -208,8 +200,8 @@ class ShoppingBag extends Component {
              </div>
              </Paper>
              <div>
-             <Button variant="contained" size="large" color="primary" className={classes.button} onClick={this.logout}>LOGOUT</Button>
-             <Button variant="contained" size="large" color="primary" className={classes.button} onClick={this.redirectToCheckOut}>CHECKOUT</Button>
+             <Link to="/"><Button variant="contained" size="large" color="primary" className={classes.button} onClick={this.logout}>LOGOUT</Button></Link>
+             <Link to="/"><Button variant="contained" size="large" color="primary" className={classes.button} onClick={this.redirectToCheckOut}>CHECKOUT</Button></Link>
              </div>
             </div>
 
@@ -224,9 +216,9 @@ ShoppingBag.propTypes = {
 function mapStateToProps(state){
     return {
         total: state.total,
-        cart: state.cart
+    
     }
 }
 
-export default connect(mapStateToProps,{updateNotAdmin, updateAdmin, updateUser, updateLogin,updateTotal, updateCart})(withStyles(styles)(ShoppingBag));
+export default connect(mapStateToProps,{updateNotAdmin, updateAdmin, updateUser, updateLogin,updateTotal})(withStyles(styles)(ShoppingBag));
 

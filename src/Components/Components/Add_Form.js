@@ -31,9 +31,9 @@ class Add_Form extends Component {
     
   }
   handleImageUpload = (file) => {
-    console.log("file",file);
+      console.log("file",file);
             axios.get('/api/upload').then(response => {
-                console.log(response.data.signature)
+                  console.log(response.data.signature)
   
     
             let formData = new FormData();
@@ -45,13 +45,13 @@ class Add_Form extends Component {
     
    
             axios.post(CLOUDINARY_UPLOAD_URL, formData).then(response => {
-                console.log("AXIOS POST RESPONSE",response.data);
+                  console.log("AXIOS POST RESPONSE",response.data);
     
                     this.setState({
                         uploadedFileCloudinaryUrl: response.data.secure_url
                     })
                 }).catch( err => {
-                    console.log(err);
+                      console.log(err);
                 }) 
             })
         }     
@@ -63,8 +63,8 @@ class Add_Form extends Component {
       width: 300,
       fontSize: 20,
     }
-    console.log("cloudinary response",this.state.uploadedFileCloudinaryUrl);
-    const { updateName, updatePrice, updateSize, updateCategory,updatePicture} = this.props;
+      console.log("cloudinary response",this.state.uploadedFileCloudinaryUrl);
+    const { updateName, updatePrice, updateSize, updateCategory} = this.props;
     return (
       <Paper style={{width: 500, margin: '0 auto'}}>
       <div className="add-form">
@@ -104,7 +104,7 @@ class Add_Form extends Component {
           
             </div>
           </label>
-          <input style={selectStyle} type="submit" value="Submit" className='btn-grad' style={{position: 'relative', bottom:-10}}/>
+          <input type="submit" value="Submit" className='btn-grad' style={{position: 'relative', bottom:-10, height: 30,width: 300,fontSize: 20}}/>
         </form>
         <br/>
       </div>
