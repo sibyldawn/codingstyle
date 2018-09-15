@@ -109,10 +109,10 @@ class ProductView extends Component {
     ;
     console.log('item qty', item.qty)
     console.log(JSON.parse(localStorage.getItem('cart')));
-    if(JSON.parse(localStorage.getItem('cart')) == null){
+    if(JSON.parse(localStorage.getItem('cart')) === null){
         cart.push(item)
         localStorage.setItem('cart', JSON.stringify(cart));
-        window.location.reload()
+        return window.location.reload()
         
     }else {
     let currentCart = JSON.parse(localStorage.getItem('cart'));
@@ -120,10 +120,11 @@ class ProductView extends Component {
     let index =  currentCart.findIndex(e => e.id === id);
     if(index !== -1){
         alert("Item already in bag. Adjust quantity there.")
-        }else{currentCart.push(item)}
-    localStorage.setItem('cart', JSON.stringify(currentCart))
-    // window.location.reload()
-      
+    }else if((index === -1)){
+        currentCart.push(item)
+        localStorage.setItem('cart', JSON.stringify(currentCart))
+         window.location.reload()
+        }
     }
    } 
 
