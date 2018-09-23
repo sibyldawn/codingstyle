@@ -9,8 +9,33 @@ import login from '../../../Assets/login.png';
 import axios from 'axios';
 import ShoppingBag from '../../Pages/ShoppingBag/ShoppingBag';
 import admin from '../../../Assets/gearIcon.png';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MenuItem from '@material-ui/core/MenuItem';
+import Drawer from '@material-ui/core/Drawer';
+import Menu from '@material-ui/core/Menu';
+import Aside from './Aside';
 
 
+const styles = {
+    root: {
+      flexGrow: 1,
+    },
+    grow: {
+      flexGrow: 1,
+    },
+    accountCircle:{
+     position: 'fixed',
+     top: 20,
+     right: 50,
+    },
+   
+  };
 
 class Header extends Component {
     constructor(props){
@@ -21,6 +46,9 @@ class Header extends Component {
             showBag: false,
             isAdmin:'',
             user_img:'',
+            auth: true,
+            anchorEl: null,
+            left: false,
         };
         this.login = this.login.bind(this);
        
@@ -48,78 +76,117 @@ class Header extends Component {
       
     }
 
-   
+     toggleDrawer = (side, open) => () => {
+        this.setState({
+            [side]: open,
+        });
+    };
 
+
+      handleMenu = event => {
+        this.setState({ anchorEl: event.currentTarget });
+      };
+    
+      handleClose = () => {
+        this.setState({ anchorEl: null });
+      };
    
 
     render() {
 
-        const menuNav = {
-            loop: true,
-            autoplay: true,
-            animationData: menuIcon,
-            rendererSettings: {
-                preserveAspectRatio: 'xMidYMid slice'
-            }
-        }
-
         const { showMenu } = this.state;
         const { showBag } = this.state;
           console.log(showBag)
-        return (
-           <div className="header-wrap">
-            <div className="menu">
-            <nav>
-            <div className="menu-nav" onClick={()=> this.setState({showMenu : !showMenu, menuIsStopped: true})}>
-             <Lottie options={menuNav}
-                     height = {40}
-                     width  = {40}
-                     isStopped = {false}/>
+
+          const { classes } = this.props;
+          const { auth, anchorEl } = this.state;
+          const open = Boolean(anchorEl);
+          return (
+            <div className={classes.root}>
               
-             </div>
-            </nav>
-            
-            <div className={ showMenu ? "drawer open": "drawer"}>
-                <br/>
-                <Link to="/Men"> Men's Collection </Link>
-                <br/>
-                <Link to="/Women">Women's Collection</Link>
-                
+              <AppBar position="static">
+                <Toolbar>
+                  <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                    <MenuIcon onClick={this.toggleDrawer('left', true)}/>
+                  </IconButton>
+                  <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
+                              <div
+                                  tabIndex={0}
+                                  role="button"
+                                  onClick={this.toggleDrawer('left', false)}
+                                  onKeyDown={this.toggleDrawer('left', false)}
+                              >
+                                  <Aside/>
+                              </div>
+                              </Drawer>
+                          <Link to='/'>
+                            <figure style={{ 
+                                          margin: 0, 
+                                          padding: 0, 
+                                          height: 45, 
+                                          position: 'fixed',
+                                          top:'1%',
+                                          left: 50,
+                                          overflow: 'hidden'
+                                           }}>
+                           <img src={logo} alt="finder logo" style={{ 
+                                              display: 'inline',
+                                              height: '100%',
+                                              width: 'auto', 
+                                              margin: 0, 
+                                              padding: 0 }}   />
+                          </figure>
+                          <div className="logo">
+                          <Link to='/'><h2>coding style</h2></Link>
+                         </div>
+      
+      
+                          </Link>
+                          <div className="adminIcon" id="adminOnly">
+                           {this.state.isAdmin === true ?
+                          <Link to="/Dashboard"><img src={ admin } id="headerAdmin" alt="Settings Icon"/></Link> 
+                          :
+                          ''
+                      }
+                   </div> 
+                  {auth && (
+                    <div>
+                      <IconButton
+                        aria-owns={open ? 'menu-appbar' : null}
+                        aria-haspopup="true"
+                        onClick={this.handleMenu}
+                        color="inherit"
+                      >
+                        <AccountCircle className={classes.accountCircle} onClick={()=> this.login()}/>
+                      </IconButton>
+                      
+                    </div>
+                  )}
+                <div className="bag">
+                  <img src={bag} id="headerBag" onClick={()=> this.setState({showBag : !showBag})} className="dropdown" alt="Bag Icon"/> 
+                   <div className={ showBag ? "dropdown-content hide" : "dropdown-content show" }>
+                     <ShoppingBag />
+                  </div>
+                 </div>
+                </Toolbar>
+              </AppBar>
             </div>
-            
-
-             <div className="adminIcon" id="adminOnly">
-                 {this.state.isAdmin === true ?
-                    <Link to="/Dashboard"><img src={ admin } id="headerAdmin" alt="Settings Icon"/></Link> 
-                    :
-                    ''
-                }
-             </div>   
-
-
-            <div className="logo">
-            <Link to='/'><img src={ logo } id="headerLogo" alt="codingstyle"/></Link>
-            <Link to='/'><h2>coding style</h2></Link>
-            </div>
-             
-           <div className="icon-wrap">
-             <div>
-                <img src={login} onClick={this.login} id="headerLogin" alt="Profile Icon"/>
-               
-             </div>
-             <div className="bag">
-            <img src={bag} id="headerBag" onClick={()=> this.setState({showBag : !showBag})} className="dropdown" alt="Bag Icon"/> 
-             <div className={ showBag ? "dropdown-content hide" : "dropdown-content show" }>
-               <ShoppingBag />
-            </div>
-             </div>
-            </div>
-          </div>
-        </div>
-        );
-    }
-}
+          );
+        }
+      }
+      
+      Header.propTypes = {
+        classes: PropTypes.object.isRequired,
+      };
+      
+      export default withStyles(styles)(Header);
 
 
-export default (Header);
 
+
+
+
+
+   
+
+    
