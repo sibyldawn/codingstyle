@@ -25,6 +25,9 @@ import Aside from './Aside';
 const styles = {
     root: {
       flexGrow: 1,
+      position:'fixed',
+      top: 0,
+      width: '100vw',
     },
     grow: {
       flexGrow: 1,
@@ -105,7 +108,7 @@ class Header extends Component {
             <div className={classes.root}>
               
               <AppBar position="static">
-                <Toolbar>
+                <Toolbar >
                   <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
                     <MenuIcon onClick={this.toggleDrawer('left', true)}/>
                   </IconButton>
@@ -119,6 +122,7 @@ class Header extends Component {
                                   <Aside/>
                               </div>
                               </Drawer>
+                        
                           <Link to='/'>
                             <figure style={{ 
                                           margin: 0, 
@@ -126,7 +130,7 @@ class Header extends Component {
                                           height: 45, 
                                           position: 'fixed',
                                           top:'1%',
-                                          left: 50,
+                                          left: 60,
                                           overflow: 'hidden'
                                            }}>
                            <img src={logo} alt="finder logo" style={{ 
@@ -134,14 +138,15 @@ class Header extends Component {
                                               height: '100%',
                                               width: 'auto', 
                                               margin: 0, 
-                                              padding: 0 }}   />
+                                              padding: 0,
+                                               }}   />
                           </figure>
-                          <div className="logo">
-                          <Link to='/'><h2>coding style</h2></Link>
-                         </div>
-      
-      
                           </Link>
+                          <div className="logo">
+                          <Link to='/'><h2 style={{position: 'fixed',
+                                          left: 110}}>coding style</h2></Link>
+                         </div>
+                      
                           <div className="adminIcon" id="adminOnly">
                            {this.state.isAdmin === true ?
                           <Link to="/Dashboard"><img src={ admin } id="headerAdmin" alt="Settings Icon"/></Link> 

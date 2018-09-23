@@ -114,6 +114,12 @@
     font-size: 1.5em;
   }
 
+  #brand>figure #brand>h2{
+    background: green;
+    position: fixed;
+    top: 10px;
+    left: 150px;
+  }
 
 .dropdown  {
     border: none;
