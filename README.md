@@ -5,6 +5,20 @@
 >Built the front-end with REACT, JAVASCRIPT, JSX, CSS, GOOGLE MATERIALS-UI,
 >REDUX, LOCAL STORAGE, AXIOS, and REACT ROUTER.
 
+![screen shot 2018-09-12 at 4 34 51 pm](https://user-images.githubusercontent.com/29646098/45974809-5ba27180-bff7-11e8-9c61-92c0db4cc40f.png)
+
+![screen shot 2018-09-12 at 4 44 32 pm](https://user-images.githubusercontent.com/29646098/45974839-6eb54180-bff7-11e8-8315-61b34c2b6bb8.png)
+
+![screen shot 2018-09-12 at 4 40 04 pm](https://user-images.githubusercontent.com/29646098/45974874-84c30200-bff7-11e8-9a7b-080fd7189747.png)
+
+![screen shot 2018-09-12 at 4 40 41 pm](https://user-images.githubusercontent.com/29646098/45974893-95737800-bff7-11e8-9a80-e29df4a43428.png)
+
+![screen shot 2018-09-13 at 11 02 09 am](https://user-images.githubusercontent.com/29646098/45975017-f00cd400-bff7-11e8-88a5-5c6499cfa94e.png)
+
+
+![screen shot 2018-09-13 at 11 02 08 am](https://user-images.githubusercontent.com/29646098/45974968-c3f15300-bff7-11e8-8693-33183639cbf9.png)
+
+![screen shot 2018-09-13 at 10 59 58 am](https://user-images.githubusercontent.com/29646098/45974992-d53a5f80-bff7-11e8-9aff-910f94a9b313.png)
 
 
 *REACT set up the foundation for this application and made it faster as it created
@@ -51,7 +65,7 @@ a product image using CLOUDINARY for their reliable photo hosting.
 *Upon order confirmation, clients receive a custom e-mail from my REACT ecommerce
 website.
 
-* AXIOS calls and promises in my REACT app are handled ASYNCHRONOUSLY to
+*AXIOS calls and promises in my REACT app are handled ASYNCHRONOUSLY to
 create a smooth flow of USER EXPERIENCE as they purchase products from my
 REACT website.
 
