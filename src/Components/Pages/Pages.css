@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Arvo|Monoton');
 
-
-
-  .gallery{
+.gallery{
       height: 200px;
       width: 200%;
       display: flex;
@@ -77,8 +75,10 @@
 
   #img-gif{
     background: black;
-    margin-top: 90px;
-    height: 700px;
+    margin-top: 50px;
     width:100%;
   }
 
+  @media(min-width: 550px){
+ 
+  }

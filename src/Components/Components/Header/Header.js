@@ -129,7 +129,7 @@ class Header extends Component {
                                           padding: 0, 
                                           height: 45, 
                                           position: 'fixed',
-                                          top:'1%',
+                                          top:10,
                                           left: 60,
                                           overflow: 'hidden'
                                            }}>

@@ -8,11 +8,10 @@ import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    display: 'block',
     minWidth: 300,
-    height: 600,
-    marginTop: 0,
+    height: '80vh',
+    marginTop: -10,
     width: '100%',
   },
   image: {
@@ -20,7 +19,7 @@ const styles = theme => ({
     height: '50vh',
     [theme.breakpoints.down('xs')]: {
       width: '100% !important', // Overrides inline-style
-      height: 100,
+      height: '30vh',
     },
     '&:hover, &$focusVisible': {
       zIndex: 1,
@@ -85,18 +84,18 @@ const images = [
   {
     url: 'https://res.cloudinary.com/djsmw5c9x/image/upload/v1534134782/Products/Men.png',
     title: 'Shop for Men',
-    marginTop: '50px',
-    height: '600px',
-    width: '50%',
+    marginTop: '0px',
+    height: '25vh',
+    width: '100vw',
     link: '/Men',
 
   },
   {
     url: 'https://res.cloudinary.com/djsmw5c9x/image/upload/v1534134791/Products/Women.png',
     title: 'Shop for Women',
-    marginTop: '50px',
-    height: '600px',
-    width: '50%',
+    marginTop: '0px',
+    height: '25vh',
+    width: '100vw',
     link:'/Women',
   },
 
