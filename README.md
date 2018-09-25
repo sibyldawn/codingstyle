@@ -1,5 +1,5 @@
 # CODINGSTYLESHOP
-## Go to site: [codingstyleshop](www.codingstyleshop.com)
+## Go to site: [codingstyleshop](https://codingstyleshop.com)
 
 >Full Stack E-Commerce Website that Sells Personalized T-Shirts for Coders.
 >Built the front-end with REACT, JAVASCRIPT, JSX, CSS, GOOGLE MATERIALS-UI,
